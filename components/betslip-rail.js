@@ -1,269 +1,979 @@
-/* Betslip Rail Component - client-side only */
-(function(){
-  class BetslipRail {
-    constructor(rootSelector){
-      this.root = document.querySelector(rootSelector) || this._createRoot(rootSelector);
-      this.storageKey = 'editorBets';
-      this.bets = this._readBets();
-      this._render();
-      this._bind();
-      this.update();
-      // position badge relative to viewport and content
-      this.positionBadge();
-      this._onWindowChange = this._throttle(()=> this.positionBadge(), 120);
-      window.addEventListener('resize', this._onWindowChange);
-      window.addEventListener('scroll', this._onWindowChange);
+// BETSLIP RAIL COMPONENT - Shared across all bet pages
+// Usage: Include betslip-rail.js and <div id="betslip-rail"></div> in your HTML
+
+(function() {
+  'use strict';
+
+  // ==================== STATE ====================
+  let bets = [];
+  let isRailOpen = false;
+  let isMinimized = false;
+  let listeners = {
+    'betslip:updated': [],
+    'betslip:booked': [],
+    'betslip:cleared': []
+  };
+
+  // ==================== STORAGE ====================
+  const STORAGE_KEY = 'editorBets';
+
+  function loadFromStorage() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      bets = data ? JSON.parse(data) : [];
+      // Normalize odds field
+      bets.forEach(b => { b.odd = b.odd || b.odds || ''; });
+      return bets;
+    } catch (e) {
+      console.error('Failed to load betslip:', e);
+      return [];
+    }
+  }
+
+  function saveToStorage() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(bets));
+      emit('betslip:updated', { bets: [...bets] });
+    } catch (e) {
+      console.error('Failed to save betslip:', e);
+    }
+  }
+
+  // ==================== EVENT EMITTER ====================
+  function on(event, callback) {
+    if (listeners[event]) {
+      listeners[event].push(callback);
+    }
+  }
+
+  function emit(event, data) {
+    if (listeners[event]) {
+      listeners[event].forEach(cb => cb(data));
+    }
+    // Also dispatch as DOM event
+    document.dispatchEvent(new CustomEvent(event, { detail: data }));
+  }
+
+  // ==================== SELECTION MANAGEMENT ====================
+  function addSelection(selection) {
+    // Check if already exists (by matchId)
+    const existingIndex = bets.findIndex(b => b.matchId === selection.matchId);
+    
+    if (existingIndex >= 0) {
+      // Update existing
+      bets[existingIndex] = { ...bets[existingIndex], ...selection };
+    } else {
+      // Add new
+      bets.push({
+        matchId: selection.matchId || Date.now(),
+        teams: selection.teams || '',
+        date: selection.date || '',
+        market: selection.market || '1x2',
+        value: selection.value || 'home',
+        odd: selection.odd || selection.odds || '1.00',
+        odds: selection.odd || selection.odds || '1.00',
+        league: selection.league || '',
+        selected: true
+      });
+    }
+    
+    saveToStorage();
+    renderRail();
+    updateBadge();
+    flashBadge();
+  }
+
+  function removeSelection(matchId) {
+    const index = bets.findIndex(b => b.matchId === matchId);
+    if (index >= 0) {
+      bets.splice(index, 1);
+      saveToStorage();
+      renderRail();
+      updateBadge();
+      
+      if (bets.length === 0) {
+        closeRail();
+      }
+    }
+  }
+
+  function updateSelection(matchId, updates) {
+    const index = bets.findIndex(b => b.matchId === matchId);
+    if (index >= 0) {
+      bets[index] = { ...bets[index], ...updates };
+      saveToStorage();
+      renderRail();
+    }
+  }
+
+  function clearAll() {
+    bets = [];
+    saveToStorage();
+    renderRail();
+    updateBadge();
+    closeRail();
+    emit('betslip:cleared', {});
+  }
+
+  function toggleSelection(matchId) {
+    const bet = bets.find(b => b.matchId === matchId);
+    if (bet) {
+      bet.selected = !bet.selected;
+      saveToStorage();
+      renderRail();
+    }
+  }
+
+  function selectAll() {
+    bets.forEach(b => b.selected = true);
+    saveToStorage();
+    renderRail();
+  }
+
+  function deleteSelected() {
+    bets = bets.filter(b => !b.selected);
+    saveToStorage();
+    renderRail();
+    updateBadge();
+    
+    if (bets.length === 0) {
+      closeRail();
+    }
+  }
+
+  // ==================== UI CONTROLS ====================
+  function openRail() {
+    isRailOpen = true;
+    const overlay = document.getElementById('rail-overlay');
+    const rail = document.getElementById('rail-container');
+    
+    if (overlay && rail) {
+      overlay.classList.add('active');
+      rail.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function expandFullScreen() {
+    const rail = document.getElementById('rail-container');
+    if (rail) {
+      rail.classList.add('fullscreen');
+    }
+  }
+
+  function exitFullScreen() {
+    const rail = document.getElementById('rail-container');
+    if (rail) {
+      rail.classList.remove('fullscreen');
+    }
+  }
+
+  function closeRail() {
+    isRailOpen = false;
+    const overlay = document.getElementById('rail-overlay');
+    const rail = document.getElementById('rail-container');
+    
+    if (overlay && rail) {
+      overlay.classList.remove('active');
+      rail.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function toggleMinimize() {
+    isMinimized = !isMinimized;
+    const rail = document.getElementById('rail-container');
+    if (rail) {
+      rail.classList.toggle('minimized', isMinimized);
+    }
+  }
+
+  function showBadge() {
+    const badge = document.getElementById('rail-badge');
+    if (badge) badge.style.display = 'flex';
+  }
+
+  function hideBadge() {
+    const badge = document.getElementById('rail-badge');
+    if (badge) badge.style.display = 'none';
+  }
+
+  function flashBadge() {
+    const badge = document.getElementById('rail-badge');
+    if (!badge) return;
+    
+    badge.classList.add('flash');
+    setTimeout(() => badge.classList.remove('flash'), 600);
+  }
+
+  function updateBadge() {
+    const badge = document.getElementById('rail-badge');
+    const count = document.getElementById('rail-badge-count');
+    
+    if (badge && count) {
+      count.textContent = bets.length;
+      
+      if (bets.length > 0) {
+        badge.classList.remove('empty');
+        badge.style.display = 'flex';
+      } else {
+        badge.classList.add('empty');
+        badge.style.opacity = '0.5';
+      }
+    }
+  }
+
+  // ==================== BOOKING ====================
+  function bookSelections(bookie) {
+    if (bets.length === 0) {
+      alert('No bets to book');
+      return;
     }
 
-    _createRoot(sel){
-      const container = document.createElement('div');
-      container.id = sel.replace('#','');
-      document.body.appendChild(container);
-      return container;
-    }
+    // Generate random booking code
+    const code = generateBookingCode();
+    
+    // Show booking result in rail (don't close or redirect)
+    showBookingResult(code, bookie);
+    
+    // Emit booked event
+    emit('betslip:booked', {
+      code: code,
+      bookie: bookie || 'sportybet:ng',
+      bets: [...bets],
+      totalOdds: calculateTotalOdds()
+    });
+  }
 
-    _readBets(){
-      try{ return JSON.parse(localStorage.getItem(this.storageKey)||'[]') }catch(e){return []}
-    }
-    _writeBets(b){ localStorage.setItem(this.storageKey, JSON.stringify(b||[])); }
+  function showBookingResult(code, bookie) {
+    // Expand to full screen
+    expandFullScreen();
+    
+    // Render booking success view
+    const rail = document.getElementById('rail-container');
+    if (!rail) return;
 
-    _render(){
-      this.root.innerHTML = `
-        <div class="betslip-rail" aria-hidden="false">
-          <button class="br-badge" aria-expanded="false"><span class="br-count">0</span> <span class="br-label">slip</span></button>
-          <div class="br-overlay" tabindex="-1"></div>
-          <div class="br-sheet" role="dialog" aria-hidden="true">
-            <div class="br-header"><h3>Betslip <span class="br-header-count">0</span></h3><button class="br-close" aria-label="Close">✕</button></div>
-            <div class="br-list"></div>
-            <div class="br-actions">
-              <button class="btn br-clear">Clear all</button>
-              <label style="margin-left:auto;display:flex;align-items:center;gap:8px"><select class="br-bookie"><option>bet9ja</option><option>sportybet</option><option>1xBet</option></select></label>
-              <button class="btn primary br-book">Book (<span class="br-count-foot">0</span>)</button>
-            </div>
-            <div class="br-code" style="display:none;padding:12px;border-top:1px solid #eee"><input id="br-generated-code" readonly style="width:calc(100% - 80px);padding:8px"/><button id="br-copy-code" style="margin-left:8px">Copy</button></div>
+    const totalOdds = calculateTotalOdds();
+
+    rail.innerHTML = `
+      <!-- Booking Success Header -->
+      <div class="rail-header">
+        <div class="rail-header-left">
+          <h2 class="rail-title">Booking Successful</h2>
+        </div>
+        <div class="rail-header-actions">
+          <button class="rail-close-btn" id="rail-close-btn">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Booking Result -->
+      <div class="booking-result-container">
+        <div class="booking-success-icon">
+          <i class="bi bi-check-circle"></i>
+        </div>
+
+        <div class="booking-info-card">
+          <div class="booking-bookie">${bookie || 'sportybet:ng'}</div>
+          <div class="booking-code-display">
+            <div class="booking-code-label">Booking Code</div>
+            <div class="booking-code-value" id="booking-code-value">${code}</div>
+          </div>
+          <div class="booking-meta">${bets.length} events @${totalOdds} odds</div>
+        </div>
+
+        <!-- Actions -->
+        <div class="booking-actions">
+          <button class="booking-action-btn primary" id="copy-code-btn">
+            <i class="bi bi-clipboard"></i> Copy Code
+          </button>
+          <button class="booking-action-btn" id="share-code-btn">
+            <i class="bi bi-share"></i> Share
+          </button>
+        </div>
+
+        <!-- Share Options (hidden initially) -->
+        <div class="share-options" id="share-options" style="display: none;">
+          <div class="share-link-box">
+            <input 
+              type="text" 
+              class="share-link-input" 
+              id="share-link-input"
+              value="https://convertbetcodes.com/bet/${code}" 
+              readonly
+            />
+            <button class="share-copy-btn" id="copy-link-btn">
+              <i class="bi bi-clipboard"></i>
+            </button>
+          </div>
+          <div class="share-social">
+            <button class="share-social-btn whatsapp" id="share-whatsapp">
+              <i class="bi bi-whatsapp"></i> WhatsApp
+            </button>
+            <button class="share-social-btn twitter" id="share-twitter">
+              <i class="bi bi-twitter"></i> Twitter
+            </button>
+            <button class="share-social-btn telegram" id="share-telegram">
+              <i class="bi bi-telegram"></i> Telegram
+            </button>
           </div>
         </div>
-      `;
-    }
 
-    _bind(){
-      this.badge = this.root.querySelector('.br-badge');
-      this.overlay = this.root.querySelector('.br-overlay');
-      this.sheet = this.root.querySelector('.br-sheet');
-      this.closeBtn = this.root.querySelector('.br-close');
-      this.list = this.root.querySelector('.br-list');
-      this.clearBtn = this.root.querySelector('.br-clear');
-      this.bookBtn = this.root.querySelector('.br-book');
-      this.headerCount = this.root.querySelector('.br-header-count');
-      this.badgeCount = this.root.querySelector('.br-count');
-      this.bookCountFoot = this.root.querySelector('.br-count-foot');
-      this.codeSection = this.root.querySelector('.br-code');
-      this.codeInput = this.root.querySelector('#br-generated-code');
-      this.copyBtn = this.root.querySelector('#br-copy-code');
+        <!-- Footer Actions -->
+        <div class="booking-footer-actions">
+          <button class="booking-footer-btn" id="view-bets-btn">
+            <i class="bi bi-list-ul"></i> View Bets
+          </button>
+          <button class="booking-footer-btn" id="book-another-btn">
+            <i class="bi bi-plus-circle"></i> Book Another
+          </button>
+          <button class="booking-footer-btn primary" id="play-now-btn">
+            <i class="bi bi-play-circle"></i> Play Now
+          </button>
+        </div>
+      </div>
+    `;
 
-      this.badge.addEventListener('click', ()=> this.openRail());
-      this.overlay.addEventListener('click', ()=> this.closeRail());
-      this.closeBtn.addEventListener('click', ()=> this.closeRail());
-      this.clearBtn.addEventListener('click', ()=> this.clearAll());
-      this.bookBtn.addEventListener('click', ()=> this._bookAction());
-      this.copyBtn.addEventListener('click', ()=> this._copyCode());
+    attachBookingEventListeners(code, bookie);
+  }
 
-      // keyboard escape closes
-      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') this.closeRail(); });
-    }
+  function attachBookingEventListeners(code, bookie) {
+    // Close button
+    const closeBtn = document.getElementById('rail-close-btn');
+    if (closeBtn) closeBtn.addEventListener('click', closeRail);
 
-    addSelection(sel){
-      // normalize selection shape to include both `odd` and `odds` for compatibility
-      sel = Object.assign({}, sel);
-      sel.odds = sel.odds || sel.odd || '';
-      sel.odd = sel.odd || sel.odds || '';
-
-      const idx = this.bets.findIndex(b=>b.matchId == sel.matchId);
-      if(idx>=0){ this.bets[idx] = Object.assign({}, this.bets[idx], sel); } else { this.bets.push(sel); }
-      this._writeBets(this.bets);
-      this.update();
-      // ensure badge stays aligned after layout changes
-      this.positionBadge();
-      this._emit('betslip:updated', { bets: this.bets });
-    }
-
-    removeSelection(matchId){
-      this.bets = this.bets.filter(b=>b.matchId != matchId);
-      this._writeBets(this.bets);
-      this.update();
-      // remove selection visual state from match options if present
-      try{
-        document.querySelectorAll(`[data-match-id="${matchId}"]`).forEach(el=>el.classList.remove('selected'));
-      }catch(e){}
-      this._emit('betslip:updated', { bets: this.bets });
-    }
-
-    clearAll(){
-      this.bets = [];
-      this._writeBets(this.bets);
-      this.update();
-      this._emit('betslip:updated', { bets: this.bets });
-      this.closeRail();
-    }
-
-    update(){
-      const bets = this._readBets();
-      this.bets = bets;
-      // update counts
-      this.badgeCount.textContent = bets.length;
-      this.headerCount.textContent = bets.length;
-      this.bookCountFoot.textContent = bets.length;
-
-      // show/hide badge depending on whether there are selections
-      if (bets.length > 0) this.showBadge(); else this.hideBadge();
-
-      // render list
-      this.list.innerHTML = '';
-      if(bets.length===0){
-        this.list.innerHTML = '<div style="padding:12px;color:#666">No selections</div>';
-        return;
-      }
-      bets.forEach(b=>{
-        const el = document.createElement('div');
-        el.className = 'br-selection';
-        const oddVal = b.odds || b.odd || '—';
-        el.innerHTML = `<div style="flex:1"><div class="teams">${b.teams}</div><div class="meta">${b.market} : ${b.value}</div></div><div class="odd">${oddVal}</div><div style="margin-left:10px;display:flex;gap:6px;align-items:center"><button class="br-remove" data-id="${b.matchId}" aria-label="Remove">✕</button><button class="br-edit" data-id="${b.matchId}" aria-label="Edit">✎</button></div>`;
-        const removeBtn = el.querySelector('.br-remove');
-        removeBtn.addEventListener('click', ()=>{ this.removeSelection(b.matchId); });
-        const editBtn = el.querySelector('.br-edit');
-        editBtn.addEventListener('click', ()=>{ this._emit('betslip:edit', {matchId:b.matchId}); openMarketModal(b.matchId); });
-        this.list.appendChild(el);
+    // Copy code button
+    const copyCodeBtn = document.getElementById('copy-code-btn');
+    if (copyCodeBtn) {
+      copyCodeBtn.addEventListener('click', () => {
+        copyToClipboard(code);
+        showCopyFeedback(copyCodeBtn, 'Copied!');
       });
     }
 
-    openRail(mode='sheet'){
-      if(mode === 'fullscreen' || window.innerWidth <= 640){
-        this.overlay.classList.add('active');
-        this.sheet.classList.add('active');
-        this.sheet.setAttribute('aria-hidden','false');
-        document.body.style.overflow = 'hidden';
-      } else {
-        // desktop open sheet
-        this.overlay.classList.add('active');
-        this.sheet.classList.add('active');
-        this.sheet.setAttribute('aria-hidden','false');
-      }
-      // hide the floating badge while the sheet/modal is open
-      this.hideBadge();
-      this.badge.setAttribute('aria-expanded','true');
-      this._emit('betslip:opened');
+    // Share button
+    const shareBtn = document.getElementById('share-code-btn');
+    const shareOptions = document.getElementById('share-options');
+    if (shareBtn && shareOptions) {
+      shareBtn.addEventListener('click', () => {
+        shareOptions.style.display = shareOptions.style.display === 'none' ? 'block' : 'none';
+      });
     }
 
-    flashBadge(){
-      if(!this.badge) return;
-      // ensure visible
-      this.showBadge();
-      this.badge.classList.add('flash');
-      setTimeout(()=> this.badge.classList.remove('flash'), 600);
+    // Copy link button
+    const copyLinkBtn = document.getElementById('copy-link-btn');
+    const shareLinkInput = document.getElementById('share-link-input');
+    if (copyLinkBtn && shareLinkInput) {
+      copyLinkBtn.addEventListener('click', () => {
+        copyToClipboard(shareLinkInput.value);
+        showCopyFeedback(copyLinkBtn, '✓');
+      });
     }
 
-    showBadge(){
-      if(!this.badge) return;
-      this.badge.style.display = 'flex';
-      // reposition since it may have been hidden
-      this.positionBadge();
+    // Social share buttons
+    const whatsappBtn = document.getElementById('share-whatsapp');
+    if (whatsappBtn) {
+      whatsappBtn.addEventListener('click', () => {
+        const text = `Check out my bet! Code: ${code} (${bets.length} events @${calculateTotalOdds()} odds)`;
+        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+      });
     }
 
-    hideBadge(){
-      if(!this.badge) return;
-      this.badge.style.display = 'none';
+    const twitterBtn = document.getElementById('share-twitter');
+    if (twitterBtn) {
+      twitterBtn.addEventListener('click', () => {
+        const text = `My bet code: ${code} (${bets.length} events @${calculateTotalOdds()} odds)`;
+        const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+      });
     }
 
-    // simple throttle to avoid excessive layout work
-    _throttle(fn, wait){
-      let timer = null;
-      return (...args)=>{
-        if(timer) return;
-        timer = setTimeout(()=>{ timer = null; fn.apply(this, args); }, wait);
-      };
+    const telegramBtn = document.getElementById('share-telegram');
+    if (telegramBtn) {
+      telegramBtn.addEventListener('click', () => {
+        const text = `Check out my bet! Code: ${code} (${bets.length} events @${calculateTotalOdds()} odds)`;
+        const url = `https://t.me/share/url?url=${encodeURIComponent('https://convertbetcodes.com')}&text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+      });
     }
 
-    // Position the badge fixed to viewport and align to content's right edge on desktop,
-    // and center-bottom on mobile. This keeps it visible during scroll like Sportybet.
-    positionBadge(){
-      if(!this.badge) return;
-      const w = window.innerWidth;
-      const content = document.querySelector('.pools-screen');
-      if(w <= 640){
-        // mobile: anchor to the right-middle but avoid overlapping bottom nav
-        this.badge.style.position = 'fixed';
-        this.badge.style.right = '12px';
-        this.badge.style.left = 'auto';
-        this.badge.style.bottom = 'auto';
-        // center vertically by default
-        const badgeRect = this.badge.getBoundingClientRect();
-        let top = Math.round(window.innerHeight / 2);
-        // if there's a mobile nav, make sure the badge stays above it
-        const mobileNav = document.getElementById('mobile-nav');
-        if (mobileNav) {
-          const navRect = mobileNav.getBoundingClientRect();
-          const minTop = window.innerHeight - (navRect.height + 12 + (badgeRect.height / 2));
-          if (top > minTop) top = minTop;
-        }
-        // ensure top is not too close to header
-        const minAllowedTop = 12 + Math.round(badgeRect.height / 2);
-        if (top < minAllowedTop) top = minAllowedTop;
-        this.badge.style.top = top + 'px';
-        this.badge.style.transform = 'translateY(-50%)';
-      } else {
-        // desktop: right-middle aligned to content
-        this.badge.style.position = 'fixed';
-        this.badge.style.top = '50%';
-        this.badge.style.bottom = 'auto';
-        this.badge.style.left = 'auto';
-        let rightOffset = 14; // fallback
-        try{
-          if(content){
-            const rect = content.getBoundingClientRect();
-            // place 14px from content right edge, but not negative
-            rightOffset = Math.max(14, Math.round(window.innerWidth - rect.right + 14));
-          }
-        }catch(e){}
-        this.badge.style.right = rightOffset + 'px';
-        this.badge.style.transform = 'translateY(-50%)';
-      }
+    // View bets button
+    const viewBetsBtn = document.getElementById('view-bets-btn');
+    if (viewBetsBtn) {
+      viewBetsBtn.addEventListener('click', () => {
+        exitFullScreen();
+        renderRail();
+      });
     }
 
-    closeRail(){
-      this.overlay.classList.remove('active');
-      this.sheet.classList.remove('active');
-      this.sheet.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-      this.badge.setAttribute('aria-expanded','false');
-      this._emit('betslip:closed');
+    // Book another button
+    const bookAnotherBtn = document.getElementById('book-another-btn');
+    if (bookAnotherBtn) {
+      bookAnotherBtn.addEventListener('click', () => {
+        exitFullScreen();
+        renderRail();
+      });
     }
 
-    _bookAction(){
-      // simulate booking and show generated code
-      const code = this.generateCode();
-      this.codeInput.value = code;
-      this.codeSection.style.display = 'block';
-      this._emit('betslip:booked', { code: code, bookie: this.root.querySelector('.br-bookie').value });
-      // copy automatically
-      this._copyCode();
+    // Play now button
+    const playNowBtn = document.getElementById('play-now-btn');
+    if (playNowBtn) {
+      playNowBtn.addEventListener('click', () => {
+        const bookieUrls = {
+          'sportybet:ng': 'https://www.sportybet.com/ng/',
+          'bet9ja:ng': 'https://www.bet9ja.com/',
+          '1xbet:ng': 'https://www.1xbet.ng/',
+          'betking:ng': 'https://www.betking.ng/',
+          '22bet:ng': 'https://www.22bet.ng/'
+        };
+        const url = bookieUrls[bookie] || 'https://www.sportybet.com/ng/';
+        window.open(url, '_blank');
+      });
     }
-
-    generateCode(){
-      const rnd = Math.random().toString(36).slice(2,8).toUpperCase();
-      return `POOL-${rnd}`;
-    }
-
-    _copyCode(){
-      const code = this.codeInput.value;
-      if(!code) return;
-      if(navigator.clipboard) navigator.clipboard.writeText(code);
-      this.copyBtn.innerText = 'Copied';
-      setTimeout(()=> this.copyBtn.innerText = 'Copy', 1200);
-    }
-
-    _emit(name, detail){ document.dispatchEvent(new CustomEvent(name, { detail })); }
   }
 
-  // expose singleton
-  window.betslipRail = new BetslipRail('#betslip-rail');
+  function copyToClipboard(text) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+    } else {
+      // Fallback
+      const input = document.createElement('input');
+      input.value = text;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+  }
+
+  function showCopyFeedback(button, message) {
+    const originalHTML = button.innerHTML;
+    button.innerHTML = message;
+    button.style.background = 'var(--rail-text)';
+    button.style.color = 'white';
+    
+    setTimeout(() => {
+      button.innerHTML = originalHTML;
+      button.style.background = '';
+      button.style.color = '';
+    }, 1500);
+  }
+
+  function generateBookingCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+  }
+
+  function calculateTotalOdds() {
+    if (bets.length === 0) return '0.00';
+    return bets.reduce((total, bet) => {
+      const odd = parseFloat(bet.odd || bet.odds || 1);
+      return total * odd;
+    }, 1).toFixed(2);
+  }
+
+  // ==================== LOAD CODE MODAL ====================
+  function showLoadCodeModal() {
+    expandFullScreen();
+    
+    const rail = document.getElementById('rail-container');
+    if (!rail) return;
+
+    rail.innerHTML = `
+      <!-- Load Code Header -->
+      <div class="rail-header">
+        <div class="rail-header-left">
+          <h2 class="rail-title">Load Bet Code</h2>
+        </div>
+        <div class="rail-header-actions">
+          <button class="rail-close-btn" id="rail-close-load">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Load Code Form -->
+      <div class="load-code-form-container">
+        <form id="load-code-form">
+          <div class="load-form-group">
+            <label class="load-form-label">Bet Code</label>
+            <div class="load-input-wrapper">
+              <input 
+                type="text" 
+                class="load-form-input" 
+                id="load-code-input"
+                placeholder="Enter bet code (e.g., M8BULE)"
+                required
+              />
+              <button type="button" class="load-paste-btn" id="paste-code-btn" title="Paste">
+                <i class="bi bi-clipboard"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="load-form-group">
+            <label class="load-form-label">Select Origin Bookie</label>
+            <select class="load-form-select" id="origin-bookie-select" required>
+              <option value="">Choose a bookie</option>
+              <option value="sportybet-nigeria">Sportybet - Nigeria</option>
+              <option value="sportybet-ghana">Sportybet - Ghana</option>
+              <option value="sportybet-kenya">Sportybet - Kenya</option>
+              <option value="bet9ja-nigeria">Bet9ja - Nigeria</option>
+              <option value="betking-nigeria">BetKing - Nigeria</option>
+              <option value="1xbet-nigeria">1xBet - Nigeria</option>
+              <option value="22bet-nigeria">22bet - Nigeria</option>
+            </select>
+          </div>
+
+          <div class="load-form-actions">
+            <button type="button" class="load-cancel-btn" id="load-cancel-btn">
+              Cancel
+            </button>
+            <button type="submit" class="load-submit-btn">
+              <i class="bi bi-download"></i> Load Code
+            </button>
+          </div>
+        </form>
+
+        <!-- Loading State (hidden initially) -->
+        <div class="load-loading-state" id="load-loading" style="display: none;">
+          <div class="load-spinner"></div>
+          <p>Loading bet code...</p>
+        </div>
+
+        <!-- Error State (hidden initially) -->
+        <div class="load-error-state" id="load-error" style="display: none;">
+          <i class="bi bi-exclamation-circle"></i>
+          <p>Failed to load bet code. Please try again.</p>
+          <button class="load-retry-btn" id="load-retry-btn">Retry</button>
+        </div>
+      </div>
+    `;
+
+    attachLoadCodeListeners();
+  }
+
+  function attachLoadCodeListeners() {
+    const closeBtn = document.getElementById('rail-close-load');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        exitFullScreen();
+        renderRail();
+      });
+    }
+
+    const cancelBtn = document.getElementById('load-cancel-btn');
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', () => {
+        exitFullScreen();
+        renderRail();
+      });
+    }
+
+    const pasteBtn = document.getElementById('paste-code-btn');
+    const codeInput = document.getElementById('load-code-input');
+    if (pasteBtn && codeInput) {
+      pasteBtn.addEventListener('click', async () => {
+        try {
+          const text = await navigator.clipboard.readText();
+          codeInput.value = text.trim();
+        } catch (err) {
+          console.log('Paste failed:', err);
+        }
+      });
+    }
+
+    const loadForm = document.getElementById('load-code-form');
+    if (loadForm) {
+      loadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const code = document.getElementById('load-code-input').value.trim();
+        const bookie = document.getElementById('origin-bookie-select').value;
+        
+        if (!code || !bookie) {
+          alert('Please fill in all fields');
+          return;
+        }
+
+        // Show loading state
+        document.querySelector('.load-code-form-container form').style.display = 'none';
+        document.getElementById('load-loading').style.display = 'flex';
+
+        // Simulate API call
+        try {
+          await loadBetCode(code, bookie);
+        } catch (error) {
+          // Show error state
+          document.getElementById('load-loading').style.display = 'none';
+          document.getElementById('load-error').style.display = 'flex';
+        }
+      });
+    }
+
+    const retryBtn = document.getElementById('load-retry-btn');
+    if (retryBtn) {
+      retryBtn.addEventListener('click', () => {
+        document.getElementById('load-error').style.display = 'none';
+        document.querySelector('.load-code-form-container form').style.display = 'block';
+      });
+    }
+  }
+
+  async function loadBetCode(code, bookie) {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // Mock data - replace with actual API call
+    const mockBets = [
+      {
+        matchId: 'load-' + Date.now() + '-1',
+        teams: 'Nottingham Forest vs Man City',
+        date: 'Sat December.27.25, 13:30',
+        market: '1x2',
+        value: 'away',
+        odd: '1.62',
+        league: 'Premier League',
+        selected: true
+      },
+      {
+        matchId: 'load-' + Date.now() + '-2',
+        teams: 'AC Milan vs Verona',
+        date: 'Sun December.28.25, 12:30',
+        market: '1x2',
+        value: 'home',
+        odd: '1.39',
+        league: 'Serie A',
+        selected: true
+      },
+      {
+        matchId: 'load-' + Date.now() + '-3',
+        teams: 'Liverpool vs Wolves',
+        date: 'Sat December.27.25, 16:00',
+        market: '1x2',
+        value: 'home',
+        odd: '1.26',
+        league: 'Premier League',
+        selected: true
+      }
+    ];
+
+    // Add to betslip
+    mockBets.forEach(bet => {
+      bets.push(bet);
+    });
+
+    saveToStorage();
+    exitFullScreen();
+    renderRail();
+    updateBadge();
+    flashBadge();
+
+    // Show success message
+    setTimeout(() => {
+      alert(`✅ Loaded ${mockBets.length} bets from ${code}`);
+    }, 300);
+  }
+
+  // ==================== RENDERING ====================
+  function renderRail() {
+    const rail = document.getElementById('rail-container');
+    if (!rail) return;
+
+    const totalOdds = calculateTotalOdds();
+    const selectedCount = bets.filter(b => b.selected).length;
+
+    rail.innerHTML = `
+      <!-- Rail Header -->
+      <div class="rail-header">
+        <div class="rail-header-left">
+          <h2 class="rail-title">Betslip (<span id="rail-count">${bets.length}</span>)</h2>
+        </div>
+        <div class="rail-header-actions">
+          <button class="rail-action-btn" id="rail-expand-btn" title="Expand Full Screen">
+            <i class="bi bi-arrows-fullscreen"></i>
+          </button>
+          <button class="rail-action-btn" id="rail-load-btn" title="Load Code">
+            <i class="bi bi-upload"></i>
+          </button>
+          <button class="rail-minimize-btn" id="rail-minimize-btn" title="${isMinimized ? 'Expand' : 'Minimize'}">
+            <i class="bi bi-${isMinimized ? 'chevron-up' : 'chevron-down'}"></i>
+          </button>
+          <button class="rail-close-btn" id="rail-close-btn">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      ${bets.length === 0 ? `
+        <!-- Empty State -->
+        <div class="rail-empty">
+          <i class="bi bi-inbox"></i>
+          <p>No games yet</p>
+          <button class="rail-empty-load-btn" id="empty-load-btn">
+            <i class="bi bi-upload"></i> Load Code
+          </button>
+        </div>
+      ` : `
+        <!-- Bulk Actions -->
+        <div class="rail-bulk-actions">
+          <label class="rail-checkbox-all">
+            <input type="checkbox" id="select-all-checkbox" ${bets.every(b => b.selected) ? 'checked' : ''} />
+            <span>Select All</span>
+          </label>
+          <button class="rail-bulk-btn" id="clear-all-btn">
+            <i class="bi bi-trash"></i> Clear All
+          </button>
+          ${selectedCount > 0 ? `
+            <button class="rail-bulk-btn delete" id="delete-selected-btn">
+              <i class="bi bi-trash"></i> Delete (${selectedCount})
+            </button>
+          ` : ''}
+        </div>
+
+        <!-- Bets List -->
+        <div class="rail-bets-list">
+          ${bets.map((bet, index) => `
+            <div class="rail-bet-item ${bet.selected ? 'selected' : ''}" data-match-id="${bet.matchId}">
+              <div class="rail-bet-checkbox">
+                <input type="checkbox" class="bet-checkbox" data-match-id="${bet.matchId}" ${bet.selected ? 'checked' : ''} />
+              </div>
+              <div class="rail-bet-content">
+                <div class="rail-bet-teams">${bet.teams || 'Unknown Match'}</div>
+                <div class="rail-bet-market">${bet.market || '1x2'}: ${bet.value || 'home'}</div>
+                <div class="rail-bet-meta">
+                  <span class="rail-bet-date">${bet.date || ''}</span>
+                  ${bet.league ? `<span class="rail-bet-league">${bet.league}</span>` : ''}
+                </div>
+              </div>
+              <div class="rail-bet-actions">
+                <div class="rail-bet-odd">${bet.odd || bet.odds || '—'}</div>
+                <button class="rail-bet-edit-btn" data-match-id="${bet.matchId}" title="Edit">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="rail-bet-remove-btn" data-match-id="${bet.matchId}" title="Remove">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- Rail Footer -->
+        <div class="rail-footer">
+          <div class="rail-total">
+            <span class="rail-total-label">Total Odds:</span>
+            <span class="rail-total-value">${totalOdds}</span>
+          </div>
+          <div class="rail-bookie-select">
+            <select class="rail-bookie-dropdown" id="rail-bookie-select">
+              <option value="sportybet:ng">Sportybet NG</option>
+              <option value="bet9ja:ng">Bet9ja NG</option>
+              <option value="1xbet:ng">1xBet NG</option>
+              <option value="betking:ng">BetKing NG</option>
+              <option value="22bet:ng">22bet NG</option>
+            </select>
+          </div>
+          <button class="rail-book-btn" id="rail-book-btn">
+            Book All (${bets.length})
+          </button>
+        </div>
+      `}
+    `;
+
+    attachEventListeners();
+  }
+
+  function attachEventListeners() {
+    // Close button
+    const closeBtn = document.getElementById('rail-close-btn');
+    if (closeBtn) closeBtn.addEventListener('click', closeRail);
+
+    // Minimize button
+    const minimizeBtn = document.getElementById('rail-minimize-btn');
+    if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
+
+    // Expand fullscreen button
+    const expandBtn = document.getElementById('rail-expand-btn');
+    if (expandBtn) expandBtn.addEventListener('click', expandFullScreen);
+
+    // Load code button
+    const loadBtn = document.getElementById('rail-load-btn');
+    if (loadBtn) loadBtn.addEventListener('click', showLoadCodeModal);
+
+    // Empty state load button
+    const emptyLoadBtn = document.getElementById('empty-load-btn');
+    if (emptyLoadBtn) emptyLoadBtn.addEventListener('click', showLoadCodeModal);
+
+    // Select all checkbox
+    const selectAllCheckbox = document.getElementById('select-all-checkbox');
+    if (selectAllCheckbox) {
+      selectAllCheckbox.addEventListener('change', (e) => {
+        if (e.target.checked) selectAll();
+        else bets.forEach(b => b.selected = false);
+        saveToStorage();
+        renderRail();
+      });
+    }
+
+    // Clear all button
+    const clearAllBtn = document.getElementById('clear-all-btn');
+    if (clearAllBtn) {
+      clearAllBtn.addEventListener('click', () => {
+        if (confirm('Clear all bets?')) clearAll();
+      });
+    }
+
+    // Delete selected button
+    const deleteSelectedBtn = document.getElementById('delete-selected-btn');
+    if (deleteSelectedBtn) {
+      deleteSelectedBtn.addEventListener('click', () => {
+        if (confirm('Delete selected bets?')) deleteSelected();
+      });
+    }
+
+    // Individual checkboxes
+    document.querySelectorAll('.bet-checkbox').forEach(cb => {
+      cb.addEventListener('change', (e) => {
+        toggleSelection(e.target.dataset.matchId);
+      });
+    });
+
+    // Edit buttons
+    document.querySelectorAll('.rail-bet-edit-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const matchId = e.currentTarget.dataset.matchId;
+        const bet = bets.find(b => b.matchId == matchId);
+        if (bet) {
+          // Open market edit modal (will be implemented in Phase 2)
+          console.log('Edit bet:', bet);
+          // For now, redirect to edit page
+          window.location.href = `bet-editor-edit.html?id=${bets.findIndex(b => b.matchId == matchId)}`;
+        }
+      });
+    });
+
+    // Remove buttons
+    document.querySelectorAll('.rail-bet-remove-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const matchId = e.currentTarget.dataset.matchId;
+        removeSelection(matchId);
+      });
+    });
+
+    // Book button
+    const bookBtn = document.getElementById('rail-book-btn');
+    const bookieSelect = document.getElementById('rail-bookie-select');
+    if (bookBtn && bookieSelect) {
+      bookBtn.addEventListener('click', () => {
+        bookSelections(bookieSelect.value);
+      });
+    }
+  }
+
+  function initRailHTML() {
+    const container = document.getElementById('betslip-rail');
+    if (!container) return;
+
+    container.innerHTML = `
+      <!-- Floating Badge -->
+      <div class="rail-badge ${bets.length === 0 ? 'empty' : ''}" id="rail-badge">
+        <span class="rail-badge-count" id="rail-badge-count">${bets.length}</span>
+        <i class="bi bi-cart3"></i>
+      </div>
+
+      <!-- Overlay -->
+      <div class="rail-overlay" id="rail-overlay"></div>
+
+      <!-- Rail Container -->
+      <div class="rail-container" id="rail-container">
+        <!-- Content will be rendered by renderRail() -->
+      </div>
+    `;
+
+    // Badge click handler
+    const badge = document.getElementById('rail-badge');
+    if (badge) {
+      badge.addEventListener('click', openRail);
+    }
+
+    // Overlay click handler
+    const overlay = document.getElementById('rail-overlay');
+    if (overlay) {
+      overlay.addEventListener('click', closeRail);
+    }
+
+    renderRail();
+    updateBadge();
+  }
+
+  // ==================== PUBLIC API ====================
+  window.betslipRail = {
+    // Selection management
+    addSelection,
+    removeSelection,
+    updateSelection,
+    clearAll,
+    selectAll,
+    deleteSelected,
+    
+    // UI controls
+    openRail,
+    closeRail,
+    toggleMinimize,
+    expandFullScreen,
+    exitFullScreen,
+    showBadge,
+    hideBadge,
+    flashBadge,
+    
+    // Modals
+    showLoadCodeModal,
+    
+    // Actions
+    bookSelections,
+    
+    // Utilities
+    calculateTotalOdds,
+    getBets: () => [...bets],
+    getSelectedBets: () => bets.filter(b => b.selected),
+    
+    // Event system
+    on,
+    
+    // Internal (for debugging)
+    _state: () => ({ bets, isRailOpen, isMinimized }),
+    _render: renderRail,
+    _bookAction: () => {
+      const bookieSelect = document.getElementById('rail-bookie-select');
+      bookSelections(bookieSelect ? bookieSelect.value : 'sportybet:ng');
+    },
+    update: () => {
+      loadFromStorage();
+      renderRail();
+      updateBadge();
+    }
+  };
+
+  // ==================== INITIALIZATION ====================
+  document.addEventListener('DOMContentLoaded', () => {
+    loadFromStorage();
+    initRailHTML();
+  });
+
+  // Handle page visibility (sync across tabs)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      loadFromStorage();
+      renderRail();
+      updateBadge();
+    }
+  });
+
 })();

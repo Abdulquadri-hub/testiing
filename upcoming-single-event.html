@@ -25,7 +25,7 @@
     <script defer src="assets/js/app8051.js?bd1e16b080f637e63a80"></script>
     <link href="assets/css/app8051.css?bd1e16b080f637e63a80" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="/assets/css/betslip-rail.css">
+    <link rel="stylesheet" href="/assets/css/betslip-rail.css" />
     <link rel="stylesheet" href="./assets/css/upcoming-single-event.css" />
   </head>
 
@@ -74,20 +74,32 @@
             </div>
 
             <div class="match-teams">
+              <button class="event-btn">
+                <i class="bi bi-chevron-left"></i>
+              </button>
+
               <div class="team home">
                 <div class="team-logo"><i class="bi bi-shield"></i></div>
                 <div class="team-name">Leeds United</div>
               </div>
 
-              <div class="match-vs">—</div>
+              <div class="match-vs">
+                  <div class="match-time">04/01</div>
+                  <div class="match-time">Sunday</div>
+                  <div class="match-time" style="background: #4444; font-weight: 700;">13:30</div>
+              </div>
 
               <div class="team away">
                 <div class="team-logo"><i class="bi bi-shield"></i></div>
                 <div class="team-name">Man Utd</div>
               </div>
+              
+              <button class="event-btn">
+                <i class="bi bi-chevron-right"></i>
+              </button>
             </div>
 
-            <div class="match-time">Sun 04/01, 13:30</div>
+            
           </div>
 
           <div class="action-tabs">
@@ -128,6 +140,9 @@
                 <span class="market-title">1X2</span>
                 <span class="info-icon" onclick="showMarketInfo(event, '1x2')">
                   <i class="bi bi-info"></i>
+                </span>
+                <span class="favourite-icon">
+                  <i class="bi bi-heart"></i>
                 </span>
               </div>
               <div class="market-expand">
@@ -483,152 +498,25 @@
       </main>
     </div>
 
-    <!-- <div id="side-menu"></div> -->
+    <div id="marketInfoModal" class="market-info-modal">
+      <div class="market-info-modal-content">
+        <div class="market-info-modal-header">
+          <h2 id="marketInfoTitle"></h2>
+          <button class="market-info-close">&times;</button>
+        </div>
+        <div class="market-info-modal-body">
+          <p id="marketInfoDescription"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="side-menu"></div>
     <div id="betslip-rail"></div>
     <div id="mobile-nav"></div>
 
     <script src="assets/js/adminux/adminux-dashboard.js"></script>
     <script src="./components/AppLayout.js"></script>
     <script src="./components/betslip-rail.js"></script>
-    <script>
-      // ================================
-      // Scroll handling
-      // ================================
-      let lastScrollTop = 0;
-      const header = document.getElementById("eventHeader");
-      const bottomNav = document.getElementById("bottomNav");
-      const scrollThreshold = 100;
-
-      window.addEventListener("scroll", () => {
-        const scrollTop =
-          window.pageYOffset || document.documentElement.scrollTop;
-
-        // Compact header
-        if (scrollTop > 50) {
-          header.classList.add("scrolled");
-        } else {
-          header.classList.remove("scrolled");
-        }
-
-        // Hide / show bottom nav
-        if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-          bottomNav.classList.add("hidden");
-        } else {
-          bottomNav.classList.remove("hidden");
-        }
-
-        lastScrollTop = scrollTop;
-      });
-
-      // ================================
-      // Toggle market collapse/expand
-      // ================================
-      function toggleMarket(headerEl) {
-        const marketGroup = headerEl.closest(".market-group");
-        marketGroup.classList.toggle("collapsed");
-      }
-
-      // ================================
-      // Market info tooltips
-      // ================================
-      function showMarketInfo(event, marketType) {
-        event.stopPropagation();
-
-        const infoTexts = {
-          "1x2":
-            "Predict the final match result. 1 = Home win, X = Draw, 2 = Away win.",
-          "1x2-1up":
-            "Applies when one team goes 1 goal up. If they maintain the lead, the bet wins.",
-          "over-under":
-            "Predict whether total goals will be over or under a set line.",
-          "double-chance":
-            "Covers two outcomes: 1X (Home/Draw), 12 (Home/Away), X2 (Draw/Away).",
-        };
-
-        alert(infoTexts[marketType] || "Market information");
-      }
-
-      // ================================
-      // Sorting & Best Odds Highlight
-      // ================================
-      let currentSort = {
-        market: null,
-        option: null,
-      };
-
-      function sortByOption(headerEl, option) {
-        const marketGroup = headerEl.closest(".market-group");
-        const marketType = marketGroup.dataset.market;
-        const bookieList = marketGroup.querySelector(".bookie-list");
-        const rows = Array.from(bookieList.querySelectorAll(".bookie-row"));
-
-        // Reset header styles
-        marketGroup.querySelectorAll(".option-header").forEach((btn) => {
-          btn.classList.remove("sorting");
-        });
-        headerEl.classList.add("sorting");
-
-        // Sort rows
-        rows.sort((a, b) => {
-          const aVal = parseFloat(a.dataset[option]) || 0;
-          const bVal = parseFloat(b.dataset[option]) || 0;
-          return bVal - aVal;
-        });
-
-        // Re-append sorted rows
-        rows.forEach((row) => bookieList.appendChild(row));
-
-        // Remove previous best highlights
-        marketGroup.querySelectorAll(".odd-value").forEach((odd) => {
-          odd.classList.remove("best");
-        });
-
-        // Highlight best odd in selected column
-        let bestValue = 0;
-        rows.forEach((row) => {
-          const val = parseFloat(row.dataset[option]) || 0;
-          if (val > bestValue) bestValue = val;
-        });
-
-        rows.forEach((row) => {
-          const odds = row.querySelectorAll(".odd-value");
-          const headers = Array.from(
-            marketGroup.querySelectorAll(".option-header")
-          );
-          const index = headers.findIndex((h) => h === headerEl);
-
-          if (index !== -1 && odds[index]) {
-            const oddVal = parseFloat(odds[index].textContent);
-            if (oddVal === bestValue) {
-              odds[index].classList.add("best");
-            }
-          }
-        });
-
-        currentSort.market = marketType;
-        currentSort.option = option;
-      }
-
-      // ================================
-      // Market filter tabs (UI only)
-      // ================================
-      document.querySelectorAll(".market-tab").forEach((tab) => {
-        tab.addEventListener("click", () => {
-          document
-            .querySelectorAll(".market-tab")
-            .forEach((t) => t.classList.remove("active"));
-          tab.classList.add("active");
-        });
-      });
-
-      // ================================
-      // Odds click (future betslip hook)
-      // ================================
-      document.querySelectorAll(".odd-value").forEach((odd) => {
-        odd.addEventListener("click", () => {
-          console.log("Selected odd:", odd.textContent);
-        });
-      });
-    </script>
+    <script src="assets/js/upcoming-single-event.js"></script>
   </body>
 </html>

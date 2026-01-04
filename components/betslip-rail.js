@@ -18,7 +18,6 @@
     try {
       const data = localStorage.getItem(STORAGE_KEY);
       bets = data ? JSON.parse(data) : [];
-      // Normalize odds field
       bets.forEach(b => { b.odd = b.odd || b.odds || ''; });
       return bets;
     } catch (e) {
@@ -47,20 +46,16 @@
     if (listeners[event]) {
       listeners[event].forEach(cb => cb(data));
     }
-    // Also dispatch as DOM event
     document.dispatchEvent(new CustomEvent(event, { detail: data }));
   }
 
   // ==================== SELECTION MANAGEMENT ====================
   function addSelection(selection) {
-    // Check if already exists (by matchId)
     const existingIndex = bets.findIndex(b => b.matchId === selection.matchId);
     
     if (existingIndex >= 0) {
-      // Update existing
       bets[existingIndex] = { ...bets[existingIndex], ...selection };
     } else {
-      // Add new
       bets.push({
         matchId: selection.matchId || Date.now(),
         teams: selection.teams || '',
@@ -227,13 +222,9 @@
       return;
     }
 
-    // Generate random booking code
     const code = generateBookingCode();
-    
-    // Show booking result in rail (don't close or redirect)
     showBookingResult(code, bookie);
     
-    // Emit booked event
     emit('betslip:booked', {
       code: code,
       bookie: bookie || 'sportybet:ng',
@@ -243,17 +234,14 @@
   }
 
   function showBookingResult(code, bookie) {
-    // Expand to full screen
     expandFullScreen();
     
-    // Render booking success view
     const rail = document.getElementById('rail-container');
     if (!rail) return;
 
     const totalOdds = calculateTotalOdds();
 
     rail.innerHTML = `
-      <!-- Booking Success Header -->
       <div class="rail-header">
         <div class="rail-header-left">
           <h2 class="rail-title">Booking Successful</h2>
@@ -265,7 +253,6 @@
         </div>
       </div>
 
-      <!-- Booking Result -->
       <div class="booking-result-container">
         <div class="booking-success-icon">
           <i class="bi bi-check-circle"></i>
@@ -280,7 +267,6 @@
           <div class="booking-meta">${bets.length} events @${totalOdds} odds</div>
         </div>
 
-        <!-- Actions -->
         <div class="booking-actions">
           <button class="booking-action-btn primary" id="copy-code-btn">
             <i class="bi bi-clipboard"></i> Copy Code
@@ -290,7 +276,6 @@
           </button>
         </div>
 
-        <!-- Share Options (hidden initially) -->
         <div class="share-options" id="share-options" style="display: none;">
           <div class="share-link-box">
             <input 
@@ -317,7 +302,6 @@
           </div>
         </div>
 
-        <!-- Footer Actions -->
         <div class="booking-footer-actions">
           <button class="booking-footer-btn" id="view-bets-btn">
             <i class="bi bi-list-ul"></i> View Bets
@@ -336,11 +320,9 @@
   }
 
   function attachBookingEventListeners(code, bookie) {
-    // Close button
     const closeBtn = document.getElementById('rail-close-btn');
     if (closeBtn) closeBtn.addEventListener('click', closeRail);
 
-    // Copy code button
     const copyCodeBtn = document.getElementById('copy-code-btn');
     if (copyCodeBtn) {
       copyCodeBtn.addEventListener('click', () => {
@@ -349,7 +331,6 @@
       });
     }
 
-    // Share button
     const shareBtn = document.getElementById('share-code-btn');
     const shareOptions = document.getElementById('share-options');
     if (shareBtn && shareOptions) {
@@ -358,7 +339,6 @@
       });
     }
 
-    // Copy link button
     const copyLinkBtn = document.getElementById('copy-link-btn');
     const shareLinkInput = document.getElementById('share-link-input');
     if (copyLinkBtn && shareLinkInput) {
@@ -368,7 +348,6 @@
       });
     }
 
-    // Social share buttons
     const whatsappBtn = document.getElementById('share-whatsapp');
     if (whatsappBtn) {
       whatsappBtn.addEventListener('click', () => {
@@ -396,7 +375,6 @@
       });
     }
 
-    // View bets button
     const viewBetsBtn = document.getElementById('view-bets-btn');
     if (viewBetsBtn) {
       viewBetsBtn.addEventListener('click', () => {
@@ -405,7 +383,6 @@
       });
     }
 
-    // Book another button
     const bookAnotherBtn = document.getElementById('book-another-btn');
     if (bookAnotherBtn) {
       bookAnotherBtn.addEventListener('click', () => {
@@ -414,7 +391,6 @@
       });
     }
 
-    // Play now button
     const playNowBtn = document.getElementById('play-now-btn');
     if (playNowBtn) {
       playNowBtn.addEventListener('click', () => {
@@ -435,7 +411,6 @@
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text);
     } else {
-      // Fallback
       const input = document.createElement('input');
       input.value = text;
       document.body.appendChild(input);
@@ -475,159 +450,13 @@
     }, 1).toFixed(2);
   }
 
-  // ==================== LOAD CODE MODAL ====================
-  function showLoadCodeModal() {
-    expandFullScreen();
-    
-    const rail = document.getElementById('rail-container');
-    if (!rail) return;
+  // ==================== LOAD CODE - REMOVED showLoadCodeModal ====================
+  // This function is removed to prevent conflicts
+  // The empty state now directly shows the load form
 
-    rail.innerHTML = `
-      <!-- Load Code Header -->
-      <div class="rail-header">
-        <div class="rail-header-left">
-          <h2 class="rail-title">Load Bet Code</h2>
-        </div>
-        <div class="rail-header-actions">
-          <button class="rail-close-btn" id="rail-close-load">
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Load Code Form -->
-      <div class="load-code-form-container">
-        <form id="load-code-form">
-          <div class="load-form-group">
-            <label class="load-form-label">Bet Code</label>
-            <div class="load-input-wrapper">
-              <input 
-                type="text" 
-                class="load-form-input" 
-                id="load-code-input"
-                placeholder="Enter bet code (e.g., M8BULE)"
-                required
-              />
-              <button type="button" class="load-paste-btn" id="paste-code-btn" title="Paste">
-                <i class="bi bi-clipboard"></i>
-              </button>
-            </div>
-          </div>
-
-          <div class="load-form-group">
-            <label class="load-form-label">Select Origin Bookie</label>
-            <select class="load-form-select" id="origin-bookie-select" required>
-              <option value="">Choose a bookie</option>
-              <option value="sportybet-nigeria">Sportybet - Nigeria</option>
-              <option value="sportybet-ghana">Sportybet - Ghana</option>
-              <option value="sportybet-kenya">Sportybet - Kenya</option>
-              <option value="bet9ja-nigeria">Bet9ja - Nigeria</option>
-              <option value="betking-nigeria">BetKing - Nigeria</option>
-              <option value="1xbet-nigeria">1xBet - Nigeria</option>
-              <option value="22bet-nigeria">22bet - Nigeria</option>
-            </select>
-          </div>
-
-          <div class="load-form-actions">
-            <button type="button" class="load-cancel-btn" id="load-cancel-btn">
-              Cancel
-            </button>
-            <button type="submit" class="load-submit-btn">
-              <i class="bi bi-download"></i> Load Code
-            </button>
-          </div>
-        </form>
-
-        <!-- Loading State (hidden initially) -->
-        <div class="load-loading-state" id="load-loading" style="display: none;">
-          <div class="load-spinner"></div>
-          <p>Loading bet code...</p>
-        </div>
-
-        <!-- Error State (hidden initially) -->
-        <div class="load-error-state" id="load-error" style="display: none;">
-          <i class="bi bi-exclamation-circle"></i>
-          <p>Failed to load bet code. Please try again.</p>
-          <button class="load-retry-btn" id="load-retry-btn">Retry</button>
-        </div>
-      </div>
-    `;
-
-    attachLoadCodeListeners();
-  }
-
-  function attachLoadCodeListeners() {
-    const closeBtn = document.getElementById('rail-close-load');
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        exitFullScreen();
-        renderRail();
-      });
-    }
-
-    const cancelBtn = document.getElementById('load-cancel-btn');
-    if (cancelBtn) {
-      cancelBtn.addEventListener('click', () => {
-        exitFullScreen();
-        renderRail();
-      });
-    }
-
-    const pasteBtn = document.getElementById('paste-code-btn');
-    const codeInput = document.getElementById('load-code-input');
-    if (pasteBtn && codeInput) {
-      pasteBtn.addEventListener('click', async () => {
-        try {
-          const text = await navigator.clipboard.readText();
-          codeInput.value = text.trim();
-        } catch (err) {
-          console.log('Paste failed:', err);
-        }
-      });
-    }
-
-    const loadForm = document.getElementById('load-code-form');
-    if (loadForm) {
-      loadForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const code = document.getElementById('load-code-input').value.trim();
-        const bookie = document.getElementById('origin-bookie-select').value;
-        
-        if (!code || !bookie) {
-          alert('Please fill in all fields');
-          return;
-        }
-
-        // Show loading state
-        document.querySelector('.load-code-form-container form').style.display = 'none';
-        document.getElementById('load-loading').style.display = 'flex';
-
-        // Simulate API call
-        try {
-          await loadBetCode(code, bookie);
-        } catch (error) {
-          // Show error state
-          document.getElementById('load-loading').style.display = 'none';
-          document.getElementById('load-error').style.display = 'flex';
-        }
-      });
-    }
-
-    const retryBtn = document.getElementById('load-retry-btn');
-    if (retryBtn) {
-      retryBtn.addEventListener('click', () => {
-        document.getElementById('load-error').style.display = 'none';
-        document.querySelector('.load-code-form-container form').style.display = 'block';
-      });
-    }
-  }
-
-  async function loadBetCode(code, bookie) {
-    // Simulate API delay
+  async function loadBetCodeFromEmpty(code, bookie) {
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    // Mock data - replace with actual API call
     const mockBets = [
       {
         matchId: 'load-' + Date.now() + '-1',
@@ -661,18 +490,15 @@
       }
     ];
 
-    // Add to betslip
     mockBets.forEach(bet => {
       bets.push(bet);
     });
 
     saveToStorage();
-    exitFullScreen();
     renderRail();
     updateBadge();
     flashBadge();
 
-    // Show success message
     setTimeout(() => {
       alert(`Loaded ${mockBets.length} bets from ${code}`);
     }, 300);
@@ -687,18 +513,12 @@
     const selectedCount = bets.filter(b => b.selected).length;
 
     rail.innerHTML = `
-      <!-- Rail Header -->
       <div class="rail-header">
         <div class="rail-header-left">
           <h2 class="rail-title">Betslip (<span id="rail-count">${bets.length}</span>)</h2>
         </div>
         <div class="rail-header-actions">
-          <button class="rail-action-btn" id="rail-expand-btn" title="Expand Full Screen">
-            <i class="bi bi-arrows-fullscreen"></i>
-          </button>
-          <button class="rail-action-btn" id="rail-load-btn" title="Load Code">
-            <i class="bi bi-upload"></i>
-          </button>
+          ${bets.length > 0 ? '<button class="rail-action-btn" id="rail-expand-btn" title="Expand Full Screen"><i class="bi bi-arrows-fullscreen"></i></button>' : ''}
           <button class="rail-minimize-btn" id="rail-minimize-btn" title="${isMinimized ? 'Expand' : 'Minimize'}">
             <i class="bi bi-${isMinimized ? 'chevron-up' : 'chevron-down'}"></i>
           </button>
@@ -709,16 +529,84 @@
       </div>
 
       ${bets.length === 0 ? `
-        <!-- Empty State -->
-        <div class="rail-empty">
-          <i class="bi bi-inbox"></i>
-          <p>No games yet</p>
-          <button class="rail-empty-load-btn" id="empty-load-btn">
-            <i class="bi bi-upload"></i> Load Code
-          </button>
+        
+        <div class="rail-empty-redesign">
+          <!-- Navigation Tabs -->
+          <div class="empty-nav-tabs">
+            <button class="empty-nav-tab active" id="empty-code-hub-btn">
+              <i class="bi bi-code-square"></i>
+              <span>Code Hub</span>
+            </button>
+            <button class="empty-nav-tab" id="empty-multi-maker-btn">
+              <i class="bi bi-plus-square"></i>
+              <span>Multi Maker</span>
+            </button>
+          </div>
+
+          <!-- Recommended Section -->
+
+          <!-- Load Code Form -->
+          <div class="empty-load-form">
+            <div class="empty-load-form-header">
+              <h4>Please insert booking code</h4>
+              <i class="bi bi-info-circle" title="Enter your bet code to load selections"></i>
+            </div>
+
+            <form id="empty-load-code-form">
+              <div class="empty-form-group">
+                <label>Bet Code</label>
+                <div class="empty-input-wrapper">
+                  <input 
+                    type="text" 
+                    id="empty-bet-code-input"
+                    placeholder="Enter bet code (e.g., M8BULE)"
+                    required
+                  />
+                  <button type="button" id="empty-paste-btn" class="empty-paste-btn">
+                    <i class="bi bi-clipboard"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="empty-form-group">
+                <label>Select Origin Bookie</label>
+                <select id="empty-origin-bookie" required>
+                  <option value="">Choose a bookie</option>
+                  <option value="sportybet-nigeria">Sportybet - Nigeria</option>
+                  <option value="sportybet-ghana">Sportybet - Ghana</option>
+                  <option value="sportybet-kenya">Sportybet - Kenya</option>
+                  <option value="bet9ja-nigeria">Bet9ja - Nigeria</option>
+                  <option value="betking-nigeria">BetKing - Nigeria</option>
+                  <option value="1xbet-nigeria">1xBet - Nigeria</option>
+                  <option value="22bet-nigeria">22bet - Nigeria</option>
+                </select>
+              </div>
+
+              <div class="empty-form-buttons">
+                <button type="button" id="empty-cancel-btn" class="empty-cancel-btn">
+                  Cancel
+                </button>
+                <button type="submit" class="empty-submit-btn">
+                  <i class="bi bi-download"></i> Load Code
+                </button>
+              </div>
+            </form>
+
+            <!-- Loading State -->
+            <div id="empty-loading-state" class="empty-loading-state" style="display: none;">
+              <div class="empty-spinner"></div>
+              <p>Loading bet code...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="empty-error-state" class="empty-error-state" style="display: none;">
+              <i class="bi bi-exclamation-circle"></i>
+              <p>Failed to load bet code. Please try again.</p>
+              <button id="empty-retry-btn" class="empty-retry-btn">Retry</button>
+            </div>
+          </div>
         </div>
       ` : `
-        <!-- Bulk Actions -->
         <div class="rail-bulk-actions">
           <label class="rail-checkbox-all">
             <input type="checkbox" id="select-all-checkbox" ${bets.every(b => b.selected) ? 'checked' : ''} />
@@ -727,14 +615,8 @@
           <button class="rail-bulk-btn" id="clear-all-btn">
             <i class="bi bi-trash"></i> Clear All
           </button>
-          ${selectedCount > 0 ? `
-            <button class="rail-bulk-btn delete" id="delete-selected-btn">
-              <i class="bi bi-trash"></i> Delete (${selectedCount})
-            </button>
-          ` : ''}
         </div>
 
-        <!-- Bets List -->
         <div class="rail-bets-list">
           ${bets.map((bet, index) => `
             <div class="rail-bet-item ${bet.selected ? 'selected' : ''}" data-match-id="${bet.matchId}">
@@ -762,7 +644,6 @@
           `).join('')}
         </div>
 
-        <!-- Rail Footer -->
         <div class="rail-footer">
           <div class="rail-total">
             <span class="rail-total-label">Total Odds:</span>
@@ -788,27 +669,97 @@
   }
 
   function attachEventListeners() {
-    // Close button
     const closeBtn = document.getElementById('rail-close-btn');
     if (closeBtn) closeBtn.addEventListener('click', closeRail);
 
-    // Minimize button
     const minimizeBtn = document.getElementById('rail-minimize-btn');
     if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
 
-    // Expand fullscreen button
     const expandBtn = document.getElementById('rail-expand-btn');
     if (expandBtn) expandBtn.addEventListener('click', expandFullScreen);
 
-    // Load code button
-    const loadBtn = document.getElementById('rail-load-btn');
-    if (loadBtn) loadBtn.addEventListener('click', showLoadCodeModal);
+    // Empty state navigation tabs
+    const codeHubBtn = document.getElementById('empty-code-hub-btn');
+    if (codeHubBtn) {
+      codeHubBtn.addEventListener('click', () => {
+        document.querySelectorAll('.empty-nav-tab').forEach(tab => tab.classList.remove('active'));
+        codeHubBtn.classList.add('active');
+        console.log('Code Hub tab selected');
+      });
+    }
 
-    // Empty state load button
-    const emptyLoadBtn = document.getElementById('empty-load-btn');
-    if (emptyLoadBtn) emptyLoadBtn.addEventListener('click', showLoadCodeModal);
+    const myPinsBtn = document.getElementById('empty-my-pins-btn');
+    if (myPinsBtn) {
+      myPinsBtn.addEventListener('click', () => {
+        document.querySelectorAll('.empty-nav-tab').forEach(tab => tab.classList.remove('active'));
+        myPinsBtn.classList.add('active');
+        console.log('My Pins tab selected');
+      });
+    }
 
-    // Select all checkbox
+    const multiMakerBtn = document.getElementById('empty-multi-maker-btn');
+    if (multiMakerBtn) {
+      multiMakerBtn.addEventListener('click', () => {
+        document.querySelectorAll('.empty-nav-tab').forEach(tab => tab.classList.remove('active'));
+        multiMakerBtn.classList.add('active');
+        console.log('Multi Maker tab selected');
+      });
+    }
+
+    // Empty state form handlers
+    const emptyPasteBtn = document.getElementById('empty-paste-btn');
+    const emptyCodeInput = document.getElementById('empty-bet-code-input');
+    if (emptyPasteBtn && emptyCodeInput) {
+      emptyPasteBtn.addEventListener('click', async () => {
+        try {
+          const text = await navigator.clipboard.readText();
+          emptyCodeInput.value = text.trim();
+        } catch (err) {
+          console.log('Paste failed:', err);
+        }
+      });
+    }
+
+    const emptyCancelBtn = document.getElementById('empty-cancel-btn');
+    if (emptyCancelBtn) {
+      emptyCancelBtn.addEventListener('click', () => {
+        closeRail();
+      });
+    }
+
+    const emptyLoadForm = document.getElementById('empty-load-code-form');
+    if (emptyLoadForm) {
+      emptyLoadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const code = document.getElementById('empty-bet-code-input').value.trim();
+        const bookie = document.getElementById('empty-origin-bookie').value;
+        
+        if (!code || !bookie) {
+          alert('Please fill in all fields');
+          return;
+        }
+
+        emptyLoadForm.style.display = 'none';
+        document.getElementById('empty-loading-state').style.display = 'flex';
+
+        try {
+          await loadBetCodeFromEmpty(code, bookie);
+        } catch (error) {
+          document.getElementById('empty-loading-state').style.display = 'none';
+          document.getElementById('empty-error-state').style.display = 'flex';
+        }
+      });
+    }
+
+    const emptyRetryBtn = document.getElementById('empty-retry-btn');
+    if (emptyRetryBtn) {
+      emptyRetryBtn.addEventListener('click', () => {
+        document.getElementById('empty-error-state').style.display = 'none';
+        document.getElementById('empty-load-code-form').style.display = 'block';
+      });
+    }
+
     const selectAllCheckbox = document.getElementById('select-all-checkbox');
     if (selectAllCheckbox) {
       selectAllCheckbox.addEventListener('change', (e) => {
@@ -819,7 +770,6 @@
       });
     }
 
-    // Clear all button
     const clearAllBtn = document.getElementById('clear-all-btn');
     if (clearAllBtn) {
       clearAllBtn.addEventListener('click', () => {
@@ -827,7 +777,6 @@
       });
     }
 
-    // Delete selected button
     const deleteSelectedBtn = document.getElementById('delete-selected-btn');
     if (deleteSelectedBtn) {
       deleteSelectedBtn.addEventListener('click', () => {
@@ -835,28 +784,23 @@
       });
     }
 
-    // Individual checkboxes
     document.querySelectorAll('.bet-checkbox').forEach(cb => {
       cb.addEventListener('change', (e) => {
         toggleSelection(e.target.dataset.matchId);
       });
     });
 
-    // Edit buttons
     document.querySelectorAll('.rail-bet-edit-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const matchId = e.currentTarget.dataset.matchId;
         const bet = bets.find(b => b.matchId == matchId);
         if (bet) {
-          // Open market edit modal (will be implemented in Phase 2)
           console.log('Edit bet:', bet);
-          // For now, redirect to edit page
           window.location.href = `bet-editor-edit.html?id=${bets.findIndex(b => b.matchId == matchId)}`;
         }
       });
     });
 
-    // Remove buttons
     document.querySelectorAll('.rail-bet-remove-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const matchId = e.currentTarget.dataset.matchId;
@@ -864,7 +808,6 @@
       });
     });
 
-    // Book button
     const bookBtn = document.getElementById('rail-book-btn');
     const bookieSelect = document.getElementById('rail-bookie-select');
     if (bookBtn && bookieSelect) {
@@ -879,28 +822,22 @@
     if (!container) return;
 
     container.innerHTML = `
-      <!-- Floating Badge -->
       <div class="rail-badge ${bets.length === 0 ? 'empty' : ''}" id="rail-badge">
         <span class="rail-badge-count" id="rail-badge-count">${bets.length}</span>
         <span>Betslip</span>
       </div>
 
-      <!-- Overlay -->
       <div class="rail-overlay" id="rail-overlay"></div>
 
-      <!-- Rail Container -->
       <div class="rail-container" id="rail-container">
-        <!-- Content will be rendered by renderRail() -->
       </div>
     `;
 
-    // Badge click handler
     const badge = document.getElementById('rail-badge');
     if (badge) {
       badge.addEventListener('click', openRail);
     }
 
-    // Overlay click handler
     const overlay = document.getElementById('rail-overlay');
     if (overlay) {
       overlay.addEventListener('click', closeRail);
@@ -912,15 +849,12 @@
 
   // ==================== PUBLIC API ====================
   window.betslipRail = {
-    // Selection management
     addSelection,
     removeSelection,
     updateSelection,
     clearAll,
     selectAll,
     deleteSelected,
-    
-    // UI controls
     openRail,
     closeRail,
     toggleMinimize,
@@ -929,22 +863,11 @@
     showBadge,
     hideBadge,
     flashBadge,
-    
-    // Modals
-    showLoadCodeModal,
-    
-    // Actions
     bookSelections,
-    
-    // Utilities
     calculateTotalOdds,
     getBets: () => [...bets],
     getSelectedBets: () => bets.filter(b => b.selected),
-    
-    // Event system
     on,
-    
-    // Internal (for debugging)
     _state: () => ({ bets, isRailOpen, isMinimized }),
     _render: renderRail,
     _bookAction: () => {
@@ -964,7 +887,6 @@
     initRailHTML();
   });
 
-  // Handle page visibility (sync across tabs)
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
       loadFromStorage();

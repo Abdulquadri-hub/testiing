@@ -114,106 +114,110 @@
   <script src="./components/market-edit-modal.js"></script>
   <script>
     // ==================== WAIT FOR RAIL TO BE READY ====================
-    function waitForRail() {
-      return new Promise((resolve) => {
+function waitForRail() {
+  return new Promise((resolve) => {
+    if (window.betslipRail) {
+      resolve();
+    } else {
+      const checkInterval = setInterval(() => {
         if (window.betslipRail) {
+          clearInterval(checkInterval);
           resolve();
-        } else {
-          const checkInterval = setInterval(() => {
-            if (window.betslipRail) {
-              clearInterval(checkInterval);
-              resolve();
-            }
-          }, 50);
         }
-      });
+      }, 50);
     }
+  });
+}
 
-    // ==================== NAVIGATION ====================
-    async function setupNavigation() {
-      await waitForRail();
+// ==================== NAVIGATION ====================
+async function setupNavigation() {
+  await waitForRail();
 
-      const loadCodeBtn = document.getElementById('load-code-btn');
-      const addGameBtn = document.getElementById('add-game-btn');
+  const loadCodeBtn = document.getElementById('load-code-btn');
+  const addGameBtn = document.getElementById('add-game-btn');
 
-      loadCodeBtn.addEventListener('click', () => {
-        console.log('Load Code clicked, Rail available:', !!window.betslipRail);
-        
-        // Open load code modal directly from Rail
-        if (window.betslipRail && window.betslipRail.showLoadCodeModal) {
-          window.betslipRail.showLoadCodeModal();
-        } else {
-          console.warn('Rail not ready, falling back to navigation');
-          // Fallback: navigate to load page
-          window.location.href = 'bet-editor-load.html';
-        }
-      });
-
-      addGameBtn.addEventListener('click', () => {
-        window.location.href = 'bet-editor-add.html';
-      });
+  loadCodeBtn.addEventListener('click', () => {
+    console.log('Load Code clicked, Rail available:', !!window.betslipRail);
+    
+    // FIXED: Just open the rail - the empty state will show the load form
+    if (window.betslipRail && window.betslipRail.openRail) {
+      window.betslipRail.openRail();
+    } else {
+      console.warn('Rail not ready, falling back to navigation');
+      window.location.href = 'bet-editor-load.html';
     }
+  });
 
-    // ==================== UI STATE MANAGEMENT ====================
-    async function updateUIState() {
-      await waitForRail();
-      
-      const bets = window.betslipRail ? window.betslipRail.getBets() : [];
-      const emptyState = document.getElementById('empty-state');
-      const infoCard = document.getElementById('info-card');
-      const betCountInfo = document.getElementById('bet-count-info');
+  addGameBtn.addEventListener('click', () => {
+    window.location.href = 'bet-editor-add.html';
+  });
+}
 
-      if (bets.length === 0) {
-        // Show empty state
-        emptyState.style.display = 'block';
-        infoCard.style.display = 'none';
-      } else {
-        // Show info card
-        emptyState.style.display = 'none';
-        infoCard.style.display = 'block';
-        betCountInfo.textContent = bets.length;
-      }
+// ==================== UI STATE MANAGEMENT ====================
+async function updateUIState() {
+  await waitForRail();
+  
+  const bets = window.betslipRail ? window.betslipRail.getBets() : [];
+  const emptyState = document.getElementById('empty-state');
+  const infoCard = document.getElementById('info-card');
+  const betCountInfo = document.getElementById('bet-count-info');
+
+  if (bets.length === 0) {
+    // Show empty state
+    if (emptyState) emptyState.style.display = 'block';
+    if (infoCard) infoCard.style.display = 'none';
+  } else {
+    // Show info card
+    if (emptyState) emptyState.style.display = 'none';
+    if (infoCard) {
+      infoCard.style.display = 'block';
+      if (betCountInfo) betCountInfo.textContent = bets.length;
     }
+  }
+}
 
-    // ==================== OPEN BETSLIP ====================
-    async function setupOpenBetslip() {
-      await waitForRail();
-      
-      document.getElementById('open-betslip-btn').addEventListener('click', () => {
-        if (window.betslipRail && window.betslipRail.openRail) {
-          window.betslipRail.openRail();
-        }
-      });
-    }
-
-    // ==================== LISTEN TO BETSLIP UPDATES ====================
-    document.addEventListener('betslip:updated', (e) => {
-      updateUIState();
-    });
-
-    document.addEventListener('betslip:cleared', (e) => {
-      updateUIState();
-    });
-
-    // ==================== INITIAL STATE ====================
-    window.addEventListener('DOMContentLoaded', async () => {
-      // Wait for Rail to be ready
-      await waitForRail();
-      
-      // Setup all interactions
-      await setupNavigation();
-      await setupOpenBetslip();
-      
-      // Update UI state
-      updateUIState();
-    });
-
-    // ==================== PAGE VISIBILITY (Sync across tabs) ====================
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) {
-        updateUIState();
+// ==================== OPEN BETSLIP ====================
+async function setupOpenBetslip() {
+  await waitForRail();
+  
+  const openBetslipBtn = document.getElementById('open-betslip-btn');
+  if (openBetslipBtn) {
+    openBetslipBtn.addEventListener('click', () => {
+      if (window.betslipRail && window.betslipRail.openRail) {
+        window.betslipRail.openRail();
       }
     });
+  }
+}
+
+// ==================== LISTEN TO BETSLIP UPDATES ====================
+document.addEventListener('betslip:updated', (e) => {
+  updateUIState();
+});
+
+document.addEventListener('betslip:cleared', (e) => {
+  updateUIState();
+});
+
+// ==================== INITIAL STATE ====================
+window.addEventListener('DOMContentLoaded', async () => {
+  // Wait for Rail to be ready
+  await waitForRail();
+  
+  // Setup all interactions
+  await setupNavigation();
+  await setupOpenBetslip();
+  
+  // Update UI state
+  updateUIState();
+});
+
+// ==================== PAGE VISIBILITY (Sync across tabs) ====================
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) {
+    updateUIState();
+  }
+});
   </script>
 </body>
 </html>

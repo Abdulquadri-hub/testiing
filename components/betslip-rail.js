@@ -210,7 +210,7 @@
         badge.style.display = 'flex';
       } else {
         badge.classList.add('empty');
-        badge.style.opacity = '0.5';
+        // badge.style.opacity = '0.5';
       }
     }
   }

@@ -5,7 +5,8 @@
 
 /* BACK LINK */
 .icon-back {
-  display: inline-flex;
+  display: flex;
+  flex: 1;
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
@@ -792,3 +793,39 @@
     margin: 0;
   }
 }
+
+
+/* ========================================
+   RESULT CONTAINER STICKY BEHAVIOR
+   ======================================== */
+
+/* Make the back link and conversion summary sticky */
+.icon-back {
+  position: sticky;
+  /* border: 1px solid red; */
+  top: 62px; /* Below desktop nav */
+  z-index: 200;
+  background: white;
+}
+
+/* .conversion-summary {
+  position: sticky;
+  top: 106px;
+  z-index: 199;
+
+}
+
+.view-toggle {
+  position: sticky;
+  top: 344px; 
+  z-index: 198;
+  background: white;
+}
+
+
+.filter-bar {
+  position: sticky;
+  top: 400px; 
+  z-index: 199;
+  background: white;
+} */

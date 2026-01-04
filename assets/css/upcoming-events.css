@@ -22,20 +22,22 @@
 .sticky-header {
   position: sticky;
   background: white;
-  z-index: 10;
+  z-index: 100;
   transition: all 0.3s ease;
 }
 
-/* Sports Bar - Sticks to top */
+/* Sports Bar - Sticks below desktop nav */
 .sports-bar-wrapper {
-  top: 0;
+  /* border:1px solid blue; */
+  top: 62px; /* Changed from 0 to account for desktop nav */
   border-bottom: 1px solid #e5e7eb;
   padding: 0.75rem 1rem;
 }
 
 /* Market Tabs - Sticks below sports bar */
 .market-tabs-wrapper {
-  top: 56px; /* Height of sports bar */
+  /* border:1px solid red; */
+  top: 118px; /*  desktop nav +  sports bar */
   border-bottom: 1px solid #e5e7eb;
   padding: 0.5rem 1rem;
 }
@@ -44,6 +46,7 @@
 .sticky-header.scrolled {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
 
 /* ========================================
    SPORTS BAR
@@ -192,6 +195,41 @@
 .event-card:hover {
   background: #f9fafb;
 }
+
+/* event market header */
+.event-market-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  margin: -12px -12px 8px -12px; 
+  background: #f3f4f6; /* light grey like image */
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 13px;
+}
+
+/* Left side date */
+.market-date {
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+}
+
+/* Right side market title*/
+.market-title {
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  text-align: center;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.market-title span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /* Event Header */
 .event-header {

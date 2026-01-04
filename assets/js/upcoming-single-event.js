@@ -6,6 +6,7 @@ const header = document.getElementById("eventHeader");
 const bottomNav = document.getElementById("bottomNav");
 const scrollThreshold = 100;
 
+// Replace the existing scroll event listener with this:
 window.addEventListener("scroll", () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -16,11 +17,13 @@ window.addEventListener("scroll", () => {
     header.classList.remove("scrolled");
   }
 
-  // Hide / show bottom nav
-  if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-    bottomNav.classList.add("hidden");
-  } else {
-    bottomNav.classList.remove("hidden");
+  // Hide / show bottom nav (if you have it)
+  if (bottomNav) {
+    if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+      bottomNav.classList.add("hidden");
+    } else {
+      bottomNav.classList.remove("hidden");
+    }
   }
 
   lastScrollTop = scrollTop;

@@ -42,6 +42,8 @@
     data-bggradient="bg-r-gradient"
     data-headerfill="adminuiux-header-transparent"
   >
+
+    <div id="desktop-nav"></div>
     <div id="side-menu"></div>
 
     <!-- main content -->
@@ -54,7 +56,10 @@
               <i class="bi bi-chevron-left"></i>
             </button>
 
-            <div class="header-logo">Details</div>
+            <div class="header-logo">
+              <span class="header-title">Details</span>
+              <span class="header-match-name">Leeds United vs Man Utd</span>
+            </div>
 
             <div class="header-actions">
               <button class="header-btn">
@@ -84,22 +89,22 @@
               </div>
 
               <div class="match-vs">
-                  <div class="match-time">04/01</div>
-                  <div class="match-time">Sunday</div>
-                  <div class="match-time" style="background: #4444; font-weight: 700;">13:30</div>
+                <div class="match-time">
+                  <span>04/01</span>
+                  <span>Sunday</span>
+                  <span  style="background: #4444; font-weight: 700">13:30</span>
+                </div>
               </div>
 
               <div class="team away">
                 <div class="team-logo"><i class="bi bi-shield"></i></div>
                 <div class="team-name">Man Utd</div>
               </div>
-              
+
               <button class="event-btn">
                 <i class="bi bi-chevron-right"></i>
               </button>
             </div>
-
-            
           </div>
 
           <div class="action-tabs">
@@ -118,6 +123,10 @@
           </div>
 
           <div class="market-filter-bar" id="marketFilterBar">
+            <div class="filter">
+              <i class="bi bi-search"></i>
+              <div class="border"></div>
+            </div>
             <button class="market-tab favorite">
               <i class="bi bi-star"></i>
             </button>
@@ -137,42 +146,42 @@
           <div class="market-group" data-market="1x2">
             <div class="market-header" onclick="toggleMarket(this)">
               <div class="market-header-left">
+                <i class="bi bi-chevron-down expand-icon"></i>
                 <span class="market-title">1X2</span>
                 <span class="info-icon" onclick="showMarketInfo(event, '1x2')">
-                  <i class="bi bi-info"></i>
-                </span>
-                <span class="favourite-icon">
-                  <i class="bi bi-heart"></i>
+                  <i class="bi bi-info-circle-fill"></i>
                 </span>
               </div>
               <div class="market-expand">
-                <span>4 bookies</span>
-                <i class="bi bi-chevron-down expand-icon"></i>
+                <span class="favourite-icon"><i class="bi bi-star"></i></span>
               </div>
             </div>
 
             <div class="market-options">
               <div class="options-grid">
-                <div class="option-label"></div>
+                <div class="option-label">Bookmaker</div>
                 <div class="option-headers">
-                  <button
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'home')"
                   >
                     1
-                  </button>
-                  <button
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'draw')"
                   >
                     X
-                  </button>
-                  <button
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'away')"
                   >
                     2
-                  </button>
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -240,45 +249,48 @@
           </div>
 
           <!-- 1X2 - 1UP Market -->
-          <div class="market-group" data-market="1x2-1up">
+          <div class="market-group collapsed" data-market="1x2-1up">
             <div class="market-header" onclick="toggleMarket(this)">
               <div class="market-header-left">
+                <i class="bi bi-chevron-down expand-icon"></i>
                 <span class="market-title">1X2 - 1UP</span>
                 <span
                   class="info-icon"
                   onclick="showMarketInfo(event, '1x2-1up')"
                 >
-                  <i class="bi bi-info"></i>
+                  <i class="bi bi-info-circle-fill"></i>
                 </span>
               </div>
               <div class="market-expand">
-                <span>3 bookies</span>
-                <i class="bi bi-chevron-down expand-icon"></i>
+                <span class="favourite-icon"><i class="bi bi-star"></i></span>
               </div>
             </div>
 
             <div class="market-options">
               <div class="options-grid">
-                <div class="option-label"></div>
+                <div class="option-label">Bookmaker</div>
                 <div class="option-headers">
-                  <button
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'home')"
                   >
                     1
-                  </button>
-                  <button
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'draw')"
                   >
                     X
-                  </button>
-                  <button
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'away')"
                   >
                     2
-                  </button>
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -333,36 +345,38 @@
           <div class="market-group collapsed" data-market="over-under">
             <div class="market-header" onclick="toggleMarket(this)">
               <div class="market-header-left">
+                <i class="bi bi-chevron-down expand-icon"></i>
                 <span class="market-title">Over/Under - Early Goals</span>
                 <span
                   class="info-icon"
                   onclick="showMarketInfo(event, 'over-under')"
                 >
-                  <i class="bi bi-info"></i>
+                  <i class="bi bi-info-circle-fill"></i>
                 </span>
               </div>
               <div class="market-expand">
-                <span>3 bookies</span>
-                <i class="bi bi-chevron-down expand-icon"></i>
+                <span class="favourite-icon"><i class="bi bi-star"></i></span>
               </div>
             </div>
 
             <div class="market-options">
               <div class="options-grid">
-                <div class="option-label"></div>
+                <div class="option-label">Bookmaker</div>
                 <div class="option-headers">
-                  <button
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'over')"
                   >
                     Over
-                  </button>
-                  <button
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'under')"
                   >
                     Under
-                  </button>
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -404,42 +418,45 @@
           <div class="market-group collapsed" data-market="double-chance">
             <div class="market-header" onclick="toggleMarket(this)">
               <div class="market-header-left">
+                <i class="bi bi-chevron-down expand-icon"></i>
                 <span class="market-title">Double Chance</span>
                 <span
                   class="info-icon"
                   onclick="showMarketInfo(event, 'double-chance')"
                 >
-                  <i class="bi bi-info"></i>
+                  <i class="bi bi-info-circle-fill"></i>
                 </span>
               </div>
               <div class="market-expand">
-                <span>3 bookies</span>
-                <i class="bi bi-chevron-down expand-icon"></i>
+                <span class="favourite-icon"><i class="bi bi-star"></i></span>
               </div>
             </div>
 
             <div class="market-options">
               <div class="options-grid">
-                <div class="option-label"></div>
+                <div class="option-label">Bookmaker</div>
                 <div class="option-headers">
-                  <button
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'home-draw')"
                   >
                     1X
-                  </button>
-                  <button
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'home-away')"
                   >
                     12
-                  </button>
-                  <button
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
+                  <div
                     class="option-header"
                     onclick="sortByOption(this, 'draw-away')"
                   >
                     X2
-                  </button>
+                    <i class="bi bi-caret-up-fill"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -510,8 +527,8 @@
       </div>
     </div>
 
-    <div id="side-menu"></div>
-    <div id="betslip-rail"></div>
+     <div id="betslip-rail"></div>
+    <div id="filter-canvas"></div>
     <div id="mobile-nav"></div>
 
     <script src="assets/js/adminux/adminux-dashboard.js"></script>

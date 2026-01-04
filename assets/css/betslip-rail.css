@@ -18,8 +18,8 @@
   position: fixed;
   bottom: 90px; /* Lifted up higher to avoid bottom nav */
   right: 0px; /* Positioned in bottom-right corner */
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background: var(--rail-primary);
   color: white;
   border-top-left-radius: 10px;
@@ -149,7 +149,7 @@
 .rail-header-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .rail-title {
@@ -157,12 +157,30 @@
   font-weight: 700;
   color: var(--rail-text);
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .rail-header-actions {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.rail-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .rail-action-btn,

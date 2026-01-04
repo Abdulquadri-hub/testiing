@@ -703,7 +703,7 @@ function attachEventListeners() {
     codeHubBtn.addEventListener('click', () => {
       document.querySelectorAll('.empty-nav-tab').forEach(tab => tab.classList.remove('active'));
       codeHubBtn.classList.add('active');
-      console.log('Code Hub tab selected');
+      window.location.href = 'codehub.html';
     });
   }
 

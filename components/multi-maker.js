@@ -140,7 +140,6 @@
             <i class="bi bi-circle-fill"></i>
             <span>${match.outcome} | ${match.market.toUpperCase()}</span>
           </div>
-          <div class="match-odd-display">${match.odd}</div>
         </div>
         <div class="match-content">
           <button class="match-remove" data-match-id="${match.id}">
@@ -148,10 +147,6 @@
           </button>
           <div class="match-details">
             <div class="match-outcome-row">
-              <div class="match-outcome">
-                <i class="bi bi-record-circle-fill"></i>
-                ${match.outcome}
-              </div>
               <div class="match-teams">${match.teams}</div>
             </div>
             <div class="match-datetime">${match.datetime}</div>

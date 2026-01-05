@@ -46,29 +46,8 @@
     <div id="side-menu"></div>
 
     <!-- main content -->
-    <div class="adminuiux-wrap page-wrapper">
+    <div class="adminuiux-wrap page-wrap">
       <main class="adminuiux-content has-sidebar" onclick="contentClick()">
-        <!-- Page Title (visible at top, hides on scroll) -->
-        <div class="container-fluid py-1 py-lg-3 page-header" id="page-header">
-          <div class="row gx-3 gx-lg-4 align-items-center page-title">
-            <div class="col col-sm">
-              <h6 class="mb-0">Upcoming Events</h6>
-              <p class="text-secondary small">
-                Browse and bet on upcoming matches
-              </p>
-            </div>
-            <div class="col-auto position-relative">
-              <button
-                class="btn btn-link btn-square"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#filter"
-                data-bs-placement="end"
-              >
-                <i class="bi bi-filter"></i>
-              </button>
-            </div>
-          </div>
-        </div>
 
         <!-- Events Container -->
         <div class="events-wrapper">
@@ -77,10 +56,10 @@
             <div class="sports-bar-wrapper sticky-header" id="sports-bar">
               <div class="sports-tabs">
                 <button class="sport-btn active" data-sport="football">
-                  <i class="bi bi-circle-fill"></i> Football
+                  <i class="bi bi-dribbble"></i> Football
                 </button>
                 <button class="sport-btn" data-sport="basketball">
-                  <i class="bi bi-circle-fill"></i> Basketball
+                  <i class="bi bi-basket"></i> Basketball
                 </button>
                 <button class="sport-btn" data-sport="tennis">
                   <i class="bi bi-circle-fill"></i> Tennis
@@ -130,10 +109,10 @@
             <!-- Events List -->
             <div class="events-list">
               <div class="featured-events">
-                <!-- <div class="section-header">
+                <div class="section-header">
                   <i class="bi bi-fire"></i>
                   <span>Hot Matches</span>
-                </div> -->
+                </div>
 
                 <!-- Event 1 -->
                 <div class="event-card">
@@ -151,8 +130,8 @@
                     <span class="event-time">15:00</span>
                     <span class="event-league">English Premier League</span>
                   </div>
-                  <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                    <div class="teams">
+                  <div class="event-body">
+                    <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                       <div class="team">Manchester United</div>
                       <div class="team">Liverpool</div>
                     </div>
@@ -177,8 +156,8 @@
                     <span class="event-time">17:30</span>
                     <span class="event-league">Spanish La Liga</span>
                   </div>
-                  <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                    <div class="teams">
+                  <div class="event-body">
+                    <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                       <div class="team">Real Madrid</div>
                       <div class="team">Barcelona</div>
                     </div>
@@ -203,8 +182,8 @@
                     <span class="event-time">18:00</span>
                     <span class="event-league">German Bundesliga</span>
                   </div>
-                  <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                    <div class="teams">
+                  <div class="event-body">
+                    <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                       <div class="team">Bayern Munich</div>
                       <div class="team">Borussia Dortmund</div>
                     </div>
@@ -229,8 +208,8 @@
                     <span class="event-time">19:45</span>
                     <span class="event-league">Italian Serie A</span>
                   </div>
-                  <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                    <div class="teams">
+                  <div class="event-body">
+                    <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                       <div class="team">AC Milan</div>
                       <div class="team">Inter Milan</div>
                     </div>
@@ -255,8 +234,8 @@
                     <span class="event-time">20:00</span>
                     <span class="event-league">French Ligue 1</span>
                   </div>
-                  <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                    <div class="teams">
+                  <div class="event-body">
+                    <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                       <div class="team">Paris Saint-Germain</div>
                       <div class="team">Olympique Marseille</div>
                     </div>
@@ -290,8 +269,8 @@
                     <span class="event-time">14:00</span>
                     <span class="event-league">UEFA Champions League</span>
                   </div>
-                  <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                    <div class="teams">
+                  <div class="event-body">
+                    <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                       <div class="team">Chelsea</div>
                       <div class="team">Arsenal</div>
                     </div>
@@ -316,8 +295,8 @@
                     <span class="event-time">16:30</span>
                     <span class="event-league">Portuguese Primeira Liga</span>
                   </div>
-                  <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                    <div class="teams">
+                  <div class="event-body">
+                    <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                       <div class="team">Benfica</div>
                       <div class="team">Porto</div>
                     </div>
@@ -342,8 +321,8 @@
                     <span class="event-time">18:00</span>
                     <span class="event-league">Dutch Eredivisie</span>
                   </div>
-                  <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                    <div class="teams">
+                  <div class="event-body">
+                    <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                       <div class="team">Ajax Amsterdam</div>
                       <div class="team">PSV Eindhoven</div>
                     </div>
@@ -368,8 +347,8 @@
                     <span class="event-time">19:00</span>
                     <span class="event-league">Turkish Super Lig</span>
                   </div>
-                  <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                    <div class="teams">
+                  <div class="event-body">
+                    <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                       <div class="team">Galatasaray</div>
                       <div class="team">Fenerbahce</div>
                     </div>
@@ -394,8 +373,8 @@
                     <span class="event-time">20:30</span>
                     <span class="event-league">Belgian Pro League</span>
                   </div>
-                  <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                    <div class="teams">
+                  <div class="event-body">
+                    <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                       <div class="team">Club Brugge</div>
                       <div class="team">Anderlecht</div>
                     </div>
@@ -442,8 +421,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 15:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Newcastle United</div>
                         <div class="team">Tottenham Hotspur</div>
                       </div>
@@ -466,8 +445,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 15:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Aston Villa</div>
                         <div class="team">West Ham United</div>
                       </div>
@@ -490,8 +469,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 17:30</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Brighton & Hove Albion</div>
                         <div class="team">Wolverhampton Wanderers</div>
                       </div>
@@ -514,8 +493,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 14:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Everton</div>
                         <div class="team">Leicester City</div>
                       </div>
@@ -538,8 +517,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 14:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Fulham</div>
                         <div class="team">Crystal Palace</div>
                       </div>
@@ -562,8 +541,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 16:30</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Southampton</div>
                         <div class="team">Bournemouth</div>
                       </div>
@@ -586,8 +565,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 16:30</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Nottingham Forest</div>
                         <div class="team">Brentford</div>
                       </div>
@@ -610,8 +589,8 @@
                     <div class="event-header">
                       <span class="event-time">Mon 20:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Luton Town</div>
                         <div class="team">Sheffield United</div>
                       </div>
@@ -654,8 +633,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 14:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Atletico Madrid</div>
                         <div class="team">Sevilla</div>
                       </div>
@@ -678,8 +657,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 16:15</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Valencia</div>
                         <div class="team">Athletic Bilbao</div>
                       </div>
@@ -702,8 +681,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 18:30</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Real Sociedad</div>
                         <div class="team">Villarreal</div>
                       </div>
@@ -726,8 +705,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 16:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Real Betis</div>
                         <div class="team">Getafe</div>
                       </div>
@@ -750,8 +729,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 18:15</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Osasuna</div>
                         <div class="team">Celta Vigo</div>
                       </div>
@@ -774,8 +753,8 @@
                     <div class="event-header">
                       <span class="event-time">Mon 21:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Mallorca</div>
                         <div class="team">Girona</div>
                       </div>
@@ -818,8 +797,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 14:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Atletico Madrid</div>
                         <div class="team">Sevilla</div>
                       </div>
@@ -842,8 +821,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 16:15</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Valencia</div>
                         <div class="team">Athletic Bilbao</div>
                       </div>
@@ -866,8 +845,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 18:30</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Real Sociedad</div>
                         <div class="team">Villarreal</div>
                       </div>
@@ -890,8 +869,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 16:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Real Betis</div>
                         <div class="team">Getafe</div>
                       </div>
@@ -914,8 +893,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 18:15</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Osasuna</div>
                         <div class="team">Celta Vigo</div>
                       </div>
@@ -938,8 +917,8 @@
                     <div class="event-header">
                       <span class="event-time">Mon 21:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Mallorca</div>
                         <div class="team">Girona</div>
                       </div>
@@ -982,8 +961,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 14:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Atletico Madrid</div>
                         <div class="team">Sevilla</div>
                       </div>
@@ -1006,8 +985,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 16:15</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Valencia</div>
                         <div class="team">Athletic Bilbao</div>
                       </div>
@@ -1030,8 +1009,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 18:30</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Real Sociedad</div>
                         <div class="team">Villarreal</div>
                       </div>
@@ -1054,8 +1033,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 16:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Real Betis</div>
                         <div class="team">Getafe</div>
                       </div>
@@ -1078,8 +1057,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 18:15</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Osasuna</div>
                         <div class="team">Celta Vigo</div>
                       </div>
@@ -1102,8 +1081,8 @@
                     <div class="event-header">
                       <span class="event-time">Mon 21:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Mallorca</div>
                         <div class="team">Girona</div>
                       </div>
@@ -1146,8 +1125,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 14:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Atletico Madrid</div>
                         <div class="team">Sevilla</div>
                       </div>
@@ -1170,8 +1149,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 16:15</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Valencia</div>
                         <div class="team">Athletic Bilbao</div>
                       </div>
@@ -1194,8 +1173,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 18:30</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Real Sociedad</div>
                         <div class="team">Villarreal</div>
                       </div>
@@ -1218,8 +1197,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 16:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Real Betis</div>
                         <div class="team">Getafe</div>
                       </div>
@@ -1242,8 +1221,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 18:15</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Osasuna</div>
                         <div class="team">Celta Vigo</div>
                       </div>
@@ -1266,8 +1245,8 @@
                     <div class="event-header">
                       <span class="event-time">Mon 21:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Mallorca</div>
                         <div class="team">Girona</div>
                       </div>
@@ -1310,8 +1289,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 14:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Atletico Madrid</div>
                         <div class="team">Sevilla</div>
                       </div>
@@ -1334,8 +1313,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 16:15</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Valencia</div>
                         <div class="team">Athletic Bilbao</div>
                       </div>
@@ -1358,8 +1337,8 @@
                     <div class="event-header">
                       <span class="event-time">Sat 18:30</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Real Sociedad</div>
                         <div class="team">Villarreal</div>
                       </div>
@@ -1382,8 +1361,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 16:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Real Betis</div>
                         <div class="team">Getafe</div>
                       </div>
@@ -1406,8 +1385,8 @@
                     <div class="event-header">
                       <span class="event-time">Sun 18:15</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Osasuna</div>
                         <div class="team">Celta Vigo</div>
                       </div>
@@ -1430,8 +1409,8 @@
                     <div class="event-header">
                       <span class="event-time">Mon 21:00</span>
                     </div>
-                    <div class="event-body" onclick="navigateTo('upcoming-single-event.html')">
-                      <div class="teams">
+                    <div class="event-body">
+                      <div class="teams" onclick="navigateTo('upcoming-single-event.html')" >
                         <div class="team">Mallorca</div>
                         <div class="team">Girona</div>
                       </div>

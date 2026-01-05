@@ -18,7 +18,7 @@
 /* Main card container */
 .betviewer .card {
   /* border: 2px solid var(--btv-border); */
-  border-radius: 0;
+  /* border-radius: 0; */
   background: #ffffff;
 }
 
@@ -50,7 +50,6 @@
   padding: 8px 10px;
   background: #ffffff;
   color: var(--btv-text);
-  border: 1px solid var(--btv-border);
   border-radius: 0;
   font-size: 14px;
   font-family: inherit;
@@ -59,9 +58,9 @@
 
 .btv-form .form-control:focus,
 .btv-form .form-select:focus {
-  outline: 2px solid var(--btv-text);
-  outline-offset: 2px;
-  border-color: var(--btv-text);
+  outline: none;
+  /* outline-offset: 2px; */
+  /* border-color: var(--btv-text); */
 }
 
 .btv-form .input-group {
@@ -97,6 +96,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 0;
 }
 
 .btv-form .btn:hover {
@@ -135,7 +135,7 @@
   padding: 10px 12px;
   background: #f8f8f8;
   border: 1px solid var(--btv-border);
-  border-radius: 0;
+  /* border-radius: 0; */
   margin-bottom: 10px;
 }
 
@@ -192,7 +192,7 @@
 /* Icon buttons in header */
 .icon-btn {
   background: transparent;
-  /* border: 1px solid var(--btv-border); */
+  border: none;
   padding: 6px 8px;
   cursor: pointer;
   display: flex;
@@ -203,7 +203,7 @@
 
 .icon-btn:hover {
   background: var(--btv-text);
-  /* border-color: var(--btv-text); */
+  border-color: var(--btv-text);
 }
 
 .icon-btn:hover svg {
@@ -225,7 +225,7 @@
   background: #ffffff;
   border: 1px solid var(--btv-border);
   border-radius: 0;
-  padding: 8px 10px;
+  padding: 8px 12px;
   margin-bottom: 8px;
   position: relative;
 }
@@ -303,8 +303,6 @@
   font-weight: 700;
   font-size: 15px;
   padding: 6px 10px;
-  border: 2px solid var(--btv-text);
-  border-radius: 0;
   display: inline-block;
   min-width: 55px;
   text-align: center;

@@ -41,38 +41,13 @@
     data-bggradient="bg-r-gradient"
     data-headerfill="adminuiux-header-transparent"
   >
-    <!-- standard header -->
-    <div id="desktop-nav"></div>
 
-    <!-- Standard sidebar -->
+    <div id="desktop-nav"></div>
     <div id="side-menu"></div>
 
     <!-- main content -->
-    <div class="adminuiux-wrap page-wrapper">
+    <div class="adminuiux-wrap page-wrap">
       <main class="adminuiux-content has-sidebar" onclick="contentClick()">
-        <!-- page title -->
-        <div class="container-fluid py-1 py-lg-3">
-          <div class="row gx-3 gx-lg-4 align-items-center page-title">
-            <div class="col col-sm">
-              <h6 class="mb-0">Bet Converter</h6>
-              <p class="text-secondary small">Convert betting codes between bookies</p>
-            </div>
-            <div class="col-auto position-relative">
-              <button
-                class="btn btn-link btn-square"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#filter"
-                data-bs-placement="end"
-              >
-                <i class="bi bi-filter"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- content -->
-        <div class="p-1">
-          <!-- Content Card -->
           <div class="content-card">
             <!-- Mobile Tabs -->
             <div class="tabs-mobile">
@@ -367,17 +342,12 @@
               </form>
             </div>
           </div>
-        </div>
       </main>
     </div>
 
-    <!-- global filter -->
     <div id="filter-canvas"></div>
-
-    <!-- mobile navigation -->
     <div id="mobile-nav"></div>
 
-    <!-- Page Level js -->
     <script src="assets/js/adminux/adminux-dashboard.js"></script>
     <script src="./components/AppLayout.js"></script>
     <script>

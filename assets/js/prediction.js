@@ -217,8 +217,8 @@
       if (btn) {
         const originalHTML = btn.innerHTML;
         btn.innerHTML = '<i class="bi bi-check-lg"></i>';
-        btn.style.background = '#4caf50';
-        btn.style.borderColor = '#4caf50';
+        btn.style.background = '#333';
+        btn.style.borderColor = '#3333';
         
         setTimeout(() => {
           btn.innerHTML = originalHTML;

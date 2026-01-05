@@ -16,6 +16,7 @@
   <link href="assets/css/app8051.css?bd1e16b080f637e63a80" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/css/main.css" />
   <link rel="stylesheet" href="./assets/css/predictions.css" />
+  <link rel="stylesheet" href="./assets/css/predictions-filters.css" />
   <link rel="stylesheet" href="./assets/css/betslip-rail.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
 </head>
@@ -25,7 +26,7 @@
   <div id="desktop-nav"></div>
   <div id="side-menu"></div>
 
-  <div class="adminuiux-wrap">
+  <div class="adminuiux-wrap page-wrapper">
     <main class="adminuiux-content has-sidebar" onclick="contentClick()">
       
       <div class="container-fluid py-1 py-lg-3">
@@ -42,18 +43,18 @@
 
           <!-- Sport Tabs with Icons -->
           <div class="sport-filter-tabs" id="sport-tabs">
-            <button class="sport-filter-tab active" data-sport="football">
+            <div class="sport-filter-tab active" data-sport="football">
               <i class="bi bi-dribbble"></i> Football
-            </button>
-            <button class="sport-filter-tab" data-sport="basketball">
+            </div>
+            <div class="sport-filter-tab" data-sport="basketball">
               <i class="bi bi-basket"></i> Basketball
-            </button>
-            <button class="sport-filter-tab" data-sport="tennis">
+            </div>
+            <div class="sport-filter-tab" data-sport="tennis">
               <i class="bi bi-trophy"></i> Tennis
-            </button>
+            </div>
           </div>
 
-          <!-- Market Filter Dropdown (Multi-Maker Style) -->
+          <!-- Filter Buttons -->
           <div class="predictions-filters">
             <button class="filter-btn" id="time-filter-btn">
               Time <i class="bi bi-chevron-down"></i>
@@ -87,7 +88,6 @@
             <div class="league-group">
               <div class="league-header">DFB Pokal</div>
               
-              <!-- Prediction Card 1 - Compact Multi-Maker Style -->
               <div class="prediction-card">
                 <div class="prediction-card-header">
                   <div class="prediction-sport-indicator">
@@ -129,7 +129,6 @@
                 </div>
               </div>
 
-              <!-- Prediction Card 2 -->
               <div class="prediction-card">
                 <div class="prediction-card-header">
                   <div class="prediction-sport-indicator">
@@ -171,7 +170,6 @@
                 </div>
               </div>
 
-              <!-- Prediction Card 3 -->
               <div class="prediction-card">
                 <div class="prediction-card-header">
                   <div class="prediction-sport-indicator">
@@ -387,112 +385,91 @@
     </main>
   </div>
 
-  <!-- Market Filter Modal -->
-  <div class="filter-modal hidden" id="market-modal">
-    <div class="filter-modal-content">
-      <div class="filter-modal-header">
-        <h3 class="filter-modal-title">Select Market</h3>
-        <button class="filter-modal-close" id="close-market-modal">
+  <!-- Time Filter Modal -->
+  <div class="pred-filter-modal" id="time-modal">
+    <div class="pred-filter-modal-content">
+      <div class="pred-filter-modal-header">
+        <h3 class="pred-filter-modal-title">Time</h3>
+        <button class="pred-filter-close" onclick="closePredFilter('time')">
           <i class="bi bi-x-lg"></i>
         </button>
       </div>
-      
-      <div class="filter-modal-body" style="padding: 0;">
-        <div class="market-list-item active" data-market="1x2" data-label="1X2">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">1X2</div>
-          </div>
-          <div class="market-list-item-count">419</div>
-        </div>
+      <div class="pred-filter-modal-body" id="time-list"></div>
+      <div class="pred-filter-modal-footer">
+        <button class="pred-filter-cancel" onclick="closePredFilter('time')">Cancel</button>
+        <button class="pred-filter-apply" onclick="applyPredFilter('time')">Apply</button>
+      </div>
+    </div>
+  </div>
 
-        <div class="market-list-item" data-market="double-chance" data-label="Double Chance">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">Double Chance</div>
-          </div>
-          <div class="market-list-item-count">75</div>
-        </div>
+  <!-- Market Filter Modal -->
+  <div class="pred-filter-modal" id="market-modal">
+    <div class="pred-filter-modal-content">
+      <div class="pred-filter-modal-header">
+        <h3 class="pred-filter-modal-title">Select Market</h3>
+        <button class="pred-filter-close" onclick="closePredFilter('market')">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="pred-filter-modal-body" id="market-list"></div>
+      <div class="pred-filter-modal-footer">
+        <button class="pred-filter-cancel" onclick="closePredFilter('market')">Cancel</button>
+        <button class="pred-filter-apply" onclick="applyPredFilter('market')">Apply</button>
+      </div>
+    </div>
+  </div>
 
-        <div class="market-list-item" data-market="handicap" data-label="Handicap">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">Handicap</div>
-          </div>
-          <div class="market-list-item-count">5</div>
-        </div>
+  <!-- League Filter Modal -->
+  <div class="pred-filter-modal" id="league-modal">
+    <div class="pred-filter-modal-content">
+      <div class="pred-filter-modal-header">
+        <h3 class="pred-filter-modal-title">Leagues</h3>
+        <button class="pred-filter-close" onclick="closePredFilter('league')">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="pred-filter-modal-body" id="league-list"></div>
+      <div class="pred-filter-modal-footer">
+        <button class="pred-filter-cancel" onclick="closePredFilter('league')">Cancel</button>
+        <button class="pred-filter-apply" onclick="applyPredFilter('league')">Apply</button>
+      </div>
+    </div>
+  </div>
 
-        <div class="market-list-item" data-market="over-under" data-label="Over/Under">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">Over/Under</div>
+  <!-- Odds Filter Modal -->
+  <div class="pred-filter-modal" id="odds-modal">
+    <div class="pred-filter-modal-content">
+      <div class="pred-filter-modal-header">
+        <h3 class="pred-filter-modal-title">Odds</h3>
+        <button class="pred-filter-close" onclick="closePredFilter('odds')">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="pred-filter-modal-body">
+        <div class="pred-odds-filter-content">
+          <div class="pred-odds-values">
+            <div class="pred-odds-value-item">
+              <span class="pred-odds-value-label">Min</span>
+              <span class="pred-odds-value-number" id="pred-odds-min-value">1.0</span>
+            </div>
+            <div class="pred-odds-value-item">
+              <span class="pred-odds-value-label">Max</span>
+              <span class="pred-odds-value-number" id="pred-odds-max-value">10.0</span>
+            </div>
           </div>
-          <div class="market-list-item-count">253</div>
-        </div>
-
-        <div class="market-list-item" data-market="gg-ng" data-label="GG/NG">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">GG/NG</div>
+          
+          <div class="pred-odds-slider-container">
+            <div class="pred-odds-slider-track">
+              <div class="pred-odds-slider-progress" id="pred-odds-progress"></div>
+            </div>
+            <input type="range" min="1" max="10" step="0.1" value="1" class="pred-odds-slider" id="pred-odds-min">
+            <input type="range" min="1" max="10" step="0.1" value="10" class="pred-odds-slider" id="pred-odds-max">
           </div>
-          <div class="market-list-item-count">44</div>
         </div>
-
-        <div class="market-list-item" data-market="european-handicap" data-label="European Handicap">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">European Handicap</div>
-          </div>
-          <div class="market-list-item-count">7</div>
-        </div>
-
-        <div class="market-list-item" data-market="btts" data-label="BTTS">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">Both Teams To Score</div>
-          </div>
-          <div class="market-list-item-count">38</div>
-        </div>
-
-        <div class="market-list-item" data-market="correct-score" data-label="Correct Score">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">Correct Score</div>
-          </div>
-          <div class="market-list-item-count">92</div>
-        </div>
-
-        <div class="market-list-item" data-market="half-time" data-label="Half Time">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">Half Time Result</div>
-          </div>
-          <div class="market-list-item-count">156</div>
-        </div>
-
-        <div class="market-list-item" data-market="draw-no-bet" data-label="Draw No Bet">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">Draw No Bet</div>
-          </div>
-          <div class="market-list-item-count">34</div>
-        </div>
-
-        <div class="market-list-item" data-market="total-goals" data-label="Total Goals">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">Total Goals</div>
-          </div>
-          <div class="market-list-item-count">128</div>
-        </div>
-
-        <div class="market-list-item" data-market="asian-handicap" data-label="Asian Handicap">
-          <div class="market-list-item-content">
-            <div class="market-radio"></div>
-            <div class="market-list-item-label">Asian Handicap</div>
-          </div>
-          <div class="market-list-item-count">23</div>
-        </div>
+      </div>
+      <div class="pred-filter-modal-footer">
+        <button class="pred-filter-cancel" onclick="closePredFilter('odds')">Cancel</button>
+        <button class="pred-filter-apply" onclick="applyPredFilter('odds')">Apply</button>
       </div>
     </div>
   </div>
@@ -503,6 +480,7 @@
 
   <script src="assets/js/adminux/adminux-dashboard.js"></script>
   <script src="./components/AppLayout.js"></script>
+  <script src="assets/js/predictions-filters.js"></script>
   <script src="assets/js/prediction.js"></script>
   <script src="./components/betslip-rail.js"></script>
 </body>

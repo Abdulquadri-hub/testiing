@@ -25,21 +25,11 @@
   <div id="desktop-nav"></div>
   <div id="side-menu"></div>
 
-  <div class="adminuiux-wrap page-wrapper">
+  <div class="adminuiux-wrap page-wrap">
     <main class="adminuiux-content has-sidebar" onclick="contentClick()">
-      
-      <div class="container-fluid py-1 py-lg-3">
-        <div class="row gx-3 gx-lg-4 align-items-center page-title">
-          <div class="col col-sm">
-            <h6 class="mb-0">Sports Predictions</h6>
-            <p class="text-secondary small">Free betting tips and predictions</p>
-          </div>
-        </div>
-      </div>
 
-      <div class="main-content mt-3">
+      <div class="">
         <div class="card p-0 predictions-page">
-
           <!-- Sport Tabs with Icons -->
           <div class="sport-filter-tabs" id="sport-tabs">
             <div class="sport-filter-tab active" data-sport="football">
@@ -396,5 +386,25 @@
   <script src="assets/js/predictions-filters.js"></script>
   <script src="assets/js/prediction.js"></script>
   <script src="./components/betslip-rail.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sportTabs = document.querySelector('.sport-filter-tabs');
+      const predictionFilters = document.querySelector('.predictions-filters');
+      const navbarHeight = 62.5; // Match the page-wrap padding in main.css
+
+      window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY;
+
+        // Add or remove 'scrolled' class based on scroll position
+        if (scrollPosition > navbarHeight) {
+          sportTabs.classList.add('scrolled');
+          predictionFilters.classList.add('scrolled');
+        } else {
+          sportTabs.classList.remove('scrolled');
+          predictionFilters.classList.remove('scrolled');
+        }
+      });
+    });
+  </script>
 </body>
 </html>

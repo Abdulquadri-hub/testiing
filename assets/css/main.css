@@ -25,3 +25,9 @@
 .page-wrap {
   padding-top:62.5px;
 }
+/* Smooth scroll for content areas */
+.adminuiux-content {
+  scroll-behavior: smooth;
+  max-height: calc(100vh - 62.5px);
+  overflow-y: auto;
+}

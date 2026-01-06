@@ -218,7 +218,6 @@
                       <span class="game-datetime-compact"
                         >Sat 12/12/25 · 18:30</span
                       >
-                      
                     </div>
 
                     <!-- Row 2: Teams -->
@@ -390,11 +389,44 @@
       </main>
     </div>
 
+    <button id="scroll-to-top" class="scroll-to-top">
+      <i class="bi bi-arrow-up"></i>
+    </button>
+
     <div id="filter-canvas"></div>
     <div id="mobile-nav"></div>
 
     <script src="assets/js/adminux/adminux-dashboard.js"></script>
     <script src="assets/js/betviewer.js"></script>
     <script src="./components/AppLayout.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const scrollToTopBtn = document.getElementById("scroll-to-top");
+        const mainContent = document.querySelector(".adminuiux-content");
+
+        // Function to check scroll position and toggle button visibility
+        function toggleScrollToTopButton() {
+          // Adjust this value to control when the button appears
+          const scrollThreshold = 300;
+
+          if (mainContent.scrollTop > scrollThreshold) {
+            scrollToTopBtn.classList.add("visible");
+          } else {
+            scrollToTopBtn.classList.remove("visible");
+          }
+        }
+
+        // Add scroll event listener to the main content
+        mainContent.addEventListener("scroll", toggleScrollToTopButton);
+
+        // Scroll to top when button is clicked
+        scrollToTopBtn.addEventListener("click", function () {
+          mainContent.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
   </body>
 </html>

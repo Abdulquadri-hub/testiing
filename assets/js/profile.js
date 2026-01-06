@@ -1,7 +1,26 @@
-// script.js
+// assets/js/profile.js
 
 document.addEventListener('DOMContentLoaded', function() {
   
+  // Back Button
+  const backBtn = document.querySelector('.back-btn');
+  if (backBtn) {
+    backBtn.addEventListener('click', function() {
+      // Navigate back or to home
+      window.history.back();
+      console.log('Back button clicked');
+    });
+  }
+
+  // Close Button
+  const closeBtn = document.querySelector('.close-btn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      window.location.href = '/';
+      console.log('Close button clicked');
+    });
+  }
+
   // Dark Mode Toggle
   const darkModeToggle = document.querySelector('.dark-mode-toggle');
   const body = document.body;
@@ -12,29 +31,39 @@ document.addEventListener('DOMContentLoaded', function() {
       isDarkMode = !isDarkMode;
       
       if (isDarkMode) {
-        body.style.background = '#1a1a1a';
-        darkModeToggle.textContent = 'Light Mode ☀️';
+        body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<i class="bi bi-sun-fill"></i><span>Light Mode</span>';
+        // You can add more dark mode styling here
       } else {
-        body.style.background = '#f5f5f5';
-        darkModeToggle.textContent = 'Dark Mode 🌙';
+        body.classList.remove('dark-mode');
+        darkModeToggle.innerHTML = '<i class="bi bi-moon-fill"></i><span>Dark Mode</span>';
       }
+      
+      console.log('Dark mode:', isDarkMode);
     });
   }
 
   // Balance Toggle
-  const eyeIcon = document.querySelector('.eye-icon');
+  const balanceLabel = document.querySelector('.balance-label');
   const balanceAmount = document.querySelector('.balance-amount');
   let balanceVisible = false;
 
-  if (eyeIcon && balanceAmount) {
-    eyeIcon.addEventListener('click', function(e) {
-      e.stopPropagation();
-      balanceVisible = !balanceVisible;
-      
-      if (balanceVisible) {
-        balanceAmount.textContent = 'NGN 0.00';
-      } else {
-        balanceAmount.textContent = 'NGN –';
+  if (balanceLabel) {
+    const eyeIcon = balanceLabel.querySelector('i');
+    
+    balanceLabel.addEventListener('click', function(e) {
+      if (e.target.closest('i')) {
+        balanceVisible = !balanceVisible;
+        
+        if (balanceVisible) {
+          balanceAmount.textContent = 'NGN 0.00';
+          eyeIcon.className = 'bi bi-eye-slash';
+        } else {
+          balanceAmount.textContent = 'NGN -';
+          eyeIcon.className = 'bi bi-eye';
+        }
+        
+        console.log('Balance visibility:', balanceVisible);
       }
     });
   }
@@ -44,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (subscribeBtn) {
     subscribeBtn.addEventListener('click', function() {
-      // Add loading state
       subscribeBtn.classList.add('loading');
       subscribeBtn.disabled = true;
       
@@ -52,25 +80,26 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(function() {
         subscribeBtn.classList.remove('loading');
         subscribeBtn.disabled = false;
+        console.log('Subscribe clicked');
         alert('Subscribe functionality - Coming soon!');
       }, 1000);
     });
   }
 
-  // Withdraw Button
-  const withdrawBtn = document.querySelector('.btn-withdraw');
+  // Load Bet Button
+  const loadBtn = document.querySelector('.btn-load');
   
-  if (withdrawBtn) {
-    withdrawBtn.addEventListener('click', function() {
-      // Add loading state
-      withdrawBtn.classList.add('loading');
-      withdrawBtn.disabled = true;
+  if (loadBtn) {
+    loadBtn.addEventListener('click', function() {
+      loadBtn.classList.add('loading');
+      loadBtn.disabled = true;
       
       // Simulate API call
       setTimeout(function() {
-        withdrawBtn.classList.remove('loading');
-        withdrawBtn.disabled = false;
-        alert('Withdraw functionality - Coming soon!');
+        loadBtn.classList.remove('loading');
+        loadBtn.disabled = false;
+        console.log('Load Bet clicked');
+        alert('Load Bet functionality - Coming soon!');
       }, 1000);
     });
   }
@@ -81,8 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
   menuItems.forEach(function(item) {
     item.addEventListener('click', function(e) {
       e.preventDefault();
-      const text = item.querySelector('span:nth-child(2)').textContent;
-      console.log('Navigating to: ' + text);
+      const text = item.querySelector('.menu-item-left span').textContent;
+      console.log('Menu clicked:', text);
       
       // Add visual feedback
       item.style.background = '#f0f0f0';
@@ -90,8 +119,36 @@ document.addEventListener('DOMContentLoaded', function() {
         item.style.background = '';
       }, 200);
       
-      // You can add navigation logic here
-      // Example: window.location.href = '/path-to-' + text.toLowerCase().replace(/\s+/g, '-');
+      // Handle specific menu items
+      switch(text) {
+        case 'View Profile':
+          console.log('Navigate to profile');
+          break;
+        case 'Dashboard':
+          console.log('Navigate to dashboard');
+          break;
+        case 'API':
+          console.log('Navigate to API');
+          break;
+        case 'Orders':
+          console.log('Navigate to orders');
+          break;
+        case 'Applets(Widget)':
+          console.log('Navigate to applets');
+          break;
+        case 'Affiliate':
+          console.log('Navigate to affiliate');
+          break;
+        case 'Change password':
+          console.log('Open change password');
+          break;
+        case 'Sign Out':
+          if (confirm('Are you sure you want to sign out?')) {
+            console.log('User signed out');
+            // Add sign out logic here
+          }
+          break;
+      }
     });
   });
 
@@ -101,18 +158,19 @@ document.addEventListener('DOMContentLoaded', function() {
   if (customerService) {
     customerService.addEventListener('click', function() {
       console.log('Opening Customer Service');
-      alert('Customer Service - Available 24/7');
+      alert('Customer Service - Available 24/7\n\nContact us at:\nsupport@example.com');
     });
   }
 
-  // Login Section Click Handler
-  const loginSection = document.querySelector('.login-section');
+  // User Info Click Handler
+  const userInfoSection = document.querySelector('.user-info-section');
   
-  if (loginSection) {
-    loginSection.addEventListener('click', function() {
-      console.log('Login clicked');
-      alert('Login - Please sign in to view your profile');
+  if (userInfoSection) {
+    userInfoSection.addEventListener('click', function() {
+      console.log('User info clicked - redirect to login');
+      // Add login redirect logic here
     });
   }
 
+  console.log('Profile page initialized successfully!');
 });

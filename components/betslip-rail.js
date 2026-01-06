@@ -146,6 +146,7 @@
     if (overlay && rail) {
       overlay.classList.add("active");
       rail.classList.add("active");
+      rail.classList.add("fullscreen");
       document.body.style.overflow = "hidden";
     }
   }

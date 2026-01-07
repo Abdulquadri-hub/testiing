@@ -1033,3 +1033,62 @@ body.pred-filter-open {
 }
 
 
+/* COLLAPSIBLE LEAGUE GROUPS */
+.league-group {
+  margin-bottom: 0;
+}
+
+.league-header {
+  padding: 0.875rem 1rem;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.league-header:hover {
+  background: #f9fafb;
+}
+
+.league-info {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex: 1;
+}
+
+.toggle-icon {
+  font-size: 0.875rem;
+  color: #6b7280;
+  transition: transform 0.3s ease;
+}
+
+.league-header.collapsed .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.league-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.event-count {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-left: auto;
+}
+
+/* League Events Container */
+.league-events {
+  max-height: 2000px;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.league-header.collapsed + .league-events {
+  max-height: 0;
+}

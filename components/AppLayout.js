@@ -1108,12 +1108,83 @@ sideMenu: `
                   <a class="nav-link" onclick="navigateTo('pools-bet-code.html')">
                     <i class="menu-icon bi bi-grid"></i>
                     <div class="col align-self-center menu-name">
-                      Bet Bet Codes Screen
+                      Pools bet Codes Screen
                     </div>
                   </a>
                 </li>
                 </ul>
             </li>
+
+            <!-- Blog Scree -->
+             <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                role="button"
+              >
+                <i class="menu-icon bi bi-hdd-network"></i>
+                <div class="col menu-name">Blog</div>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item">
+                  <a class="nav-link" onclick="navigateTo('blog.html')">
+                    <i class="menu-icon bi bi-grid"></i>
+                    <div class="col align-self-center menu-name">
+                      Blog Screen
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+              <!-- Share codes screen -->
+             <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                role="button"
+              >
+                <i class="menu-icon bi bi-hdd-network"></i>
+                <div class="col menu-name">Share Codes</div>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item">
+                  <a class="nav-link" onclick="navigateTo('share-codes.html')">
+                    <i class="menu-icon bi bi-grid"></i>
+                    <div class="col align-self-center menu-name">
+                      Share Codes
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+             <!-- Pricing -->
+             <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                role="button"
+              >
+                <i class="menu-icon bi bi-hdd-network"></i>
+                <div class="col menu-name">Pricing</div>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item">
+                  <a class="nav-link" onclick="navigateTo('pricing.html')">
+                    <i class="menu-icon bi bi-grid"></i>
+                    <div class="col align-self-center menu-name">
+                     Pricing Screen
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
 
           </ul>
 

@@ -432,6 +432,8 @@ const AppLayout = {
             </div>
           </div>
 
+          </ul>
+
           <!-- right icons button -->
           <div class="ms-auto">
             <!-- global search toggle -->

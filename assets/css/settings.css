@@ -1,0 +1,114 @@
+/* ========================================
+   SETTINGS PAGE - BLACK & WHITE DESIGN
+   ======================================== */
+
+.settings-page {
+  font-family: var(--adminuiux-content-font, "Open Sans", sans-serif);
+  background: #fff;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* ========================================
+   PAGE HEADER
+   ======================================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.page-header .back-btn,
+.page-header .home-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.page-header .back-btn:hover,
+.page-header .home-btn:hover {
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.page-header .back-btn svg,
+.page-header .home-btn svg {
+  width: 24px;
+  height: 24px;
+  stroke: #000;
+}
+
+.page-header .page-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  flex-grow: 1;
+  color: #000;
+}
+
+/* ========================================
+   SEARCH BAR
+   ======================================== */
+.settings-search {
+  position: relative;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.search-icon {
+  position: absolute;
+  left: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  font-size: 14px;
+  background: #fafafa;
+  transition: all 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #000;
+  background: #fff;
+}
+
+/* ========================================
+   SETTINGS CONTENT
+   ======================================== */
+.settings-content {
+  padding: 0;
+}
+
+/* ========================================
+   SETTINGS SECTION
+   ======================================== */
+.settings-section {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.section-header {
+  width: 100%;
+  display: flex;
+  align-items: center;

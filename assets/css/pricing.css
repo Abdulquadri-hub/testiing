@@ -94,7 +94,7 @@ body {
 }
 
 .hero-subtitle {
-  color: #007bff;
+  color: #333;
   font-size: 13px;
   margin-bottom: 24px;
   font-weight: 500;
@@ -179,7 +179,7 @@ body {
 }
 
 .plan-card.featured {
-  border: 2px solid #007bff;
+  border: 2px solid #333;
   background: #f8fbff;
 }
 
@@ -204,7 +204,7 @@ body {
 }
 
 .plan-badge {
-  background: #007bff;
+  background: #333;
   color: #fff;
   padding: 4px 10px;
   font-size: 10px;
@@ -278,7 +278,7 @@ body {
 
 .feature-value.unlimited {
   font-style: italic;
-  color: #007bff;
+  color: #333;
   font-weight: 600;
 }
 
@@ -312,9 +312,9 @@ body {
 }
 
 .plan-cta.primary {
-  background: #007bff;
+  background: #333;
   color: #fff;
-  border: 2px solid #007bff;
+  border: 2px solid #333;
 }
 
 .plan-cta.primary:hover {

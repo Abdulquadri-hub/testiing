@@ -58,7 +58,10 @@ const AppLayout = {
       <!-- Fixed navbar -->
       <nav class="navbar navbar-expand-lg fixed">
         <div class="container-fluid">
-          <!-- main sidebar toggle -->
+                      <!-- main sidebar toggle -->
+            <button class="btn btn-link btn-square sidebar-toggler" type="button" onclick="initSidebar()">
+                <i class="sidebar-svg" data-feather="menu"></i>
+            </button>
           <!-- logo -->
           <a class="navbar-brand" onclick="navigateTo('index.html')">
             <img data-bs-img="light" src="" alt="" />
@@ -858,7 +861,7 @@ sideMenu: `
     <div id="side-menu" class="adminuiux-wrap">
       <div class="adminuiux-sidebar shadow-sm">
         <div class="adminuiux-sidebar-inner">
-          <div class="px-3 not-iconic mt-2">
+          <div class="px-3 not-iconic" id="features">
             <div class="row gx-3 gx-lg-4">
               <div class="col align-self-center menu-name">
                 <h6>Features & Pages</h6>
@@ -1190,31 +1193,6 @@ sideMenu: `
 
           <div class="mt-auto"></div>
 
-          <!-- chat -->
-          <ul class="nav flex-column menu-active-line mb-2">
-            <li class="nav-item">
-              <a href="adminux-chat.html" class="nav-link">
-                <div class="col-auto">
-                  <div
-                    class="avatar avatar-30 coverimg rounded d-block align-top"
-                  >
-                    <img src="assets/img/modern-ai-image/user-2.jpg" alt="" />
-                  </div>
-                </div>
-                <div class="col px-2 menu-name text-start not-iconic">
-                  <!-- limit name character-->
-                  <p class="mb-0 fs-14 lh-20">
-                    Zoory Sen<br /><small class="opacity-75"
-                      >Relationship Manager</small
-                    >
-                  </p>
-                </div>
-                <div class="col-auto not-iconic">
-                  <i class="bi bi-chat-dots"></i>
-                </div>
-              </a>
-            </li>
-          </ul>
 
           <!-- quick links -->
           <div class="px-3 not-iconic">
@@ -1747,15 +1725,29 @@ sideMenu: `
     </div>
   `,
 
-  // Initialize layout
-  init() {
+init() {
+  if (document.getElementById("mobile-nav")) {
     document.getElementById("mobile-nav").innerHTML = this.mobileNav;
+  }
+
+  if (document.getElementById("filter-canvas")) {
     document.getElementById("filter-canvas").innerHTML = this.filterCanvas;
+  }
+
+  if (document.getElementById("desktop-nav") && window.innerWidth >= 1024) {
     document.getElementById("desktop-nav").innerHTML = this.desktopNav;
+  }
+
+  if (document.getElementById("side-menu")) {
     document.getElementById("side-menu").innerHTML = this.sideMenu;
+  }
+
+  if (document.getElementById("footer")) {
     document.getElementById("footer").innerHTML = this.footer;
-    this.setActiveNav();
-  },
+  }
+
+  this.setActiveNav();
+},
 
   // Set active navigation state
   setActiveNav() {

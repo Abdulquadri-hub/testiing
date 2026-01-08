@@ -1,8 +1,4 @@
-/* ========================================
-   DESKTOP NAVIGATION - UNIVERSAL FOR ALL SCREENS
-======================================== */
 
-/* Desktop nav - always fixed at top */
 #desktop-nav {
   position: fixed;
   top: 0;
@@ -24,5 +20,50 @@
 /* Add top padding to ALL page content */
 .page-wrap {
   padding-top:62.5px;
+}
+
+@media (min-width: 1024px) {
+  .page-header {
+    display: none;
+  }
+
+
+  .adminuiux-content {
+    padding-top: 0; 
+  }
+
+  #desktop-nav {
+    /* position: sticky; */
+    top: 0;
+    z-index: 100;
+  }
+
+  #side-menu {
+    z-index: 99;
+  }
+
+  #features {
+    margin-top: 70px;
+  }
+
+  .content-card {
+    max-width: 900px;
+    margin: 100px auto;
+  }
+  
+  .content-section {
+    padding: 40px 48px;
+  }
+
+  .form-group-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .form-group-row .form-group {
+    margin-bottom: 0;
+  }
 }
 

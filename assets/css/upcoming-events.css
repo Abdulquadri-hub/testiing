@@ -738,7 +738,6 @@ html {
     scrollbar-width: none;
   }
 
-  /* Wider team names */
   .team {
     max-width: 400px;
   }
@@ -747,7 +746,6 @@ html {
     max-width: 320px;
   }
   
-  /* Larger odds buttons */
   .odd-btn {
     min-width: 60px;
     padding: 0.875rem 0.75rem;
@@ -757,12 +755,10 @@ html {
 
 
 @media (min-width: 1400px) {
-  /* Maximum comfortable reading width */
   .events-wrapper {
     max-width: 1600px;
   }
   
-  /* Even more generous spacing */
   .event-body {
     gap: 1.5rem;
   }

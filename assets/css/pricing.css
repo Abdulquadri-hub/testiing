@@ -497,3 +497,53 @@ body {
     font-size: 36px;
   }
 }
+
+@media (min-width: 992px) {
+  .pricing-container {
+    margin-top: 60px;
+    padding: 50px 60px 100px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .pricing-hero {
+    padding: 60px 40px 70px;
+    margin-bottom: 60px;
+    border-radius: 8px;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .pricing-plans {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+  }
+
+  .plan-card {
+    padding: 24px;
+    border-radius: 8px;
+  }
+
+  .plan-card.featured {
+    transform: scale(1.05);
+  }
+
+  .plan-card.featured:hover {
+    transform: scale(1.08);
+  }
+
+  .plan-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+
+  .faq-section {
+    max-width: 900px;
+  }
+
+  .accordion-item {
+    border-radius: 8px;
+  }
+}

@@ -180,6 +180,50 @@ function toggleMobileSearch() {
   }
 }
 
+// Toggle Side Menu
+function toogleSideMenu() {
+  const overlay = document.getElementById('sideMenuOverlay');
+  if (overlay) {
+    overlay.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open
+    if (overlay.classList.contains('active')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+}
+
+// Close Side Menu
+function closeSideMenu() {
+  const overlay = document.getElementById('sideMenuOverlay');
+  if (overlay) {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Close menu when clicking overlay (not the menu itself)
+document.addEventListener('DOMContentLoaded', function() {
+  const overlay = document.getElementById('sideMenuOverlay');
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) {
+        closeSideMenu();
+      }
+    });
+  }
+});
+
+// Toggle Menu Section (Collapsible)
+function toggleMenuSection(headerElement) {
+  const section = headerElement.closest('.side-menu-section');
+  if (section) {
+    section.classList.toggle('collapsed');
+  }
+}
+
 // Initialize when DOM is ready
 const desktopNav = new DesktopNavigation();
 

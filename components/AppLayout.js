@@ -1067,6 +1067,5 @@ function pageTitle(title) {
     return title
 }
 
-
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => AppLayout.init());

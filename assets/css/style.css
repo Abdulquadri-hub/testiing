@@ -430,10 +430,7 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 2000; /* Above header */
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -447,31 +444,33 @@
 
 /* Side Menu Container - Centered */
 .side-menu-container {
-  background: #1a1a1a;
-  border-radius: 12px;
+  background: #ffffff;
   width: 90%;
-  max-width: 480px;
-  max-height: 85vh;
+  max-width: 380px;
+  height: 100vh;
   overflow: hidden;
-  transform: scale(0.9);
+  transform: translateX(-100%);
   transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .side-menu-overlay.active .side-menu-container {
-  transform: scale(1);
+  transform: translateX(0);
 }
 
 /* Menu Header */
 .side-menu-header {
   padding: 20px;
-  border-bottom: 1px solid #2a2a2a;
+  border-bottom: 1px solid #333;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #1a1a1a;
+  background: #fff;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -488,13 +487,13 @@
 .side-menu-logo-text {
   font-size: 20px;
   font-weight: 700;
-  color: #ffffff;
+  color: #333;
 }
 
 .side-menu-close {
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: #333;
   width: 36px;
   height: 36px;
   display: flex;
@@ -506,7 +505,7 @@
 }
 
 .side-menu-close:hover {
-  background: #2a2a2a;
+  background: #3333;
 }
 
 .side-menu-close:active {
@@ -518,6 +517,7 @@
   overflow-y: auto;
   flex: 1;
   padding: 20px;
+  background: white;
 }
 
 /* Custom Scrollbar */
@@ -526,16 +526,16 @@
 }
 
 .side-menu-content::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #fff;
 }
 
 .side-menu-content::-webkit-scrollbar-thumb {
-  background: #3a3a3a;
+  background: #ffffff;
   border-radius: 3px;
 }
 
 .side-menu-content::-webkit-scrollbar-thumb:hover {
-  background: #4a4a4a;
+  background: #fff;
 }
 
 /* Top Navigation Grid */
@@ -547,8 +547,8 @@
 }
 
 .side-menu-nav-item {
-  background: #2a2a2a;
-  border: 1px solid #3a3a3a;
+  background: #fff;
+  border: 1px solid #fff;
   border-radius: 8px;
   padding: 15px 10px;
   text-align: center;
@@ -562,7 +562,7 @@
 }
 
 .side-menu-nav-item:hover {
-  background: #3a3a3a;
+  background: #ffff;
   transform: translateY(-2px);
 }
 
@@ -571,19 +571,19 @@
 }
 
 .side-menu-nav-item.active {
-  background: #ffffff;
-  border-color: #ffffff;
+  background: #333;
+  border-color: #333;
 }
 
 .side-menu-nav-icon {
   width: 28px;
   height: 28px;
-  color: #ffffff;
+  color: #333;
   transition: color 0.3s ease;
 }
 
 .side-menu-nav-item.active .side-menu-nav-icon {
-  color: #000000;
+  color: #fff;
 }
 
 .side-menu-nav-text {
@@ -594,7 +594,7 @@
 }
 
 .side-menu-nav-item.active .side-menu-nav-text {
-  color: #000000;
+  color: #fff;
 }
 
 .side-menu-nav-badge {
@@ -641,11 +641,11 @@
 }
 
 .side-menu-category-pill {
-  background: #2a2a2a;
-  border: 1px solid #3a3a3a;
+  background: #333;
+  border: 1px solid #333;
   border-radius: 20px;
   padding: 10px 20px;
-  color: #ffffff;
+  color: #333;
   font-size: 14px;
   white-space: nowrap;
   cursor: pointer;
@@ -656,12 +656,12 @@
 }
 
 .side-menu-category-pill:hover {
-  background: #3a3a3a;
+  background: #fff;
 }
 
 .side-menu-category-pill.active {
-  background: #ffffff;
-  color: #000000;
+  background: #333;
+  color: #fff;
   border-color: #ffffff;
 }
 
@@ -688,7 +688,7 @@
 .side-menu-section-title {
   font-size: 14px;
   font-weight: 600;
-  color: #ffffff;
+  color: #333;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -696,7 +696,7 @@
 .side-menu-section-toggle {
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: #333;
   width: 24px;
   height: 24px;
   display: flex;

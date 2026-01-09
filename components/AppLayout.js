@@ -58,7 +58,7 @@ desktopNav: `
     
     <!-- Left Section -->
     <div class="desktop-header-left">
-      <button class="desktop-menu-toggle" onclick="initSidebar()">
+      <button class="desktop-menu-toggle" onclick="toogleSideMenu()">
         <div class="desktop-menu-icon">
           <span></span>
           <span></span>
@@ -1066,6 +1066,7 @@ function navigateTo(page) {
 function pageTitle(title) {
     return title
 }
+
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => AppLayout.init());

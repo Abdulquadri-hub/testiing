@@ -41,7 +41,7 @@
 .content-card {
   background: #fff;
   border: 2px solid #e0e0e0;
-  border-radius: 0; /* Square corners */
+  border-radius: 0; 
 }
 
 /* DESKTOP TABS */
@@ -328,6 +328,7 @@ select:focus {
 }
 
 /* Desktop Styles */
+/* Desktop Styles - Centered Card */
 @media (min-width: 1024px) {
   .page-header {
     display: none;
@@ -341,9 +342,19 @@ select:focus {
     display: flex;
   }
 
+  /* CENTER THE CARD */
+  .adminuiux-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
   .content-card {
     max-width: 900px;
-    margin: 100px auto;
+    width: 100%;
+    margin: 0 auto;
   }
   
   .content-section {

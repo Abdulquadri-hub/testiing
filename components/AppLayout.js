@@ -776,212 +776,124 @@ sideMenu: `
   `,
 
 footer: `
-  <!-- Footer Content -->
-  <div class="adminuiux-footer has-adminuiux-sidebar mt-auto py-0">
-    <div class="container py-4 py-lg-5">
-      <!-- Main Footer Content -->
-      <div class="row mb-4">
-        <!-- Services Column -->
-        <div class="col-6 col-md-3 mb-4">
-          <h6 class="fw-bold mb-3" style="font-size: 14px;">Services</h6>
-          <ul class="nav flex-column" style="gap: 8px;">
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="convert.html" style="color: #666; font-size: 13px;">Bet converter</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="betviewer.html" style="color: #666; font-size: 13px;">Bet viewer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="pools-bet-code.html" style="color: #666; font-size: 13px;">Pools bet codes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="bet-editor.html" style="color: #666; font-size: 13px;">Bet editor</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="bet-safer.html" style="color: #666; font-size: 13px;">Bet saver</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Odd comparer</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="free-prediction.html" style="color: #666; font-size: 13px;">Accurate predictions</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="free-bet-codes.html" style="color: #666; font-size: 13px;">Free bet codes today</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Widget</a>
-            </li>
-          </ul>
+  <!-- Main Footer -->
+  <footer class="footer-main">
+    <div class="container">
+      
+      <!-- Join Now Section -->
+      <div class="footer-join-section">
+        <button class="footer-join-btn" onclick="navigateTo('register.html')">
+          JOIN NOW
+        </button>
+      </div>
+
+      <!-- Sports & Social Links -->
+      <div class="footer-sports">
+        <div class="footer-sports-links">
+          <a href="#" class="footer-sports-link">Football</a>
+          <a href="#" class="footer-sports-link">Basketball</a>
+          <a href="#" class="footer-sports-link">eFootball</a>
+          <a href="#" class="footer-sports-link">Tennis</a>
         </div>
-
-        <!-- Developer Column -->
-        <div class="col-6 col-md-3 mb-4">
-          <h6 class="fw-bold mb-3" style="font-size: 14px;">Developer</h6>
-          <ul class="nav flex-column" style="gap: 8px;">
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Bet conversion API</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">API documentation</a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Quick Links Column -->
-        <div class="col-6 col-md-3 mb-4">
-          <h6 class="fw-bold mb-3" style="font-size: 14px;">Quick Links</h6>
-          <ul class="nav flex-column" style="gap: 8px;">
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Faqs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">About us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Advertise with us</a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Support & Community Column -->
-        <div class="col-6 col-md-3 mb-4">
-          <h6 class="fw-bold mb-3" style="font-size: 14px;">Support</h6>
-          <ul class="nav flex-column mb-4" style="gap: 8px;">
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">support@convertbetcodes.com</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Contact us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Why conversion may fail</a>
-            </li>
-          </ul>
-
-          <h6 class="fw-bold mb-3" style="font-size: 14px;">Community</h6>
-          <div class="d-flex gap-2">
-            <a href="#" class="btn btn-sm" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid #ddd; background: #fff;">
-              <i class="bi bi-twitter" style="font-size: 16px; color: #000;"></i>
-            </a>
-            <a href="#" class="btn btn-sm" style="width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid #ddd; background: #fff;">
-              <i class="bi bi-telegram" style="font-size: 16px; color: #000;"></i>
-            </a>
-          </div>
+        
+        <div class="footer-social">
+          <a href="#" class="footer-social-link">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="#" class="footer-social-link">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+          <a href="#" class="footer-social-link">
+            <i class="bi bi-instagram"></i>
+          </a>
         </div>
       </div>
 
-      <!-- Resources & Terms Section -->
-      <div class="row mb-4 pt-4" style="border-top: 1px solid #e0e0e0;">
-        <div class="col-12 col-md-6 mb-3">
-          <h6 class="fw-bold mb-3" style="font-size: 14px;">Resources</h6>
-          <ul class="nav" style="gap: 16px; flex-wrap: wrap;">
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #007bff; font-size: 13px;">Careers <span style="background: #007bff; color: #fff; padding: 2px 6px; font-size: 10px; border-radius: 3px; margin-left: 4px;">hiring</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Reviews</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Join our affiliate programme</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="blog.html" style="color: #666; font-size: 13px;">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Help Center <span style="background: #28a745; color: #fff; padding: 2px 6px; font-size: 10px; border-radius: 3px; margin-left: 4px;">soon</span></a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-12 col-md-6 mb-3">
-          <h6 class="fw-bold mb-3" style="font-size: 14px;">Terms</h6>
-          <ul class="nav" style="gap: 16px; flex-wrap: wrap;">
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Terms of service</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Cookie Policy</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Privacy Policy</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Disclaimer</a>
-            </li>
-          </ul>
+      <!-- Footer Links -->
+      <div class="footer-links-section">
+        <div class="footer-links-grid">
+          <a href="#" class="footer-link-item">Home</a>
+          <a href="#" class="footer-link-item">About</a>
+          <a href="#" class="footer-link-item">Terms</a>
+          <a href="#" class="footer-link-item">Data Privacy Policy</a>
+          <a href="#" class="footer-link-item">Cookies Policy</a>
+          <a href="#" class="footer-link-item">Rules</a>
+          <a href="#" class="footer-link-item">Lottery Rules</a>
+          <a href="#" class="footer-link-item">Help</a>
+          <a href="#" class="footer-link-item">Responsible Gambling</a>
+          <a href="#" class="footer-link-item">News</a>
         </div>
       </div>
 
-      <!-- Recommended Sites Section -->
-      <div class="row pt-4" style="border-top: 1px solid #e0e0e0;">
-        <div class="col-12">
-          <h6 class="fw-bold mb-3" style="font-size: 14px;">Recommended sites</h6>
-          <ul class="nav" style="gap: 16px; flex-wrap: wrap;">
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">bettingsitesbd.com</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Moroccobettingsites.com</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Bookmakerscameroun.com</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Codepromoafrique.com</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Winning Tips</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Live Football Scores</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-0 py-1" href="#" style="color: #666; font-size: 13px;">Pools fixtures</a>
-            </li>
-          </ul>
+      <!-- Brand & Country -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="footer-logo-text">Convert<span class="footer-logo-highlight">bet</span></span>
         </div>
+        
+        <div class="footer-country">
+          <span>🇳🇬</span>
+          <span>Nigeria</span>
+          <span>Change</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Footer Info -->
+  <div class="footer-info">
+    <div class="container">
+      <p class="footer-info-text">
+        Your bets and payouts are processed by Choplife Gaming Limited, which is licensed and regulated by the Lagos State Lotteries and Gaming Authority of Nigeria.
+      </p>
+      <p class="footer-license">
+        Licence No. LSLGA/OP/OSB/CL071124
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer Warning -->
+  <div class="footer-warning">
+    <div class="container">
+      <p class="footer-warning-text">
+        You have to be 18 years and above to bet.
+      </p>
+      <p class="footer-warning-text">
+        Betting is addictive and can be psychologically harmful.
+      </p>
+      <p class="footer-warning-text">
+        Contact an experienced counsellor at any time 24/7 Monday to Sunday via toll free numbers:
+      </p>
+      
+      <div class="footer-contact">
+        <a href="tel:09117581454" class="footer-contact-item">Phone: 0911 758 1454</a>
+        <a href="tel:09078884268" class="footer-contact-item">Phone: 0907 888 4268</a>
+      </div>
+
+      <p class="footer-warning-text" style="margin-top: 15px;">
+        or WhatsApp only: 0907 888 4268 or email via <a href="mailto:eap@tranquilandquest.org.ng" style="color: #c8ff00;">eap@tranquilandquest.org.ng</a>
+      </p>
+      <p class="footer-warning-text">
+        Please only contact the number above if you need counselling. For help related to your account, contact our <a href="#" style="color: #c8ff00;">Customer Support Team</a>
+      </p>
+
+      <div class="footer-support-links">
+        <a href="#" class="footer-support-link">Tranquil & Quest</a>
       </div>
     </div>
   </div>
 
-  <!-- Copyright Footer -->
-  <footer class="adminuiux-footer has-adminuiux-sidebar mt-0" style="background: #000; color: #fff;">
-    <div class="container-fluid">
-      <div class="row gx-3 gx-lg-4 align-items-center py-3">
-        <div class="col-12 col-md-6 text-center text-md-start mb-2 mb-md-0">
-          <span style="font-size: 13px;">
-            Copyright @2025, Designed by 
-            <a href="https://adminuiux.com/" target="_blank" class="text-white text-decoration-underline">Adminuiux</a>
-          </span>
-        </div>
-        <div class="col-12 col-md-6 text-center text-md-end">
-          <span style="font-size: 13px;">
-            * All Packages are fair use only(rate limited).
-          </span>
-        </div>
-      </div>
+  <!-- Copyright -->
+  <div class="footer-copyright">
+    <div class="container">
+      <p>Copyright @2025, Designed by <a href="https://adminuiux.com/" target="_blank">Adminuiux</a></p>
     </div>
-  </footer>
+  </div>
 
   <!-- Fixed Buttons -->
   <div class="position-fixed bottom-0 end-0 m-3 z-index-5" id="fixedbuttons">
-    <button
-      class="btn btn-square shadow rounded-circle"
-      type="button"
-      data-bs-toggle="offcanvas"
-      data-bs-target="#theming"
-      aria-controls="theming"
-      style="background: #000; color: #fff; width: 48px; height: 48px;"
-    >
-      <i class="bi bi-palette"></i>
-    </button>
+
     <br />
     <button
       class="btn btn-square shadow mt-2 d-none rounded-circle"
@@ -1038,6 +950,8 @@ function navigateTo(page) {
 function pageTitle(title) {
     return title
 }
+
+
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => AppLayout.init());

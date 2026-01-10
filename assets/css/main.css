@@ -14,10 +14,6 @@ body {
   background: #f5f5f5;
 }
 
-/* ============================================
-   MAIN LAYOUT WITH FIXED SIDEBARS
-   ============================================ */
-
 .adminuiux-wrap {
   display: flex;
   justify-content: center;
@@ -57,7 +53,6 @@ body {
     width: calc(100% - 600px);
     margin: 60px auto 0 auto;
     padding: 0;
-    overflow-y: auto;
     max-height: calc(100vh - 60px);
   }
 
@@ -119,10 +114,6 @@ body {
   }
 }
 
-/* ========================================
-   AD SIDEBAR STYLES
-   ======================================== */
-
 .ad-sidebar-left,
 .ad-sidebar-right {
   display: none; 
@@ -168,9 +159,7 @@ body {
   opacity: 0.5;
 }
 
-/* ========================================
-   SCROLLBAR STYLES
-   ======================================== */
+
 
 .adminuiux-content {
   scrollbar-width: thin;
@@ -258,7 +247,7 @@ body::-webkit-scrollbar-thumb:hover {
 html {
   scroll-behavior: smooth;
 }
-
+/* 
 * {
   scrollbar-width: thin;
   scrollbar-color: #9ca3af #f3f4f6;
@@ -280,4 +269,4 @@ html {
 
 *::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
-}
+} */

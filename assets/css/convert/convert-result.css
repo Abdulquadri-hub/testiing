@@ -228,7 +228,6 @@
     transform: rotate(90deg);
   }
 
-.adminuiux-
 }
 
 /* ========================================
@@ -820,9 +819,7 @@
     z-index: 1000;
   }
 
-  #side-menu {
-    /* display: none; */
-  }
+
 
   .result-container {
     max-width: 100%;

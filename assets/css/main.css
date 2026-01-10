@@ -14,6 +14,10 @@ body {
   background: #f5f5f5;
 }
 
+/* ============================================
+   MAIN LAYOUT WITH FIXED SIDEBARS
+   ============================================ */
+
 .adminuiux-wrap {
   display: flex;
   justify-content: center;
@@ -28,19 +32,21 @@ body {
   position: relative;
 }
 
+
 @media (min-width: 1400px) {
   .adminuiux-wrap {
     display: block;
     max-width: 1920px;
     margin: 0 auto;
-    padding: 0; 
+    padding: 0;
   }
 
+  /* Left Ad Sidebar - FIXED */
   .ad-sidebar-left {
     display: block !important;
     position: fixed;
     left: 0;
-    top: 80px;
+    top: 100px;
     width: 300px;
     height: calc(100vh - 80px);
     overflow-y: auto;
@@ -48,20 +54,19 @@ body {
   }
 
   .adminuiux-content {
-    max-width: 1200px;
-    width: 100%;
+    width: calc(100% - 600px);
     margin: 60px auto 0 auto;
-    padding: 0 320px; 
+    padding: 0;
     overflow-y: auto;
     max-height: calc(100vh - 60px);
   }
 
-
+  /* Right Ad Sidebar - FIXED */
   .ad-sidebar-right {
     display: block !important;
     position: fixed;
     right: 0;
-    top: 80px;
+    top: 100px;
     width: 300px;
     height: calc(100vh - 80px);
     overflow-y: auto;
@@ -139,7 +144,7 @@ body {
 }
 
 .ad-container.large {
-  min-height: 650px;
+  min-height: 600px;
 }
 
 .ad-container.medium {

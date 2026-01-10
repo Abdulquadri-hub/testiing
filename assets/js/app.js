@@ -121,8 +121,6 @@ class DesktopNavigation {
   
   performSearch(query) {
     console.log('Searching for:', query);
-    // Add your search logic here
-    // Example: window.location.href = `/search?q=${encodeURIComponent(query)}`;
   }
   
   // Theme toggle
@@ -166,7 +164,6 @@ class DesktopNavigation {
   }
 }
 
-// Global function for mobile search toggle
 function toggleMobileSearch() {
   const overlay = document.getElementById('mobileSearchOverlay');
   if (overlay) {
@@ -186,7 +183,6 @@ function toogleSideMenu() {
   if (overlay) {
     overlay.classList.toggle('active');
     
-    // Prevent body scroll when menu is open
     if (overlay.classList.contains('active')) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -216,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Toggle Menu Section (Collapsible)
+
 function toggleMenuSection(headerElement) {
   const section = headerElement.closest('.side-menu-section');
   if (section) {

@@ -286,7 +286,10 @@ select:focus {
   }
 }
 
-/* Existing CSS content... */
+
+/* .adminuiux-content {
+  margin-top: 70px;
+} */
 
 /* Page Header Styles */
 .page-header {
@@ -327,8 +330,6 @@ select:focus {
   flex-grow: 1;
 }
 
-/* Desktop Styles */
-/* Desktop Styles - Centered Card */
 @media (min-width: 1024px) {
   .page-header {
     display: none;
@@ -351,10 +352,18 @@ select:focus {
     padding: 40px 20px;
   }
 
+  .adminuiux-content {
+    margin-top: 0 !important; 
+  }
+
+  .adminuiux-wrap {
+    min-height: 100vh;
+  }
+
   .content-card {
     max-width: 900px;
     width: 100%;
-    margin: 0 auto;
+    margin: 0 ;
   }
   
   .content-section {
@@ -381,10 +390,6 @@ select:focus {
 
   .content-section {
     padding-top: 0;
-  }
-
-  #desktop-nav {
-    display: none !important;
   }
 }
 

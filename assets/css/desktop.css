@@ -1,0 +1,423 @@
+.desktop-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right:0;
+  z-index: 1000;
+  height: 60px;
+  transition: all 0.3s ease;
+
+}
+
+.desktop-header.scrolled {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  height: 65px;
+}
+
+.desktop-header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Left Section - Menu + Logo */
+.desktop-header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.desktop-menu-toggle {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.desktop-menu-toggle:hover {
+  background: #f5f5f5;
+}
+
+.desktop-menu-toggle:active {
+  transform: scale(0.95);
+}
+
+.desktop-menu-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.3s ease;
+}
+
+.desktop-menu-icon span {
+  width: 100%;
+  height: 3px;
+  background: #000000;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.desktop-menu-toggle.active .desktop-menu-icon span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.desktop-menu-toggle.active .desktop-menu-icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.desktop-menu-toggle.active .desktop-menu-icon span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.desktop-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #000000;
+  transition: opacity 0.3s ease;
+}
+
+.desktop-logo:hover {
+  opacity: 0.8;
+}
+
+.desktop-logo-img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.desktop-logo:hover .desktop-logo-img {
+  transform: scale(1.05);
+}
+
+.desktop-logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Center Section - Search */
+.desktop-header-center {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 40px;
+}
+
+.desktop-search-box {
+  width: 100%;
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  height: 45px;
+  transition: all 0.3s ease;
+}
+
+.desktop-search-box:focus-within {
+  background: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.desktop-search-icon {
+  width: 20px;
+  height: 20px;
+  color: #666666;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.desktop-search-box:focus-within .desktop-search-icon {
+  color: #000000;
+}
+
+.desktop-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: #000000;
+}
+
+.desktop-search-input::placeholder {
+  color: #999999;
+}
+
+.desktop-search-filter {
+  background: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  color: #666666;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.desktop-search-filter:hover {
+  background: #e0e0e0;
+  color: #000000;
+}
+
+/* Right Section - Actions */
+.desktop-header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.desktop-search-mobile {
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.desktop-search-mobile:hover {
+  background: #f5f5f5;
+}
+
+.desktop-search-mobile:active {
+  transform: scale(0.95);
+}
+
+.desktop-theme-toggle {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.desktop-theme-toggle:hover {
+  background: #f5f5f5;
+}
+
+.desktop-theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.desktop-theme-toggle svg {
+  transition: transform 0.5s ease;
+}
+
+.desktop-theme-toggle:hover svg {
+  transform: rotate(180deg);
+}
+
+.desktop-notification-btn {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.desktop-notification-btn:hover {
+  background: #f5f5f5;
+}
+
+.desktop-notification-btn:active {
+  transform: scale(0.95);
+}
+
+.desktop-notification-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.desktop-notification-btn:hover svg {
+  animation: bellRing 0.5s ease;
+}
+
+@keyframes bellRing {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30%, 50%, 70%, 90% { transform: rotate(-10deg); }
+  20%, 40%, 60%, 80% { transform: rotate(10deg); }
+}
+
+.desktop-notification-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #000000;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Mobile Search Overlay */
+.desktop-search-overlay {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 15px 20px;
+  z-index: 999;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.desktop-search-overlay.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.desktop-search-overlay-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.desktop-search-close {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.desktop-search-close:hover {
+  background: #f5f5f5;
+}
+
+.desktop-search-close:active {
+  transform: scale(0.95);
+}
+
+/* Loading State */
+.desktop-search-input.loading {
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05), transparent);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .desktop-header-center {
+    display: none;
+  }
+  
+  .desktop-search-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-header {
+    height: 60px;
+  }
+  
+  .desktop-header.scrolled {
+    height: 55px;
+  }
+  
+  .desktop-header-container {
+    padding: 0 15px;
+  }
+  
+  .desktop-header-left {
+    gap: 10px;
+  }
+  
+  .desktop-logo-text {
+    font-size: 18px;
+  }
+  
+  .desktop-header-right {
+    gap: 8px;
+  }
+  
+  .desktop-search-overlay {
+    top: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .desktop-logo-img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .desktop-logo-text {
+    font-size: 16px;
+  }
+  
+  .desktop-menu-toggle,
+  .desktop-search-mobile,
+  .desktop-theme-toggle,
+  .desktop-notification-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .desktop-menu-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Hide header on scroll down, show on scroll up */
+.desktop-header.hide-on-scroll {
+  transform: translateY(-100%);
+}
+
+.desktop-header.show-on-scroll {
+  transform: translateY(0);
+}

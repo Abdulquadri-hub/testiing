@@ -914,7 +914,7 @@ init() {
     document.getElementById("filter-canvas").innerHTML = this.filterCanvas;
   }
 
-  if (document.getElementById("desktop-nav") && window.innerWidth >= 1024) {
+  if (document.getElementById("desktop-nav")) {
     document.getElementById("desktop-nav").innerHTML = this.desktopNav;
   }
 

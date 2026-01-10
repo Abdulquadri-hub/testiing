@@ -132,7 +132,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .tabs-nav {
-    top: 55px;
+    top: 50px;
   }
   
  .tabs-nav-container {

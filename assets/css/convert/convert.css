@@ -1,4 +1,4 @@
-/* CONVERT PAGE - BLACK & WHITE - PHASE 1 IMPROVEMENTS */
+
 .convert-page {
   font-family: var(--adminuiux-content-font, 'Open Sans', sans-serif);
   background: #fff;
@@ -343,27 +343,11 @@ select:focus {
     display: flex;
   }
 
-  /* CENTER THE CARD */
-  .adminuiux-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 40px 20px;
-  }
-
-  .adminuiux-content {
-    margin-top: 0 !important; 
-  }
-
-  .adminuiux-wrap {
-    min-height: 100vh;
-  }
 
   .content-card {
     max-width: 900px;
     width: 100%;
-    margin: 0 ;
+    margin-top: 0 ;
   }
   
   .content-section {

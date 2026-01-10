@@ -1,12 +1,11 @@
 *{
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
     height: 100%;
     overflow-y: hidden;
-    scrollbar-width;
     width: 100%;
     -ms-overflow-style: none;
     color: #252a2d;

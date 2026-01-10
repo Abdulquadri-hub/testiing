@@ -220,6 +220,23 @@ function toggleMenuSection(headerElement) {
   }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  const tabsNav = document.querySelector('.tabs-nav');
+  const scrollThreshold = 100; // Start sticky after 100px scroll
+  
+  if (tabsNav) {
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > scrollThreshold) {
+        tabsNav.classList.add('scrolled');
+      } else {
+        tabsNav.classList.remove('scrolled');
+      }
+    });
+  }
+});
+
 // Initialize when DOM is ready
 const desktopNav = new DesktopNavigation();
 

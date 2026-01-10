@@ -15,18 +15,21 @@
   justify-content: flex-start;
   gap: 0;
   width: 100%;
-  overflow-x: auto;
+   overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f9fafb;
 }
+
 
 .tab-item {
   background: transparent;
   border: none;
   color: #bdc3c7;
-  padding: 8px 10px;
+  padding: 10px 5px;
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,6 +52,11 @@
 .tab-item svg {
   width: 16px;
   height: 16px;
+}
+
+.tab-item .home {
+  width: 25px;
+  height: 25px;
 }
 
 /* Dropdown Arrow */

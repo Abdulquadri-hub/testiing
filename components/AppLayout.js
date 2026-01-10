@@ -335,199 +335,145 @@ sideMenu: `
 </div>
 `,
 
-  filterCanvas: `
-      <div
-      class="offcanvas offcanvas-end shadow border-0"
-      tabindex="-1"
-      id="filter"
-      data-bs-scroll="true"
-      data-bs-backdrop="false"
-      aria-labelledby="filterlabel"
-    >
-      <div class="offcanvas-header border-bottom">
-        <div>
-          <h5 class="offcanvas-title" id="filterlabel">Filter</h5>
-          <p class="text-secondary small">Grab the trimmed details</p>
-        </div>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body">
-        <h6 class="offcanvas-title">Duration</h6>
-        <p class="text-secondary small mb-3">
-          Filter details with desired period
-        </p>
-        <div class="row gx-2 align-items-center mb-3 mb-lg-4">
-          <div class="col">
-            <div class="input-group input-group-md">
-              <input
-                type="text"
-                class="form-control bg-transparent"
-                value=""
-                id="datepicker"
-              />
-              <span
-                class="input-group-text text-theme-1 bg-transparent width-40"
-                id="titlecalendar"
-                onclick="this.previousElementSibling.click()"
-                ><i class="bi bi-calendar-event"></i
-              ></span>
-            </div>
-          </div>
-          <div class="col-auto text-secondary small">-</div>
-          <div class="col">
-            <div class="input-group input-group-md">
-              <input
-                type="text"
-                class="form-control bg-transparent datepicker-single"
-                value=""
-              />
-              <span
-                class="input-group-text text-theme-1 bg-transparent width-40"
-                id="titlecalendar"
-                onclick="this.previousElementSibling.click()"
-                ><i class="bi bi-calendar-event"></i
-              ></span>
-            </div>
-          </div>
-        </div>
-        <h6 class="offcanvas-title">Country Selection</h6>
-        <p class="text-secondary small mb-3">
-          Change country for operational details
-        </p>
-        <div class="mb-3 mb-lg-4">
-          <div
-            class="input-group input-group-md rounded"
-            style="--mw-dynamic: calc(100% - 42px)"
-          >
-            <span class="input-group-text text-theme-1"
-              ><i class="bi bi-box"></i
-            ></span>
-            <select class="form-control choices" id="titltfilterlist" multiple>
-              <option value="San Francisco">San Francisco</option>
-              <option value="New York">New York</option>
-              <option value="London">London</option>
-              <option value="Chicago">Chicago</option>
-              <option value="India" selected="">India</option>
-              <option value="Sydney">Sydney</option>
-              <option value="Seattle">Seattle</option>
-              <option value="Los Angeles">Los Angeles</option>
-              <option value="Indonesia">Indonesia</option>
-              <option value="Los Angeles">Los Angeles</option>
-              <option value="Chicago">Chicago</option>
-              <option value="India">India</option>
-            </select>
-          </div>
-          <div class="invalid-feedback">
-            You have already selected maximum option allowed. (This is
-            Configurable)
-          </div>
-        </div>
+tabsNav: `
+    <div class="tabs-nav">
+        <div class="tabs-nav-container">
+          <button class="tab-item active" onclick="navigateTo('index.html')">
+            <svg class="home" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </svg>
+            
+          </button>
 
-        <h6 class="offcanvas-title">Orders</h6>
-        <p class="text-secondary small mb-2">1256 orders last week</p>
-        <div class="row mb-3 mb-lg-4">
-          <div class="col-12 px-0">
-            <ul class="list-group list-group-flush bg-transparent border-0">
-              <li class="list-group-item">
-                <div class="row gx-3 gx-lg-4">
-                  <div class="col">Online Orders</div>
-                  <div class="col-auto">
-                    <div class="form-check form-switch">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        role="switch"
-                        id="titleswitch1"
-                      />
-                      <label
-                        class="form-check-label"
-                        for="titleswitch1"
-                      ></label>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="row gx-3 gx-lg-4">
-                  <div class="col">Offline Orders</div>
-                  <div class="col-auto">
-                    <div class="form-check form-switch">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        role="switch"
-                        id="titleswitch2"
-                        checked=""
-                      />
-                      <label
-                        class="form-check-label"
-                        for="titleswitch2"
-                      ></label>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <hr class="mb-4" />
-        <a
-          href="adminux-company-help-center.html"
-          class="row gx-3 align-items-center style-none text-theme-1 mb-3 mb-lg-4"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-        >
-          <div class="col-auto">
-            <i
-              class="bi bi-life-preserver avatar avatar-30 bg-theme-1-subtle text-theme-1 rounded"
-            ></i>
-          </div>
-          <div class="col">
-            <p class="">Need help?</p>
-          </div>
-        </a>
-        <a
-          href="https://1.envato.market/nQzeo"
-          target="_blank"
-          class="row gx-3 align-items-center style-none text-theme-1 mb-3 mb-lg-4"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-        >
-          <div class="col-auto">
-            <span
-              class="bi bi-basket avatar avatar-30 bg-theme-1-subtle text-theme-1 rounded position-relative"
-            >
-              <span
-                class="position-absolute top-0 end-0 p-1 bg-green border border-light rounded-circle"
+          <!-- <div class="tab-item-dropdown">
+            <button class="tab-item">
+              <svg
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 24 24"
               >
-                <span class="visually-hidden">New alerts</span>
-              </span>
-            </span>
-          </div>
-          <div class="col">
-            <p class="">Buy now and support us!</p>
-          </div>
-        </a>
-      </div>
-      <div class="offcanvas-header border-top">
-        <div class="col">
-          <button class="btn btn-theme" data-bs-dismiss="offcanvas">
-            Apply
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+                />
+              </svg>
+              Services
+              <svg
+                width="12"
+                height="12"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                class="dropdown-arrow"
+              >
+                <path d="M7 10l5 5 5-5z" />
+              </svg>
+            </button>
+            <div class="tab-dropdown-menu">
+              <a href="#" class="tab-dropdown-item">⚽ Football</a>
+              <a href="#" class="tab-dropdown-item">🏀 Basketball</a>
+              <a href="#" class="tab-dropdown-item">🎾 Tennis</a>
+              <a href="#" class="tab-dropdown-item">🏐 Volleyball</a>
+              <a href="#" class="tab-dropdown-item">🏏 Cricket</a>
+              <a href="#" class="tab-dropdown-item">🏒 Ice Hockey</a>
+            </div>
+          </div> -->
+
+          <button class="tab-item" onclick="navigateTo('convert.html')">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"
+              />
+            </svg>
+            Bet Converter
+
+          </button>
+
+          <button class="tab-item" onclick="navigateTo('betviewer.html')">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"
+              />
+            </svg>
+            Bet Viewer
+          </button>
+
+          <button class="tab-item" onclick="navigateTo('upcoming-events.html')" >
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M9.5 6.5v3h-3v-3h3M11 5H5v6h6V5zm-1.5 9.5v3h-3v-3h3M11 13H5v6h6v-6zm6.5-6.5v3h-3v-3h3M19 5h-6v6h6V5zm-6 8h1.5v1.5H13V13zm1.5 1.5H16V16h-1.5v-1.5zM16 13h1.5v1.5H16V13zm-3 3h1.5v1.5H13V16zm1.5 1.5H16V19h-1.5v-1.5zM16 16h1.5v1.5H16V16zm1.5-1.5H19V16h-1.5v-1.5zm0 3H19V19h-1.5v-1.5zM22 7h-2V4h-3V2h5v5zm0 15v-5h-2v3h-3v2h5zM2 22h5v-2H4v-3H2v5zM2 2v5h2V4h3V2H2z"
+              />
+            </svg>
+            Upcoming Events
+          </button>
+
+          <button class="tab-item" onclick="navigateTo('bet-editor.html')">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
+              />
+            </svg>
+            Bet Editor
+          </button>
+
+          <button class="tab-item" onclick="navigateTo('free-prediction.html')">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"
+              />
+            </svg>
+            Free Predictions
+            <span class="tab-badge">45</span> 
+          </button>
+
+          <button class="tab-item" onclick="navigateTo('free-bet-codes.html')">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"
+              />
+            </svg>
+            Free Bet Codes
+            <span class="tab-badge">45</span> 
+          </button>
+        
+          <button class="tab-item" onclick="navigateTo('bet-safer.html')">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"
+              />
+            </svg>
+            BetSafer 
+          </button>
+
+          <button class="tab-item" onclick="navigateTo('pools-bet-codes.html')">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"
+              />
+            </svg>
+            Pools Bets 
+          </button>
+
+          <button class="tab-item" onclick="navigateTo('pricing.html')">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"
+              />
+            </svg>
+            Pricing
+          </button>
+
+          
+          <button class="tab-item" onclick="navigateTo('blog.html')">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"
+              />
+            </svg>
+            Blog
           </button>
         </div>
-        <div class="col-auto">
-          <button class="btn btn-link theme-red" data-bs-dismiss="offcanvas">
-            Cancel
-          </button>
-        </div>
       </div>
-    </div>
-  `,
+`,
 
 footer: `
   <!-- Main Footer -->
@@ -664,10 +610,6 @@ init() {
     document.getElementById("mobile-nav").innerHTML = this.mobileNav;
   }
 
-  if (document.getElementById("filter-canvas")) {
-    document.getElementById("filter-canvas").innerHTML = this.filterCanvas;
-  }
-
   if (document.getElementById("desktop-nav")) {
     document.getElementById("desktop-nav").innerHTML = this.desktopNav;
   }
@@ -678,6 +620,10 @@ init() {
 
   if (document.getElementById("footer")) {
     document.getElementById("footer").innerHTML = this.footer;
+  }
+
+  if (document.getElementById("tabs-nav")) {
+    document.getElementById("tabs-nav").innerHTML = this.tabsNav;
   }
 
   this.setActiveNav();

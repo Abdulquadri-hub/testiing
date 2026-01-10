@@ -434,3 +434,117 @@
     
   </div>
 </div>
+
+
+
+<div class="page-wrapper">
+      
+      <!-- Left Ad Space -->
+      <aside class="ad-space-left">
+        <div class="ad-placeholder">Ad Space</div>
+      </aside>
+      
+      <!-- Main Content Area -->
+      <main class="main-content-area">
+        
+        <!-- Content Grid: Events Left, Sidebar Right -->
+        <div class="content-grid">
+          
+          <!-- Events Section (Left) -->
+          <section class="events-section">
+            
+            <!-- Filters Bar -->
+            <div class="filters-bar">
+              <select class="filter-select">
+                <option>⚽ Leagues</option>
+              </select>
+              <select class="filter-select">
+                <option>📊 Markets</option>
+              </select>
+              <select class="filter-select">
+                <option>📅 Date</option>
+              </select>
+            </div>
+            
+            <!-- Event Cards -->
+            <div class="event-card">
+              <div class="event-header">
+                <span class="event-time">6:40 am Sat 10/01</span>
+                <span class="event-category">Tennis / International</span>
+              </div>
+              <div class="event-teams">
+                <div class="team-name">Player A / Player B</div>
+                <div class="team-name">Player C / Player D</div>
+              </div>
+              <div class="event-odds">
+                <button class="odd-btn">1 <span>1.63</span></button>
+                <button class="odd-btn">2 <span>2.17</span></button>
+                <button class="odd-btn">5+</button>
+              </div>
+            </div>
+
+            <div class="event-card">
+              <div class="event-header">
+                <span class="event-time">7:00 am Sat 10/01</span>
+                <span class="event-category">Tennis / International</span>
+              </div>
+              <div class="event-teams">
+                <div class="team-name">Player E / Player F</div>
+                <div class="team-name">Player G / Player H</div>
+              </div>
+              <div class="event-odds">
+                <button class="odd-btn">1 <span>1.31</span></button>
+                <button class="odd-btn">2 <span>3.20</span></button>
+                <button class="odd-btn">23+</button>
+              </div>
+            </div>
+            
+          </section>
+          
+          <!-- Sidebar (Right) -->
+          <aside class="content-sidebar">
+            
+            <!-- Login Prompt -->
+            <div class="sidebar-section login-prompt">
+              <p>Not logged in - <a href="#">Join Now</a> or <a href="#">Login</a></p>
+            </div>
+            
+            <!-- Sport/Virtuals Toggle -->
+            <div class="sidebar-section toggle-section">
+              <button class="toggle-btn active">⚽ Sport</button>
+              <button class="toggle-btn">🎮 Virtuals</button>
+            </div>
+            
+            <!-- Booking Code -->
+            <div class="sidebar-section booking-section">
+              <label>Booking code</label>
+              <input type="text" placeholder="Enter booking code" class="booking-input">
+              <button class="load-betslip-btn">LOAD BETSLIP</button>
+            </div>
+            
+            <!-- Betslip Empty State -->
+            <div class="sidebar-section betslip-section">
+              <div class="betslip-empty">
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+                  <circle cx="50" cy="70" r="15" fill="#ddd"/>
+                  <rect x="35" y="20" width="30" height="40" fill="#ddd"/>
+                  <rect x="30" y="15" width="8" height="50" fill="#ccc"/>
+                </svg>
+                <p>Betslip is empty</p>
+              </div>
+              <button class="learn-btn">LEARN HOW TO BET</button>
+              <button class="discover-btn">DISCOVER MORE SPORTS</button>
+            </div>
+            
+          </aside>
+          
+        </div>
+        
+      </main>
+      
+      <!-- Right Ad Space -->
+      <aside class="ad-space-right">
+        <div class="ad-placeholder">Ad Space</div>
+      </aside>
+      
+</div>

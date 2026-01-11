@@ -14,9 +14,7 @@ body {
   background: #f5f5f5;
 }
 
-/* ============================================
-   MAIN LAYOUT WITH FIXED SIDEBARS
-   ============================================ */
+
 
 .adminuiux-wrap {
   display: flex;
@@ -24,6 +22,7 @@ body {
   width: 100%;
   min-height: 100vh;
   position: relative;
+  padding-top: 105px; 
 }
 
 .adminuiux-content {
@@ -32,76 +31,86 @@ body {
   position: relative;
 }
 
-/* ============================================
-   DESKTOP LAYOUT
-   ============================================ */
+.ad-sidebar-left::-webkit-scrollbar {
+  display: none;
+}
+
+.ad-sidebar-right::-webkit-scrollbar {
+  display: none;
+}
+
+
 
 @media (min-width: 1400px) {
   .adminuiux-wrap {
     display: block;
     max-width: 1920px;
     margin: 0 auto;
-    padding: 0;
+    padding-top: 105px; 
   }
 
-  /* Left Ad Sidebar - FIXED */
+ 
   .ad-sidebar-left {
     display: block !important;
     position: fixed;
     left: 0;
-    top: 80px;
+    top: 105px; 
     width: 300px;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 105px);
     overflow-y: auto;
     z-index: 50;
   }
 
-  /* Main Content Area - FILLS SPACE BETWEEN SIDEBARS */
   .adminuiux-content {
-    width: calc(100% - 950px); /* 300 (left ad) + 350 (betslip) + 300 (right ad) = 950 */
+    width: calc(100% - 950px); 
     margin-left: 300px;
-    margin-right: 650px; /* 350 (betslip) + 300 (right ad) = 650 */
-    margin-top: 60px;
-    padding: 0;
+    margin-right: 650px; 
+    margin-top: 0;
+    padding: 0px;
     overflow-y: auto;
+    min-height: calc(100vh - 105px);
+    border-right: 1px solid #e0e0e0;
   }
-
 
   .sidebar-right {
     display: block !important;
     position: fixed;
     right: 300px; 
-    top: 110px;
+    top: 105px; 
     width: 350px;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 105px);
     overflow: hidden;
     z-index: 50;
     background: #fff;
-    border-left: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+
   }
 
-  /* Right Ad Sidebar - FIXED */
+
   .ad-sidebar-right {
     display: block !important;
     position: fixed;
     right: 0;
-    top: 80px;
+    top: 105px; 
     width: 300px;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 105px);
     overflow-y: auto;
     z-index: 50;
   }
 }
 
+
 @media (min-width: 1200px) and (max-width: 1399px) {
   .adminuiux-wrap {
     max-width: 1400px;
     margin: 0 auto;
+    padding-top: 105px;
   }
 
   .adminuiux-content {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
   }
 
   .ad-sidebar-left,
@@ -109,15 +118,18 @@ body {
     display: none !important;
   }
 }
+
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .adminuiux-wrap {
     max-width: 1200px;
     margin: 0 auto;
+    padding-top: 105px;
   }
 
   .adminuiux-content {
     max-width: 100%;
+    padding: 20px;
   }
 
   .ad-sidebar-left,
@@ -126,8 +138,11 @@ body {
   }
 }
 
-/* Mobile/Tablet - No sidebars */
 @media (max-width: 991px) {
+  .adminuiux-wrap {
+    padding-top: 99px; 
+  }
+
   .ad-sidebar-left,
   .ad-sidebar-right {
     display: none !important;
@@ -135,12 +150,27 @@ body {
 
   .adminuiux-content {
     max-width: 100%;
+    /* padding: 15px; */
   }
 }
 
-/* ========================================
-   AD SIDEBAR STYLES
-   ======================================== */
+
+@media (max-width: 768px) {
+  .adminuiux-wrap {
+    padding-top: 99px; 
+  }
+
+  .adminuiux-content {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .adminuiux-wrap {
+    padding-top: 92px; 
+  }
+}
+
 
 .ad-sidebar-left,
 .ad-sidebar-right {
@@ -149,7 +179,6 @@ body {
   margin: 0;
 }
 
-/* Ad Container */
 .ad-container {
   border: 2px dashed #d1d5db;
   border-radius: 8px;
@@ -160,6 +189,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin: 20px;
 }
 
 .ad-container.large {
@@ -187,81 +217,6 @@ body {
   opacity: 0.5;
 }
 
-/* ========================================
-   SCROLLBAR STYLES
-   ======================================== */
-
-.adminuiux-content {
-  scrollbar-width: thin;
-  scrollbar-color: #9ca3af #f3f4f6;
-}
-
-.adminuiux-content::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-.adminuiux-content::-webkit-scrollbar-track {
-  background: #f3f4f6;
-  border-radius: 5px;
-}
-
-.adminuiux-content::-webkit-scrollbar-thumb {
-  background: #9ca3af;
-  border-radius: 5px;
-  border: 2px solid #f3f4f6;
-}
-
-.adminuiux-content::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
-}
-
-/* Ad sidebar scrollbar */
-.ad-sidebar-left::-webkit-scrollbar,
-.ad-sidebar-right::-webkit-scrollbar {
-  width: 8px;
-}
-
-.ad-sidebar-left::-webkit-scrollbar-track,
-.ad-sidebar-right::-webkit-scrollbar-track {
-  background: #f9fafb;
-  border-radius: 4px;
-}
-
-.ad-sidebar-left::-webkit-scrollbar-thumb,
-.ad-sidebar-right::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 4px;
-}
-
-.ad-sidebar-left::-webkit-scrollbar-thumb:hover,
-.ad-sidebar-right::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
-}
-
-body {
-  scrollbar-width: thin;
-  scrollbar-color: #9ca3af #e5e7eb;
-}
-
-body::-webkit-scrollbar {
-  width: 12px;
-}
-
-body::-webkit-scrollbar-track {
-  background: #e5e7eb;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: #9ca3af;
-  border-radius: 6px;
-  border: 2px solid #e5e7eb;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
-}
-
 .wrapper {
   width: 100%;
   max-width: 100%;
@@ -269,34 +224,10 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 @media (min-width: 992px) {
-  .wrapper {
-    max-width: 100%;
-  }
+
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #9ca3af #f3f4f6;
-}
-
-*::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-*::-webkit-scrollbar-track {
-  background: #f3f4f6;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #9ca3af;
-  border-radius: 4px;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
-}

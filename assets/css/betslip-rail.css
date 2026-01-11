@@ -1374,13 +1374,13 @@
     z-index: 1;
   }
 
-  .rail-header,
+  /* .rail-header,
   .rail-footer,
   .rail-bets-list,
   .empty-load-form,
   .rail-empty-redesign {
     background: transparent;
-  }
+  } */
 
 
 
@@ -1399,12 +1399,19 @@
     display: none; 
   }
 
-  /* Desktop bets list scrolling */
   .rail-bets-list {
-    max-height: calc(100vh - 280px);
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+  }
+  
+  .rail-footer {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    border-top: 2px solid #e0e0e0;
   }
 
-  /* Desktop empty state */
   .empty-load-form {
     padding: 24px;
   }

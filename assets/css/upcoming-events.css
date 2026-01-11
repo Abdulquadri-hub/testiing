@@ -113,9 +113,6 @@
   color: #fff;
 }
 
-/* ==========================================
-   MARKET TABS - Clean Pill Style
-   ========================================== */
 .market-tabs-wrapper {
   position: sticky;
   background: #fafafa;
@@ -129,8 +126,6 @@
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
 }
 
 .market-tabs::-webkit-scrollbar {
@@ -176,7 +171,6 @@
   align-items: center;
   gap: 1.25rem;
   overflow-x: auto;
-  scrollbar-width: none;
 }
 
 .quick-filters::-webkit-scrollbar {

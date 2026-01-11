@@ -198,41 +198,39 @@
         </div>
       </aside>
 
-      <main class="adminuiux-content" >
-
-        <div class="page-main-content" >
+      <main class="adminuiux-content">
+        <div class="page-main-content">
           <div class="sports-bar-wrapper sticky-header" id="sports-bar">
-            <div class="sports-tabs">
-              <button class="sport-btn active" data-sport="football">
-                <i class="bi bi-dribbble"></i> Football
-              </button>
-              <button class="sport-btn" data-sport="basketball">
-                <i class="bi bi-basket"></i> Basketball
-              </button>
-              <button class="sport-btn" data-sport="tennis">
-                <i class="bi bi-circle-fill"></i> Tennis
-              </button>
-              <button class="sport-btn" data-sport="hockey">
-                <i class="bi bi-circle-fill"></i> Hockey
-              </button>
-              <button class="sport-btn" data-sport="volleyball">
-                <i class="bi bi-circle-fill"></i> Volleyball
-              </button>
-              <button class="sport-btn" data-sport="handball">
-                <i class="bi bi-circle-fill"></i> Handball
-              </button>
-              <button class="sport-btn" data-sport="rugby">
-                <i class="bi bi-circle-fill"></i> Rugby
-              </button>
-              <button class="sport-btn" data-sport="baseball">
-                <i class="bi bi-circle-fill"></i> Baseball
-              </button>
-              <button class="sport-btn" data-sport="cricket">
-                <i class="bi bi-circle-fill"></i> Cricket
-              </button>
-              <button class="sport-btn" data-sport="esports">
-                <i class="bi bi-circle-fill"></i> E-Sports
-              </button>
+            <div class="sports-selector">
+              <input type="checkbox" id="sports-toggle" />
+              <label for="sports-toggle" class="sports-selector-label">
+                <div class="sports-selector-text">
+                  <span class="sports-selector-icon"><i class="bi bi-dribbble"></i></span>
+                  <span>Football</span>
+                </div>
+                <span class="sports-dropdown-arrow">
+                  <i class="bi bi-chevron-down"></i>
+                </span>
+              </label>
+
+              <div class="sports-dropdown-menu">
+                <a href="#" class="sports-dropdown-item">
+                  <span><i class="bi bi-dribbble"></i></span> Football
+                </a>
+                <a href="#" class="sports-dropdown-item">
+                  <span><i class="bi bi-dribbble"></i></span> Basketball
+                </a>
+                <a href="#" class="sports-dropdown-item">
+                  <span><i class="bi bi-dribbble"></i></span> Tennis
+                </a>
+                <a href="#" class="sports-dropdown-item">
+                  <span><i class="bi bi-dribbble"></i></span> Hockey
+                </a>
+                <a href="#" class="sports-dropdown-item active">
+                  <span><i class="bi bi-dribbble"></i></span> Volleyball
+                </a>
+
+              </div>
             </div>
           </div>
 
@@ -1748,7 +1746,7 @@
       <aside class="sidebar-right">
         <div id="betslip-rail"></div>
       </aside>
-      
+
       <aside class="ad-sidebar-right">
         <div class="ad-container large">
           <div class="ad-placeholder">

@@ -66,12 +66,12 @@ body {
     overflow-y: auto;
   }
 
-  /* Sidebar - FIXED */
+
   .sidebar-right {
     display: block !important;
     position: fixed;
-    right: 300px; /* Space for right ad */
-    top: 80px;
+    right: 300px; 
+    top: 110px;
     width: 350px;
     height: calc(100vh - 80px);
     overflow: hidden;

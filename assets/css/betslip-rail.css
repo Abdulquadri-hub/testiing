@@ -1359,26 +1359,37 @@
 
 
   .rail-container {
-    position: fixed;
+    position: relative;
     top: 0;
     right: 0;
     bottom: 0;
-    left: auto;
-    width: 380px;
-    max-width: 380px;
+    left: 0;
+    width: 350px;
+    max-width: 350px;
     max-height: 100vh;
     border-radius: 0;
     transform: translateX(0);
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    background: transparent;
+    box-shadow: none;
+    z-index: 1;
   }
+
+  .rail-header,
+  .rail-footer,
+  .rail-bets-list,
+  .empty-load-form,
+  .rail-empty-redesign {
+    background: transparent;
+  }
+
+
 
   .rail-overlay {
     display: none;
   }
 
   .rail-container .page-header {
-    background: #fff;
+    background: transparent;
     border-bottom: 2px solid #e0e0e0;
     padding: 16px 20px;
   }

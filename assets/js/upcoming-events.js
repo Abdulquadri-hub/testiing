@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Collapsible League Groups
+
     function initLeagueCollapse() {
         const leagueHeaders = document.querySelectorAll('.league-header');
         
@@ -8,13 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const leagueEvents = this.nextElementSibling;
                 const toggleIcon = this.querySelector('.toggle-icon');
                 
-                // Toggle visibility and icon rotation
                 leagueEvents.classList.toggle('collapsed');
                 toggleIcon.classList.toggle('rotated');
             });
         });
 
-        // Collapse ALL league groups
         const leagueGroups = document.querySelectorAll('.league-group');
         leagueGroups.forEach(group => {
             const leagueEvents = group.querySelector('.league-events');
@@ -26,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Load More Functionality
+
     function initLoadMore() {
         const eventsContainer = document.querySelector('.events-list');
         const loadMoreBtn = document.createElement('button');
@@ -68,82 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Betslip Integration with Duplicate Check
-    function initBetslipIntegration() {
-        const events = document.querySelectorAll('.event-card');
-        
-        events.forEach(event => {
-            const oddButtons = event.querySelectorAll('.odd-btn');
-            
-            oddButtons.forEach((button, index) => {
-                button.addEventListener('click', (e) => {
-                    // Get event details
-                    const teams = event.querySelectorAll('.team');
-                    const header = event.querySelector('.event-header');
-                    
-                    // Create a unique match identifier based on teams and date
-                    const matchIdentifier = `${teams[0].textContent.trim()}-vs-${teams[1].textContent.trim()}-${header.querySelector('.event-time').textContent.trim()}`;
-                    
-                    // Determine the bet type based on button position
-                    let betType;
-                    if (index === 0) betType = 'Home';
-                    else if (index === 1) betType = 'Draw';
-                    else if (index === 2) betType = 'Away';
-                    
-                    const eventDetails = {
-                        matchId: matchIdentifier,
-                        teams: `${teams[0].textContent} vs ${teams[1].textContent}`,
-                        date: header.querySelector('.event-time').textContent,
-                        market: event.closest('.event-card').getAttribute('data-market') || '1x2',
-                        value: betType,
-                        odd: button.textContent,
-                        league: header.querySelector('.event-league') ? header.querySelector('.event-league').textContent : 'Unknown League',
-                        selected: true
-                    };
-                    
-                    // Check if betslip rail is available
-                    if (window.betslipRail && window.betslipRail.addSelection) {
-                        // Check if event already exists in betslip
-                        const existingBet = window.betslipRail.checkIfExists ? 
-                            window.betslipRail.checkIfExists(matchIdentifier) : false;
-                        
-                        if (existingBet) {
-                            // Update existing bet instead of adding duplicate
-                            if (window.betslipRail.updateSelection) {
-                                window.betslipRail.updateSelection(eventDetails);
-                                
-                                // Update UI: remove selected class from all odds in this event
-                                oddButtons.forEach(btn => btn.classList.remove('selected'));
-                                // Add selected class to clicked button
-                                button.classList.add('selected');
-                            } else {
-                                // Fallback: show message that bet already exists
-                                console.log('Bet already exists in betslip. Updating selection...');
-                                // Still highlight the selected odd
-                                oddButtons.forEach(btn => btn.classList.remove('selected'));
-                                button.classList.add('selected');
-                            }
-                        } else {
-                            // Add new selection
-                            window.betslipRail.addSelection(eventDetails);
-                            
-                            // Highlight selected odd
-                            oddButtons.forEach(btn => btn.classList.remove('selected'));
-                            button.classList.add('selected');
-                        }
-                    } else {
-                        console.warn('Betslip rail not available');
-                        
-                        // Still update UI for visual feedback
-                        oddButtons.forEach(btn => btn.classList.remove('selected'));
-                        button.classList.add('selected');
-                    }
-                });
-            });
-        });
-    }
 
-    // Optional: CSS to support the JavaScript
     const styles = `
     <style>
     .league-events.collapsed {
@@ -182,11 +105,107 @@ document.addEventListener('DOMContentLoaded', () => {
     </style>
     `;
 
-    // Inject styles
+    function initQuickFilters() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const liveToggle = document.querySelector('.live-toggle');
+  
+  // Date filter buttons
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const group = this.closest('.filter-group');
+      const groupBtns = group.querySelectorAll('.filter-btn');
+      
+      // Remove active from group
+      groupBtns.forEach(b => b.classList.remove('active'));
+      
+      // Add active to clicked
+      this.classList.add('active');
+      
+      // Filter events based on selection
+      const filter = this.dataset.filter;
+      filterEventsByDate(filter);
+    });
+  });
+  
+  // Live toggle
+  if (liveToggle) {
+    liveToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      filterLiveEvents(this.classList.contains('active'));
+    });
+  }
+}
+
+function filterEventsByDate(filter) {
+  const events = document.querySelectorAll('.event-card');
+  
+  // This is a placeholder - you'll implement actual filtering logic
+  console.log('Filtering by:', filter);
+  
+  // Example: Show/hide events based on filter
+  events.forEach(event => {
+    // Add your filtering logic here
+    // For now, just show all
+    event.style.display = 'block';
+  });
+}
+
+function filterLiveEvents(showOnlyLive) {
+  const events = document.querySelectorAll('.event-card');
+  
+  events.forEach(event => {
+    if (showOnlyLive) {
+      // Show only live events
+      if (event.classList.contains('live')) {
+        event.style.display = 'block';
+      } else {
+        event.style.display = 'none';
+      }
+    } else {
+      // Show all events
+      event.style.display = 'block';
+    }
+  });
+  
+  // Update league groups visibility
+  updateLeagueGroupsVisibility();
+}
+
+function updateLeagueGroupsVisibility() {
+  const leagueGroups = document.querySelectorAll('.league-group');
+  
+  leagueGroups.forEach(group => {
+    const visibleEvents = group.querySelectorAll('.event-card[style*="display: block"]');
+    
+    if (visibleEvents.length === 0) {
+      group.style.display = 'none';
+    } else {
+      group.style.display = 'block';
+    }
+  });
+}
+
+function initStickyHeaders() {
+  const stickyHeaders = document.querySelectorAll('.sticky-header');
+  
+  window.addEventListener('scroll', function() {
+    stickyHeaders.forEach(header => {
+      const rect = header.getBoundingClientRect();
+      
+      // Add shadow when header is stuck at top
+      if (rect.top <= header.offsetTop) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  });
+}
+
     document.head.insertAdjacentHTML('beforeend', styles);
 
-    // Initialize functionalities
+    initQuickFilters();
+    initStickyHeaders();
     initLeagueCollapse();
     initLoadMore();
-    initBetslipIntegration();
 });

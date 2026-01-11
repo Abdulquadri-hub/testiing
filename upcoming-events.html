@@ -199,8 +199,7 @@
       </aside>
 
       <main class="adminuiux-content">
-        <div class="">
-          <!-- Sticky Sports Bar -->
+        <div class="wrapper">
           <div class="sports-bar-wrapper sticky-header" id="sports-bar">
             <div class="sports-tabs">
               <button class="sport-btn active" data-sport="football">
@@ -236,7 +235,6 @@
             </div>
           </div>
 
-          <!-- Sticky Market Tabs -->
           <div class="market-tabs-wrapper sticky-header" id="market-tabs">
             <div class="market-tabs">
               <div class="market-btn active" data-market="1x2">1X2</div>
@@ -250,7 +248,41 @@
             </div>
           </div>
 
-          <!-- Events List -->
+          <div class="quick-filters-wrapper sticky-header" id="quick-filters">
+            <div class="quick-filters">
+              <!-- Date Filters -->
+              <div class="filter-group">
+                <span class="filter-label">Date:</span>
+                <button class="filter-btn active" data-filter="today">
+                  Today
+                </button>
+                <button class="filter-btn" data-filter="tomorrow">
+                  Tomorrow
+                </button>
+                <button class="filter-btn" data-filter="week">This Week</button>
+              </div>
+
+              <div class="filter-divider"></div>
+
+              <!-- Time Filters -->
+              <div class="filter-group">
+                <span class="filter-label">Time:</span>
+                <button class="filter-btn" data-filter="starting-soon">
+                  Starting Soon
+                </button>
+                <button class="filter-btn" data-filter="morning">
+                  Morning
+                </button>
+                <button class="filter-btn" data-filter="afternoon">
+                  Afternoon
+                </button>
+                <button class="filter-btn" data-filter="evening">
+                  Evening
+                </button>
+              </div>
+            </div>
+          </div>
+
           <div class="events-list">
             <div class="featured-events">
               <!-- Event 1 -->
@@ -1736,8 +1768,6 @@
       </aside>
     </div>
 
-    
-     
     <div id="footer"></div>
     <div id="mobile-nav"></div>
 

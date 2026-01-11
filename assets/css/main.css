@@ -14,6 +14,10 @@ body {
   background: #f5f5f5;
 }
 
+/* ============================================
+   MAIN LAYOUT WITH FIXED SIDEBARS
+   ============================================ */
+
 .adminuiux-wrap {
   display: flex;
   justify-content: center;
@@ -28,13 +32,16 @@ body {
   position: relative;
 }
 
+/* ============================================
+   DESKTOP LAYOUT - FIXED ADS
+   ============================================ */
 
 @media (min-width: 1400px) {
   .adminuiux-wrap {
     display: block;
     max-width: 1920px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0; /* No padding to eliminate gaps */
   }
 
   /* Left Ad Sidebar - FIXED */
@@ -42,18 +49,22 @@ body {
     display: block !important;
     position: fixed;
     left: 0;
-    top: 100px;
+    top: 80px;
     width: 300px;
     height: calc(100vh - 80px);
     overflow-y: auto;
     z-index: 50;
   }
 
+  /* Main Content - FILLS SPACE BETWEEN SIDEBARS */
   .adminuiux-content {
-    width: calc(100% - 600px);
-    margin: 60px auto 0 auto;
+    width: calc(100% - 600px); /* Total width minus both sidebars (300px each) */
+    margin-left: 300px; /* Start right after left sidebar */
+    margin-right: 300px; /* End right before right sidebar */
+    margin-top: 60px;
     padding: 0;
-    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    /* Removed max-height to allow footer to show */
   }
 
   /* Right Ad Sidebar - FIXED */
@@ -61,7 +72,7 @@ body {
     display: block !important;
     position: fixed;
     right: 0;
-    top: 100px;
+    top: 80px;
     width: 300px;
     height: calc(100vh - 80px);
     overflow-y: auto;
@@ -114,6 +125,10 @@ body {
   }
 }
 
+/* ========================================
+   AD SIDEBAR STYLES
+   ======================================== */
+
 .ad-sidebar-left,
 .ad-sidebar-right {
   display: none; 
@@ -159,7 +174,9 @@ body {
   opacity: 0.5;
 }
 
-
+/* ========================================
+   SCROLLBAR STYLES
+   ======================================== */
 
 .adminuiux-content {
   scrollbar-width: thin;
@@ -247,7 +264,7 @@ body::-webkit-scrollbar-thumb:hover {
 html {
   scroll-behavior: smooth;
 }
-/* 
+
 * {
   scrollbar-width: thin;
   scrollbar-color: #9ca3af #f3f4f6;
@@ -269,4 +286,4 @@ html {
 
 *::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
-} */
+}

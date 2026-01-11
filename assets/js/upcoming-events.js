@@ -84,12 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
         display: block;
         width: 100%;
         padding: 10px;
-        margin-top: 15px;
+        margin-top: 5px;
         background-color: #333;
         color: white;
         border: none;
         cursor: pointer;
-        border-radius: 5px;
         transition: background-color 0.3s ease;
     }
 

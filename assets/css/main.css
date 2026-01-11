@@ -58,13 +58,12 @@ body {
 
   /* Main Content - FILLS SPACE BETWEEN SIDEBARS */
   .adminuiux-content {
-    width: calc(100% - 600px); /* Total width minus both sidebars (300px each) */
-    margin-left: 300px; /* Start right after left sidebar */
-    margin-right: 300px; /* End right before right sidebar */
+    width: calc(100% - 600px); 
+    margin-left: 300px; 
+    margin-right: 300px; 
     margin-top: 60px;
     padding: 0;
     overflow-y: auto;
-    /* Removed max-height to allow footer to show */
   }
 
   /* Right Ad Sidebar - FIXED */

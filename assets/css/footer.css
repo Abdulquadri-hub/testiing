@@ -290,11 +290,10 @@
   text-decoration: underline;
 }
 
-/* Desktop Responsive - Adjust for sidebar layout */
 @media (min-width: 1400px) {
   .footer-main {
-    margin-left: 300px; /* Left sidebar width */
-    width: calc(100% - 950px); /* Account for both sidebars and betslip */
+    margin-left: 300px; 
+    width: calc(100% - 950px); 
   }
 }
 

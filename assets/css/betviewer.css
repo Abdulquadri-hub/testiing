@@ -565,17 +565,28 @@
    EXTRA LARGE DESKTOP (1400px and up)
    ========================================== */
 @media (min-width: 1400px) {
-  /* Hide mobile header */
+
+  .sidebar-right {
+    display: none !important;
+  }
+
+  .adminuiux-content {
+    width: calc(100% - 600px) !important; 
+    margin-right: 300px !important; 
+  }
+
+  .footer-main {
+     width: calc(100% - 600px) !important; 
+  }
+
   .btv-header {
     display: none !important;
   }
 
-  /* Show desktop header */
   .btv-desktop-header {
     display: block !important;
   }
 
-  /* Column layout still, but optimized for narrow content area */
   .betviewer-columns {
     max-width: 100%;
   }
@@ -610,11 +621,13 @@
     height: 26px;
     font-size: 12px;
   }
+
+  #mobile-nav {
+    display: none;
+  }
 }
 
-/* ==========================================
-   SMALL MOBILE (480px and below)
-   ========================================== */
+
 @media (max-width: 480px) {
   .btv-form {
     padding: 16px;

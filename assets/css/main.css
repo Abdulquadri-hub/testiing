@@ -33,7 +33,7 @@ body {
 }
 
 /* ============================================
-   DESKTOP LAYOUT - FIXED ADS
+   DESKTOP LAYOUT
    ============================================ */
 
 @media (min-width: 1400px) {
@@ -41,7 +41,7 @@ body {
     display: block;
     max-width: 1920px;
     margin: 0 auto;
-    padding: 0; /* No padding to eliminate gaps */
+    padding: 0;
   }
 
   /* Left Ad Sidebar - FIXED */
@@ -56,14 +56,28 @@ body {
     z-index: 50;
   }
 
-  /* Main Content - FILLS SPACE BETWEEN SIDEBARS */
+  /* Main Content Area - FILLS SPACE BETWEEN SIDEBARS */
   .adminuiux-content {
-    width: calc(100% - 600px); 
-    margin-left: 300px; 
-    margin-right: 300px; 
+    width: calc(100% - 950px); /* 300 (left ad) + 350 (betslip) + 300 (right ad) = 950 */
+    margin-left: 300px;
+    margin-right: 650px; /* 350 (betslip) + 300 (right ad) = 650 */
     margin-top: 60px;
     padding: 0;
     overflow-y: auto;
+  }
+
+  /* Sidebar - FIXED */
+  .sidebar-right {
+    display: block !important;
+    position: fixed;
+    right: 300px; /* Space for right ad */
+    top: 80px;
+    width: 350px;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+    z-index: 50;
+    background: #fff;
+    border-left: 1px solid #e0e0e0;
   }
 
   /* Right Ad Sidebar - FIXED */

@@ -1,5 +1,17 @@
 (function () {
   "use strict";
+// Hide badge on desktop
+function updateBadgeVisibility() {
+  const badge = document.getElementById('rail-badge');
+  if (badge && window.innerWidth >= 1400) {
+    badge.style.display = 'none';
+  } else if (badge) {
+    badge.style.display = 'flex';
+  }
+}
+
+window.addEventListener('resize', updateBadgeVisibility);
+document.addEventListener('DOMContentLoaded', updateBadgeVisibility);
 
   // ==================== STATE ====================
   let bets = [];

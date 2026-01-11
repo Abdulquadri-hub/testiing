@@ -1746,76 +1746,7 @@
       </main>
 
       <aside class="sidebar-right">
-  <div class="load-code-container">
-          <div class="load-code-card">
-            
-            <!-- Header -->
-            <div class="load-code-header">
-              <div class="load-code-icon">
-                <i class="bi bi-download"></i>
-              </div>
-              <h1 class="load-code-title">Load Bet Code</h1>
-              <p class="load-code-subtitle">Enter your betting code to import selections</p>
-            </div>
-
-            <!-- Success Message (hidden by default) -->
-            <div class="success-message" id="success-message">
-              <div class="success-icon">
-                <i class="bi bi-check"></i>
-              </div>
-              <p class="success-text" id="success-text">
-                Successfully loaded 4 bets! Check your betslip below.
-              </p>
-            </div>
-
-            <!-- Load Form -->
-            <form id="load-code-form">
-              
-              <div class="load-form-group">
-                <label class="load-form-label">Bet Code</label>
-                <div class="load-input-wrapper">
-                  <input 
-                    type="text" 
-                    class="load-form-input" 
-                    id="bet-code-input"
-                    placeholder="e.g., M8BULE"
-                    required
-                    autocomplete="off"
-                  />
-                  <button type="button" class="load-paste-btn" id="paste-btn" title="Paste from clipboard">
-                    <i class="bi bi-clipboard"></i>
-                  </button>
-                </div>
-              </div>
-
-              <div class="load-form-group">
-                <label class="load-form-label">Origin Bookie</label>
-                <select class="load-form-select" id="origin-bookie" required>
-                  <option value="">Select bookie</option>
-                  <option value="sportybet:ng">Sportybet - Nigeria</option>
-                  <option value="sportybet:gh">Sportybet - Ghana</option>
-                  <option value="sportybet:ke">Sportybet - Kenya</option>
-                  <option value="bet9ja:ng">Bet9ja - Nigeria</option>
-                  <option value="betking:ng">BetKing - Nigeria</option>
-                  <option value="1xbet:ng">1xBet - Nigeria</option>
-                  <option value="22bet:ng">22bet - Nigeria</option>
-                  <option value="nairabet:ng">NairaBet - Nigeria</option>
-                </select>
-              </div>
-
-              <button type="submit" class="load-submit-btn" id="submit-btn">
-                <i class="bi bi-download"></i>
-                Load Code
-              </button>
-
-              <button type="button" class="load-cancel-btn" id="cancel-btn">
-                Cancel
-              </button>
-
-            </form>
-
-          </div>
-        </div>
+        <div id="betslip-rail"></div>
       </aside>
       
       <aside class="ad-sidebar-right">
@@ -1837,7 +1768,6 @@
       </aside>
     </div>
 
-    <div id="betslip-rail"></div>
     <div id="footer"></div>
     <div id="mobile-nav"></div>
 

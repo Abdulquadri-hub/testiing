@@ -1350,3 +1350,73 @@
   color: #000;
 }
 
+/* ==================== DESKTOP SIDEBAR ==================== */
+@media (min-width: 768px) {
+  /* Hide mobile badge on desktop */
+  .rail-badge {
+    display: none !important;
+  }
+
+  /* Desktop sidebar - always visible */
+  .rail-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: 380px;
+    max-width: 380px;
+    max-height: 100vh;
+    border-radius: 0;
+    transform: translateX(0);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  /* Remove overlay on desktop */
+  .rail-overlay {
+    display: none;
+  }
+
+  /* Desktop header styling */
+  .rail-container .page-header {
+    background: #fff;
+    border-bottom: 2px solid #e0e0e0;
+    padding: 16px 20px;
+  }
+
+  .rail-container .page-header .back-btn,
+  .rail-container .page-header .home-btn {
+    display: none; /* Hide mobile navigation on desktop */
+  }
+
+  /* Adjust main content to account for sidebar */
+  body {
+    margin-right: 380px;
+  }
+
+  /* Desktop bets list scrolling */
+  .rail-bets-list {
+    max-height: calc(100vh - 280px);
+  }
+
+  /* Desktop empty state */
+  .empty-load-form {
+    padding: 24px;
+  }
+}
+
+/* ==================== MOBILE ONLY ==================== */
+@media (max-width: 767px) {
+  body {
+    margin-right: 0 !important;
+  }
+
+  .rail-container {
+    display: none; /* Hidden by default on mobile */
+  }
+
+  .rail-container.active {
+    display: flex; /* Show when active */
+  }
+}

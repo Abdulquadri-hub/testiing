@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="assets/css/tab-nav.css" />
     <link rel="stylesheet" href="assets/css/side-menu.css" />
     <link rel="stylesheet" href="assets/css/footer.css" />
-    <link rel="stylesheet" href="assets/css/betslip-rail.css">
+        <link rel="stylesheet" href="assets/css/betslip-rail.css">
     <link href="assets/css/betviewer.css" rel="stylesheet" />
   </head>
 
@@ -523,10 +523,9 @@
         </div>
       </main>
 
-      <aside class="sidebar-right">
-        <h1 style="font-size: 20px; margin-top: 10px; color: #000; text-align: center;">Edit your bet by loading it here</h1>
+      <!-- <aside class="sidebar-right">
         <div id="betslip-rail"></div>
-      </aside>
+      </aside> -->
 
       <aside class="ad-sidebar-right">
         <div class="ad-container large">
@@ -550,35 +549,12 @@
     <div id="footer"></div>
     <div id="mobile-nav"></div>
 
-    <script src="./components/AppLayout.js"></script>
-    <script src="assets/js/app.js"></script>
+
     <script src="assets/js/adminux/adminux-dashboard.js"></script>
-    <script src="assets/js/betviewer.js"></script>
+    <script src="./components/AppLayout.js"></script>
     <script src="./components/betslip-rail.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const scrollToTopBtn = document.getElementById("scroll-to-top");
-        const mainContent = document.querySelector(".adminuiux-content");
+    <script src="assets/js/betviewer.js"></script>
+    <script src="assets/js/app.js"></script>
 
-        function toggleScrollToTopButton() {
-          // Adjust this value to control when the button appears
-          const scrollThreshold = 300;
-
-          if (mainContent.scrollTop > scrollThreshold) {
-            scrollToTopBtn.classList.add("visible");
-          } else {
-            scrollToTopBtn.classList.remove("visible");
-          }
-        }
-        mainContent.addEventListener("scroll", toggleScrollToTopButton);
-
-        scrollToTopBtn.addEventListener("click", function () {
-          mainContent.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
-        });
-      });
-    </script>
   </body>
 </html>

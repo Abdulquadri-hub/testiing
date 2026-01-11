@@ -448,7 +448,7 @@
 /* ==================== RAIL FOOTER ==================== */
 .rail-footer {
   border-top: 2px solid var(--rail-border);
-  padding: 16px 20px;
+  padding: 8px 12px;
   background: white;
   flex-shrink: 0;
 }
@@ -1396,15 +1396,6 @@
   .rail-container .page-header .back-btn,
   .rail-container .page-header .home-btn {
     display: none; 
-  }
-
-
-  
-  .rail-footer {
-    position: sticky;
-    bottom: 100px;
-    background: white;
-    border-top: 2px solid #e0e0e0;
   }
 
   .empty-load-form {

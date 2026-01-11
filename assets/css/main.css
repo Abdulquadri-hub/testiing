@@ -70,6 +70,7 @@ body {
     overflow-y: auto;
     min-height: calc(100vh - 105px);
     border-right: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
   }
 
   .sidebar-right {
@@ -79,7 +80,7 @@ body {
     top: 105px; 
     width: 350px;
     height: calc(100vh - 105px);
-    overflow: hidden;
+    overflow-y:auto;
     z-index: 50;
     background: #fff;
     border-right: 1px solid #e0e0e0;

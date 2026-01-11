@@ -1,14 +1,14 @@
-
 .footer-main {
   background: #2c3e50;
   color: #ffffff;
-  padding: 40px 0 20px;
+  padding: 40px 20px 20px;
+  width: 100%;
 }
 
 /* Join Now Section */
 .footer-join-section {
   text-align: center;
-  padding: 30px 0;
+  padding: 30px 20px;
   margin-bottom: 30px;
 }
 
@@ -35,9 +35,11 @@
 /* Sports Links Section */
 .footer-sports {
   text-align: center;
-  padding: 20px 0;
+  padding: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footer-sports-links {
@@ -57,7 +59,7 @@
 }
 
 .footer-sports-link:hover {
-  color: #333;
+  color: #3498db;
 }
 
 /* Social Icons */
@@ -81,7 +83,7 @@
 }
 
 .footer-social-link:hover {
-  background: #333;
+  background: #3498db;
   transform: scale(1.1);
 }
 
@@ -90,10 +92,16 @@
   color: #000000;
 }
 
+.footer-social-link:hover i {
+  color: #ffffff;
+}
+
 /* Footer Links Section */
 .footer-links-section {
-  padding: 30px 0;
+  padding: 30px 20px;
   text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footer-links-grid {
@@ -112,13 +120,15 @@
 }
 
 .footer-link-item:hover {
-  color: #333;
+  color: #3498db;
 }
 
 /* Footer Logo & Country Section */
 .footer-brand {
   text-align: center;
-  padding: 30px 0;
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footer-logo {
@@ -132,7 +142,7 @@
 }
 
 .footer-logo-highlight {
-  color: #333;
+  color: #3498db;
 }
 
 .footer-country {
@@ -163,19 +173,25 @@
 .footer-info {
   background: #1a1a1a;
   color: #999999;
-  padding: 30px 0;
+  padding: 30px 20px;
   font-size: 12px;
   line-height: 1.8;
+  width: 100%;
 }
 
 .footer-info-text {
   text-align: center;
   margin-bottom: 15px;
+  max-width: 100%;
+  padding: 0 20px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .footer-info-text a {
-  color: #333;
+  color: #3498db;
   text-decoration: none;
+  word-break: break-word;
 }
 
 .footer-info-text a:hover {
@@ -186,49 +202,64 @@
   text-align: center;
   color: #666666;
   font-size: 11px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  word-wrap: break-word;
 }
 
 /* Footer Warning Section */
 .footer-warning {
   background: #000000;
   color: #999999;
-  padding: 20px 0;
+  padding: 20px;
   text-align: center;
   font-size: 12px;
   line-height: 1.6;
+  width: 100%;
 }
 
 .footer-warning-text {
   margin-bottom: 10px;
+  max-width: 100%;
+  padding: 0 20px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .footer-contact {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 15px;
   flex-wrap: wrap;
   margin-top: 15px;
+  max-width: 100%;
+  padding: 0 20px;
 }
 
 .footer-contact-item {
   color: #999999;
   text-decoration: none;
+  font-size: 11px;
+  word-break: break-word;
 }
 
 .footer-contact-item:hover {
-  color: #333;
+  color: #3498db;
 }
 
 .footer-support-links {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
   margin-top: 15px;
+  max-width: 100%;
+  padding: 0 20px;
 }
 
 .footer-support-link {
-  color: #333;
+  color: #3498db;
   text-decoration: none;
   font-size: 11px;
 }
@@ -241,14 +272,17 @@
 .footer-copyright {
   background: #000000;
   color: #666666;
-  padding: 15px 0;
+  padding: 15px 20px;
   text-align: center;
   font-size: 11px;
   border-top: 1px solid #1a1a1a;
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .footer-copyright a {
-  color: #333;
+  color: #3498db;
   text-decoration: none;
 }
 
@@ -256,10 +290,25 @@
   text-decoration: underline;
 }
 
+/* Desktop Responsive - Adjust for sidebar layout */
+@media (min-width: 1400px) {
+  .footer-main {
+    margin-left: 300px; /* Left sidebar width */
+    width: calc(100% - 950px); /* Account for both sidebars and betslip */
+  }
+}
+
 /* Responsive Design */
+@media (max-width: 1399px) {
+  .footer-main {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .footer-main {
-    padding: 30px 0 15px;
+    padding: 30px 15px 15px;
   }
 
   .footer-sports-links {

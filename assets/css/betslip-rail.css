@@ -928,11 +928,10 @@
   }
 
   .rail-badge {
-    bottom: 100px; /* More space on desktop */
+    bottom: 100px; 
   }
 }
 
-/* ==================== EMPTY STATE REDESIGN ==================== */
 .rail-empty-redesign {
   height: 100%;
   overflow-y: auto;
@@ -1399,15 +1398,11 @@
     display: none; 
   }
 
-  .rail-bets-list {
-    overflow-y: auto;
-    flex: 1;
-    min-height: 0;
-  }
+
   
   .rail-footer {
     position: sticky;
-    bottom: 0;
+    bottom: 100px;
     background: white;
     border-top: 2px solid #e0e0e0;
   }

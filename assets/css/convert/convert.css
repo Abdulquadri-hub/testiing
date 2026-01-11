@@ -83,7 +83,7 @@
 /* CONTENT SECTIONS */
 .content-section {
   display: none;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .content-section.active {

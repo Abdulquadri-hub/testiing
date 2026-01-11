@@ -476,134 +476,147 @@ tabsNav: `
 `,
 
 footer: `
-  <!-- Main Footer -->
-  <footer class="footer-main">
-    <div class="container">
-      
-      <!-- Join Now Section -->
-      <div class="footer-join-section">
-        <button class="footer-join-btn" onclick="navigateTo('register.html')">
-          JOIN NOW
-        </button>
-      </div>
-
-      <!-- Sports & Social Links -->
-      <div class="footer-sports">
-        <div class="footer-sports-links">
-          <a href="#" class="footer-sports-link">Football</a>
-          <a href="#" class="footer-sports-link">Basketball</a>
-          <a href="#" class="footer-sports-link">eFootball</a>
-          <a href="#" class="footer-sports-link">Tennis</a>
-        </div>
-        
-        <div class="footer-social">
-          <a href="#" class="footer-social-link">
-            <i class="bi bi-facebook"></i>
-          </a>
-          <a href="#" class="footer-social-link">
-            <i class="bi bi-twitter-x"></i>
-          </a>
-          <a href="#" class="footer-social-link">
-            <i class="bi bi-instagram"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Footer Links -->
-      <div class="footer-links-section">
-        <div class="footer-links-grid">
-          <a href="#" class="footer-link-item">Home</a>
-          <a href="#" class="footer-link-item">About</a>
-          <a href="#" class="footer-link-item">Terms</a>
-          <a href="#" class="footer-link-item">Data Privacy Policy</a>
-          <a href="#" class="footer-link-item">Cookies Policy</a>
-          <a href="#" class="footer-link-item">Rules</a>
-          <a href="#" class="footer-link-item">Lottery Rules</a>
-          <a href="#" class="footer-link-item">Help</a>
-          <a href="#" class="footer-link-item">Responsible Gambling</a>
-          <a href="#" class="footer-link-item">News</a>
-        </div>
-      </div>
-
-      <!-- Brand & Country -->
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <span class="footer-logo-text">Convert<span class="footer-logo-highlight">bet</span></span>
-        </div>
-        
-        <div class="footer-country">
-          <span>🇳🇬</span>
-          <span>Nigeria</span>
-          <span>Change</span>
-        </div>
-      </div>
-
+<!-- Main Footer -->
+<footer class="footer-main">
+  <div class="container">
+    <!-- Join Now Section -->
+    <div class="footer-join-section">
+      <button class="footer-join-btn" onclick="navigateTo('register.html')">
+        JOIN NOW
+      </button>
     </div>
-  </footer>
 
-  <!-- Footer Info -->
-  <div class="footer-info">
-    <div class="container">
-      <p class="footer-info-text">
-        Your bets and payouts are processed by Choplife Gaming Limited, which is licensed and regulated by the Lagos State Lotteries and Gaming Authority of Nigeria.
-      </p>
-      <p class="footer-license">
-        Licence No. LSLGA/OP/OSB/CL071124
-      </p>
-    </div>
-  </div>
-
-  <!-- Footer Warning -->
-  <div class="footer-warning">
-    <div class="container">
-      <p class="footer-warning-text">
-        You have to be 18 years and above to bet.
-      </p>
-      <p class="footer-warning-text">
-        Betting is addictive and can be psychologically harmful.
-      </p>
-      <p class="footer-warning-text">
-        Contact an experienced counsellor at any time 24/7 Monday to Sunday via toll free numbers:
-      </p>
-      
-      <div class="footer-contact">
-        <a href="tel:09117581454" class="footer-contact-item">Phone: 0911 758 1454</a>
-        <a href="tel:09078884268" class="footer-contact-item">Phone: 0907 888 4268</a>
+    <!-- Sports & Social Links -->
+    <div class="footer-sports">
+      <div class="footer-sports-links">
+        <a href="#" class="footer-sports-link">Football</a>
+        <a href="#" class="footer-sports-link">Basketball</a>
+        <a href="#" class="footer-sports-link">eFootball</a>
+        <a href="#" class="footer-sports-link">Tennis</a>
       </div>
 
-      <p class="footer-warning-text" style="margin-top: 15px;">
-        or WhatsApp only: 0907 888 4268 or email via <a href="mailto:eap@tranquilandquest.org.ng" style="color: #c8ff00;">eap@tranquilandquest.org.ng</a>
-      </p>
-      <p class="footer-warning-text">
-        Please only contact the number above if you need counselling. For help related to your account, contact our <a href="#" style="color: #c8ff00;">Customer Support Team</a>
-      </p>
+      <div class="footer-social">
+        <a href="#" class="footer-social-link">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="#" class="footer-social-link">
+          <i class="bi bi-twitter-x"></i>
+        </a>
+        <a href="#" class="footer-social-link">
+          <i class="bi bi-instagram"></i>
+        </a>
+      </div>
+    </div>
 
-      <div class="footer-support-links">
-        <a href="#" class="footer-support-link">Tranquil & Quest</a>
+    <!-- Footer Links -->
+    <div class="footer-links-section">
+      <div class="footer-links-grid">
+        <a href="#" class="footer-link-item">Home</a>
+        <a href="#" class="footer-link-item">About</a>
+        <a href="#" class="footer-link-item">Terms</a>
+        <a href="#" class="footer-link-item">Data Privacy Policy</a>
+        <a href="#" class="footer-link-item">Cookies Policy</a>
+        <a href="#" class="footer-link-item">Rules</a>
+        <a href="#" class="footer-link-item">Lottery Rules</a>
+        <a href="#" class="footer-link-item">Help</a>
+        <a href="#" class="footer-link-item">Responsible Gambling</a>
+        <a href="#" class="footer-link-item">News</a>
+      </div>
+    </div>
+
+    <!-- Brand & Country -->
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <span class="footer-logo-text"
+          >Convert<span class="footer-logo-highlight">bet</span></span
+        >
+      </div>
+
+      <div class="footer-country">
+        <span>🇳🇬</span>
+        <span>Nigeria</span>
+        <span>Change</span>
       </div>
     </div>
   </div>
-
-  <!-- Copyright -->
-  <div class="footer-copyright">
-    <div class="container">
-      <p>Copyright @2025, Designed by <a href="https://adminuiux.com/" target="_blank">Adminuiux</a></p>
+      <!-- Footer Info -->
+    <div class="footer-info">
+      <div class="container">
+        <p class="footer-info-text">
+          Your bets and payouts are processed by Choplife Gaming Limited, which
+          is licensed and regulated by the Lagos State Lotteries and Gaming
+          Authority of Nigeria.
+        </p>
+        <p class="footer-license">Licence No. LSLGA/OP/OSB/CL071124</p>
+      </div>
     </div>
-  </div>
 
-  <!-- Fixed Buttons -->
-  <div class="position-fixed bottom-0 end-0 m-3 z-index-5" id="fixedbuttons">
+    <!-- Footer Warning -->
+    <div class="footer-warning">
+      <div class="container">
+        <p class="footer-warning-text">
+          You have to be 18 years and above to bet.
+        </p>
+        <p class="footer-warning-text">
+          Betting is addictive and can be psychologically harmful.
+        </p>
+        <p class="footer-warning-text">
+          Contact an experienced counsellor at any time 24/7 Monday to Sunday
+          via toll free numbers:
+        </p>
 
-    <br />
-    <button
-      class="btn btn-square shadow mt-2 d-none rounded-circle"
-      id="backtotop"
-      style="background: #000; color: #fff; width: 48px; height: 48px;"
-    >
-      <i class="bi bi-arrow-up"></i>
-    </button>
-  </div>
+        <div class="footer-contact">
+          <a href="tel:09117581454" class="footer-contact-item"
+            >Phone: 0911 758 1454</a
+          >
+          <a href="tel:09078884268" class="footer-contact-item"
+            >Phone: 0907 888 4268</a
+          >
+        </div>
+
+        <p class="footer-warning-text" style="margin-top: 15px">
+          or WhatsApp only: 0907 888 4268 or email via
+          <a href="mailto:eap@tranquilandquest.org.ng" style="color: #c8ff00"
+            >eap@tranquilandquest.org.ng</a
+          >
+        </p>
+        <p class="footer-warning-text">
+          Please only contact the number above if you need counselling. For help
+          related to your account, contact our
+          <a href="#" style="color: #c8ff00">Customer Support Team</a>
+        </p>
+
+        <div class="footer-support-links">
+          <a href="#" class="footer-support-link">Tranquil & Quest</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-copyright">
+      <div class="container">
+        <p>
+          Copyright @2025, Designed by
+          <a href="https://adminuiux.com/" target="_blank">convertbetcodes</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Fixed Buttons -->
+    <div class="position-fixed bottom-0 end-0 m-3 z-index-5" id="fixedbuttons">
+      <br />
+      <button
+        class="btn btn-square shadow mt-2 d-none rounded-circle"
+        id="backtotop"
+        style="background: #000; color: #fff; width: 48px; height: 48px"
+      >
+        <i class="bi bi-arrow-up"></i>
+      </button>
+    </div>
+</footer>
+
 `,
+
 
 init() {
   if (document.getElementById("mobile-nav")) {

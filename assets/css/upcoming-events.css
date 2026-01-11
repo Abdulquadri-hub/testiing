@@ -375,12 +375,8 @@
   color: #000;
 }
 
-/* ========================================
-   LEAGUE GROUPS - ENHANCED
-   ======================================== */
 
 .league-group {
-  margin-top: 1rem;
   border-radius: 4px;
   overflow: hidden;
 }
